@@ -15,8 +15,8 @@
 Se pueden realizar búsquedas directas de anuncios, insertando cadenas de texto con una o varias palabras de búsqueda que representan al producto o servicio que se desea buscar. La búsqueda por defecto se realiza en las siguientes cadenas:</p>
 
 *	Título del anuncio
-    - Nombre de contacto
-    - Número de teléfono de contacto
+*	Nombre de contacto
+*	Número de teléfono de contacto
 *	Dirección email de contacto
 *	URL del sitio web
 *	Etiquetas del anuncio
@@ -104,10 +104,10 @@ Para los usuarios deseen insertar anuncios sin registrarse, pueden utilizar el p
 *	Ver el ID y email de su anfitrión
 *	Ver la cantidad de referidos directos que tiene. 
 *	Ver la lista de referidos directos y por cada uno ver:
-  -	ID de usuario.
-  -	Dirección email.
-  -	Número del móvil.
-  -	Cantidad de referidos.
+    - ID de usuario.
+    - Dirección email.
+    - Número del móvil.
+    - Cantidad de referidos.
 *	Ver la lista de los anuncios que ha insertado. 
 *	Insertar, modificar, ocultar y eliminar anuncios simples
 *	Insertar, modificar, ocultar y eliminar anuncios avanzados
@@ -271,31 +271,32 @@ Los pagos se realizan automáticamente desde la oficina virtual del usuario cuan
 *	Cantidad total de visitantes (se mide por los accesos a las cuentas de usuario)
 *	Cantidad total de visualizaciones (visualización de anuncios)
 *	Por cada una de las clases de usuarios mostrar:
-o	Cantidad de usuarios en la clase y % que representa.
-o	Cantidad total de anuncios publicados por usuarios de la clase y % que representa.
-o	Cantidad de autorrenovables publicados por usuarios de la clase
-o	Cantidad total de puntos acumulados en la clase y % que representa.
-o	Histograma de cantidad de puntos acumulados por usuarios de la clase. Que se puedan modificar los rangos de puntos con que se hace el histograma. 
-o	Histograma de cantidad de anuncios publicados por usuarios de la clase. Que se puedan modificar los rangos de anuncios con que se hace el histograma.
-o	Histograma de la antigüedad en meses de usuarios de la clase. Que se puedan modificar los rangos de meses con que se hace el histograma.
+    o	Cantidad de usuarios en la clase y % que representa.
+    o	Cantidad total de anuncios publicados por usuarios de la clase y % que representa.
+    o	Cantidad de autorrenovables publicados por usuarios de la clase
+    o	Cantidad total de puntos acumulados en la clase y % que representa.
+    o	Histograma de cantidad de puntos acumulados por usuarios de la clase. Que se puedan modificar los rangos de puntos con que se hace el histograma. 
+    o	Histograma de cantidad de anuncios publicados por usuarios de la clase. Que se puedan modificar los rangos de anuncios con que se hace el histograma.
+    o	Histograma de la antigüedad en meses de usuarios de la clase. Que se puedan modificar los rangos de meses con que se hace el histograma.
 *	Por cada categoría y subcategoría de anuncios, se debe mostrar:
-o	Total de anuncios en la categoría y % que representa.
-o	Cantidad de anuncios simples en la categoría.
-o	Cantidad de anuncios autorrenovables en la categoría.
-o	Cantidad total de banners superiores y % que representa.
-o	Cantidad total de banners inferiores y % que representa.
-o	Cantidad total de referencias a web y % que representa.
-o	Cantidad de visualizaciones.
+    o	Total de anuncios en la categoría y % que representa.
+    o	Cantidad de anuncios simples en la categoría.
+    o	Cantidad de anuncios autorrenovables en la categoría.
+    o	Cantidad total de banners superiores y % que representa.
+    o	Cantidad total de banners inferiores y % que representa.
+    o	Cantidad total de referencias a web y % que representa.
+    o	Cantidad de visualizaciones.
 *	Por cada provincia y municipio del país se debe mostrar:
-o	Cantidad total de anuncios
-o	Cantidad de anuncios simples y % que representa.
-o	Cantidad de anuncios autorrenovables y % que representa.
-o	Cantidad total de banners superiores y % que representa.
-o	Cantidad total de banners inferiores y % que representa.
+    o	Cantidad total de anuncios
+    o	Cantidad de anuncios simples y % que representa.
+    o	Cantidad de anuncios autorrenovables y % que representa.
+    o	Cantidad total de banners superiores y % que representa.
+    o	Cantidad total de banners inferiores y % que representa.
 
 
 <h2>API de la web</h2>
 <p>La web del sistema está implementada de manera tal que brinda una API (Application Program Interface en ingles) al exterior mediante la cual se pueden conectar al sistema otras aplicaciones web, móviles y desktop. La aplicación para Android de Setvmás se conecta al sitio web por medio de esta API.</p>
+
 
 
 
