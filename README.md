@@ -2,7 +2,7 @@
 
 <h2>Descripción de la web SetV+</h2>
 <p>El sistema Setvmás es una Red de Publicidad, compuesta inicialmente por una web de anuncios CLASIFICADOS y enriquecida con un sistema de PUNTOS que sirven como medio de intercambio y estímulo para los usuarios. Permite la creación de redes de MLM (Marketing Multinivel) y se pueden ganar BONIFICACIONES de puntos por participar y aportar al crecimiento del sistema. Cada usuario registrado tendrá una OFICINA virtual, en la cual podrán gestionar todo su negocio, administrando sus anuncios, sus puntos y su red de referidos. Todas las opciones de publicidad disponibles en el sistema se pagan con puntos. Todo usuario que participe activamente en el sistema, puede llegar a alcanzar los niveles Bronce, Plata, Oro y Diamante, y así aumentar sus ganancias de puntos.</p>
-![_HOME](https://github.com/user-attachments/assets/776d1dba-9c0d-4e0e-871b-e45bce3675bb)
+<img width="683" height="485" alt="_HOME" src="https://github.com/user-attachments/assets/67aff193-82aa-463b-8b5c-90da2e6d4bb9" />
 
 <p>El sistema de puntuación se utiliza internamente en el sistema para que los usuarios puedan pagar el acceso a las funcionalidades avanzadas. Cada usuario puede obtenerpuntos como bonificaciones por realizar determinadas acciones o por las acciones que realicen sus referidos directos e indirectos. Además, los puntos se pueden obtener comprándolos directamente al sistema o a un usuario autorizado que desee vender. Los puntos se pueden acumular en la oficina virtual. Los puntos no son dinero y solo representan el acceso del usuario a las funcionalidades del sistema.</p>
 
@@ -36,12 +36,12 @@ Para filtrar los resultados de la búsqueda, el usuario cuenta con los siguiente
 
 La búsqueda de palabras claves en los anuncios, se realiza dentro del título y texto de los anuncios, nombre, teléfono y email del anunciante y en los títulos de las imágenes de los anuncios.
 A continuación la imagen del formulario con los filtros de búsqueda:</p>
-![_FILTROS](https://github.com/user-attachments/assets/6874d357-6919-4dae-b4c4-58d6a6094c2a)
+<img width="595" height="254" alt="_FILTROS" src="https://github.com/user-attachments/assets/af95df63-d6e9-48d3-9b3c-58b484b44635" />
 
 <h2>Detalles del anuncio</h2>
 <p>Cualquier usuario registrado o no, puede ver un anuncio completamente con todos los detalles. Si la dirección email del anuncio es pública, se podrá ver también. El anuncio debe mostrar al usuario la cantidad de visualizaciones que ha tenido. Se considera una visualización cuando el anuncio es visitado por un usuario desde cualquier origen, ya sea la lista de anuncios de su categoría, el resultado de una búsqueda, al hacer clic en su banner, etc.
 Si es un usuario registrado y ha entrado al sistema mediante su usuario y contraseña, el sistema le otorga automáticamente una bonificación por visualización, por el primer anuncio que visualice. Para ganar puntos por visualización, el usuario debe reentrar al sistema nuevamente con su nombre de usuario y contraseña y tiene que haber pasado más de X minutos de espera desde la última bonificación por visualización. La cantidad de puntos de las bonificaciones por visualización y la cantidad de minutos de esperase configura en la administración del sistema. </p>
-![_ANUNCIO](https://github.com/user-attachments/assets/080a211b-0d1f-4c26-b151-5dd8b578fb31)
+<img width="454" height="334" alt="_ANUNCIO" src="https://github.com/user-attachments/assets/0056fadc-c568-4823-b9a8-07da9ef7e82d" />
 
 <h2>Registro de usuarios</h2>
 <p>Cualquier usuario no registrado se puede registrar en el sistema, para lo cual tiene una opción en el menú principal de la aplicación. Para registrarse, el usuario debe insertar los siguientes datos:</p>
@@ -54,7 +54,9 @@ Si es un usuario registrado y ha entrado al sistema mediante su usuario y contra
 
 <p>Una vez registrado el usuario, se le otorga inmediatamente puntos en forma de bonificación por registro y se le envía un email a su dirección con un enlace de verificación. También se le otorga una bonificación por referido al usuario Anfitrión que lo invitó, solo si la cantidad de referidos del Anfitrión, no excede el valor establecido como límite. La cantidad de puntos que se otorgan como bonificación por referido y la cantidad de referidos a bonificar, los configura la administración del sistema. 
 A continuación el formulario de registro:</p>
-![_REGISTRARSE](https://github.com/user-attachments/assets/e319bef4-c227-4f6b-935b-65478f53d2b2)
+<img width="452" height="233" alt="_REGISTRARSE" src="https://github.com/user-attachments/assets/c497e024-3488-4f75-ad9f-5c512afda8ab" />
+
+
 
 
 
