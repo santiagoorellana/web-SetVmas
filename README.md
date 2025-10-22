@@ -185,7 +185,7 @@ A continuación se ve el formulario para hacer las compras:</p>
 <p>Un usuario bloqueado puede recibir bonificaciones, autenticarse y entrar a su oficina virtual como observador. Mientras esté bloqueado no puede hacer ningún cambio en sus datos, ni insertar anuncios, ni vender puntos. Se debe mostrar en la oficina virtual del usuario bloqueado un cartelito que indique su estado y la fecha-hora del desbloqueo.
 Un usuario desactivado no puede autenticarse y por tanto no puede acceder a su oficina virtual y tampoco recibe bonificaciones, pero sus datos permanecen en el sistema. Cuando el usuario intenta autenticarse se le niega el acceso.</p>
 <p>A continuación se presenta un boceto de la lista de usuarios que ven los administradores:</p>
-<img width="1150" alt="Listar Usuarios" src="https://github.com/user-attachments/assets/e3098efa-2958-43a3-a4ca-fdf719f78083" />
+<img width="750" alt="Listar Usuarios" src="https://github.com/user-attachments/assets/e3098efa-2958-43a3-a4ca-fdf719f78083" />
 
 <h2>Lista de transferencias</h2>
 <p>Para los usuarios registrados y autorizados, es posible acceder a la lista de transferenciasdonde es posible ver todos los movimientos de puntos que se han realizado en el sistema. </p>
@@ -239,7 +239,7 @@ Los pagos se realizan automáticamente desde la oficina virtual del usuario cuan
 <p>Metas de claseque debe cumplir un usuario para alcanzar una clase superior. </p>
 
 <p>Los factores de bonificación por red de referidos determinan lo que se suman al monto del usuario anfitrión cuyo referido inserta un anuncio, hace una denuncia, vende o compra puntos. La bonificación que obtiene cada usuario es igual a la cantidad de puntos vendidos/comprados o los ganados por denunciar o insertar un anuncio. En la tabla siguiente se muestran en las casillas de color blanco, ejemplos de factores de bonificación por red que ganan los usuarios según sus niveles y su clase.</p>
-<img width="706" alt="tabla1" src="https://github.com/user-attachments/assets/9797c7f6-2651-48f9-8f45-31db03a5c00f" />
+<img width="506" alt="tabla1" src="https://github.com/user-attachments/assets/9797c7f6-2651-48f9-8f45-31db03a5c00f" />
 
 <p>La pseudo fórmula para calcular la bonificación por venta que se debe dar a un usuario anfitrión es:</p>
 
@@ -296,6 +296,7 @@ o	Cantidad total de banners inferiores y % que representa.
 
 <h2>API de la web</h2>
 <p>La web del sistema está implementada de manera tal que brinda una API (Application Program Interface en ingles) al exterior mediante la cual se pueden conectar al sistema otras aplicaciones web, móviles y desktop. La aplicación para Android de Setvmás se conecta al sitio web por medio de esta API.</p>
+
 
 
 
