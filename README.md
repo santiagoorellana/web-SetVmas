@@ -1,4 +1,5 @@
 <h1>Clasificados SetV+</h1>
+<p>En 2019 diseñé un modelo de negocio para gestionar anuncios clasificados mediante una aplicación web (setvmas.com), y mediante un sistema de puntos pagarles a los usuarios su participación. Luego con esos puntos pueden comprar las opciones de publicidad más avanzadas del sistema. Para la implementación contraté a DOSSL, que utilizó tecnología .NET CORE para el backend, Angular para el frontend y Cordoba para la aplicación de Android. Durante todo el proceso de implementación participé activamente revisando el cumplimiento de los requerimientos y ayudando en la toma de decisiones. Luego me asocié con DOSSL para darle mantenimiento al sitio ante posibles problemas y con una comercial que se encargaría de buscar clientes para la aplicación. </p>
 
 <h2>Descripción de la web SetV+</h2>
 <p>El sistema Setvmás es una Red de Publicidad, compuesta inicialmente por una web de anuncios CLASIFICADOS y enriquecida con un sistema de PUNTOS que sirven como medio de intercambio y estímulo para los usuarios. Permite la creación de redes de MLM (Marketing Multinivel) y se pueden ganar BONIFICACIONES de puntos por participar y aportar al crecimiento del sistema. Cada usuario registrado tendrá una OFICINA virtual, en la cual podrán gestionar todo su negocio, administrando sus anuncios, sus puntos y su red de referidos. Todas las opciones de publicidad disponibles en el sistema se pagan con puntos. Todo usuario que participe activamente en el sistema, puede llegar a alcanzar los niveles Bronce, Plata, Oro y Diamante, y así aumentar sus ganancias de puntos.</p>
@@ -296,6 +297,7 @@ Los pagos se realizan automáticamente desde la oficina virtual del usuario cuan
 
 <h2>API de la web</h2>
 <p>La web del sistema está implementada de manera tal que brinda una API (Application Program Interface en ingles) al exterior mediante la cual se pueden conectar al sistema otras aplicaciones web, móviles y desktop. La aplicación para Android de Setvmás se conecta al sitio web por medio de esta API.</p>
+
 
 
 
