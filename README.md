@@ -14,12 +14,12 @@
 <p>Cualquier usuario (en el caso de la Web, registrado o no), puede navegar por los anuncios y abrirlos. Al seleccionar un anuncio, este se abre completamente en una página donde el usuario puede ver todos los detalles del anuncio. La imagen del producto no es obligatoria, por lo que en caso de que el usuario no la ponga, el SISTEMA la sustituye por una imagen avatar.
 Se pueden realizar búsquedas directas de anuncios, insertando cadenas de texto con una o varias palabras de búsqueda que representan al producto o servicio que se desea buscar. La búsqueda por defecto se realiza en las siguientes cadenas:</p>
 
-•	Título del anuncio
-•	Nombre de contacto
-•	Número de teléfono de contacto
-•	Dirección email de contacto
-•	URL del sitio web
-•	Etiquetas del anuncio
+*	Título del anuncio
+*	Nombre de contacto
+*	Número de teléfono de contacto
+*	Dirección email de contacto
+*	URL del sitio web
+*	Etiquetas del anuncio
 
 <p>Si el usuario activa la búsqueda profunda, también se busca en el texto del anuncio.<br>
 Para filtrar los resultados de la búsqueda, el usuario cuenta con los siguientes filtros:</p>
@@ -96,7 +96,7 @@ Los campos marcados con * son obligatorios.
 <h2>Oficina virtual</h2>
 <p>Los usuarios registrados pueden acceder a una oficina virtual mediante una opción en el menú principal de la aplicación, la cual solo es accesible cuando el usuario registrado y verificado se ha loggeado en el sistema. En la oficina virtual el usuario puede:</p>
 
-•	*Ver el mensaje de texto, insertado por los administradores del sistema. 
+• Ver el mensaje de texto, insertado por los administradores del sistema. 
 •	Ver y editar sus datos de registro (Solo puede editar teléfono y contraseña)
 •	Ver su fecha de registro
 •	Ver su clase de usuario (BRONCE, PLATA, ORO, DIAMANTE)
@@ -297,6 +297,7 @@ o	Cantidad total de banners inferiores y % que representa.
 
 <h2>API de la web</h2>
 <p>La web del sistema está implementada de manera tal que brinda una API (Application Program Interface en ingles) al exterior mediante la cual se pueden conectar al sistema otras aplicaciones web, móviles y desktop. La aplicación para Android de Setvmás se conecta al sitio web por medio de esta API.</p>
+
 
 
 
