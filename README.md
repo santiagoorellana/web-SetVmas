@@ -104,10 +104,10 @@ Para los usuarios deseen insertar anuncios sin registrarse, pueden utilizar el p
 *	Ver el ID y email de su anfitrión
 *	Ver la cantidad de referidos directos que tiene. 
 *	Ver la lista de referidos directos y por cada uno ver:
-  o	ID de usuario.
-  o	Dirección email.
-  o	Número del móvil.
-  o	Cantidad de referidos.
+  **	ID de usuario.
+  **	Dirección email.
+  **	Número del móvil.
+  **	Cantidad de referidos.
 *	Ver la lista de los anuncios que ha insertado. 
 *	Insertar, modificar, ocultar y eliminar anuncios simples
 *	Insertar, modificar, ocultar y eliminar anuncios avanzados
@@ -296,6 +296,7 @@ o	Cantidad total de banners inferiores y % que representa.
 
 <h2>API de la web</h2>
 <p>La web del sistema está implementada de manera tal que brinda una API (Application Program Interface en ingles) al exterior mediante la cual se pueden conectar al sistema otras aplicaciones web, móviles y desktop. La aplicación para Android de Setvmás se conecta al sitio web por medio de esta API.</p>
+
 
 
 
