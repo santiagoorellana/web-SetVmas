@@ -15,8 +15,8 @@
 Se pueden realizar búsquedas directas de anuncios, insertando cadenas de texto con una o varias palabras de búsqueda que representan al producto o servicio que se desea buscar. La búsqueda por defecto se realiza en las siguientes cadenas:</p>
 
 *	Título del anuncio
- - Nombre de contacto
- - Número de teléfono de contacto
+   - Nombre de contacto
+   - Número de teléfono de contacto
 *	Dirección email de contacto
 *	URL del sitio web
 *	Etiquetas del anuncio
@@ -296,6 +296,7 @@ o	Cantidad total de banners inferiores y % que representa.
 
 <h2>API de la web</h2>
 <p>La web del sistema está implementada de manera tal que brinda una API (Application Program Interface en ingles) al exterior mediante la cual se pueden conectar al sistema otras aplicaciones web, móviles y desktop. La aplicación para Android de Setvmás se conecta al sitio web por medio de esta API.</p>
+
 
 
 
