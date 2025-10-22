@@ -104,10 +104,10 @@ Para los usuarios deseen insertar anuncios sin registrarse, pueden utilizar el p
 *	Ver el ID y email de su anfitrión
 *	Ver la cantidad de referidos directos que tiene. 
 *	Ver la lista de referidos directos y por cada uno ver:
-  **	ID de usuario.
-  **	Dirección email.
-  **	Número del móvil.
-  **	Cantidad de referidos.
+  -	ID de usuario.
+  -	Dirección email.
+  -	Número del móvil.
+  -	Cantidad de referidos.
 *	Ver la lista de los anuncios que ha insertado. 
 *	Insertar, modificar, ocultar y eliminar anuncios simples
 *	Insertar, modificar, ocultar y eliminar anuncios avanzados
@@ -155,17 +155,17 @@ A continuación se ve el formulario para hacer las compras:</p>
 <h2>Pie de página</h2>
 <p>El pie de página muestra el copyright del sitio y enlaces a varios temas importantes para los usuarios. Son los siguientes:</p>
 
-•	Términos y condiciones de uso
-•	Nosotros (Explicación sobre Setvmás)
-•	Contáctanos (Para contactar por email con la administración)
-•	Puntuación (Página con texto para explicar el sistema de puntuación)
-•	Preguntas frecuentes
+*	Términos y condiciones de uso
+*	Nosotros (Explicación sobre Setvmás)
+*	Contáctanos (Para contactar por email con la administración)
+*	Puntuación (Página con texto para explicar el sistema de puntuación)
+*	Preguntas frecuentes
 
 <p>También se muestran íconos de acceso a los siguientes sitios:</p>
 
-•	Facebook (Para obtener información sobre Setvmás)
-•	Telegram (Para entrar al grupo Setvmás)
-•	GooglePlay (Para descargar la aplicación Setvmás)
+*	Facebook (Para obtener información sobre Setvmás)
+*	Telegram (Para entrar al grupo Setvmás)
+*	GooglePlay (Para descargar la aplicación Setvmás)
 
 <h2>Contactanos</h2>
 <p>Esta es una página con el formulario de contacto, mediante el cual se puede enviar un email a la administración del sistema. Los datos que se piden son los básicos:</p>
@@ -192,11 +192,11 @@ Un usuario desactivado no puede autenticarse y por tanto no puede acceder a su o
 <img width="452" alt="_TRANSFERENCIAS" src="https://github.com/user-attachments/assets/84c22233-63ac-49c0-92cb-39b1419028ba" />
 <p>Por cada transferencia se guardan los siguientes datos:</p>
 
-•	Fecha y hora de operación
-•	Tipo de operación
-•	Usuario fuente 
-•	Usuario destino
-•	Cantidad de puntos
+*	Fecha y hora de operación
+*	Tipo de operación
+*	Usuario fuente 
+*	Usuario destino
+*	Cantidad de puntos
 
 <h2>Bonificación manual</h2>
 <p>Las bonificaciones manuales las otorga el administrador y los usuarios autorizados. 
@@ -225,16 +225,16 @@ Los pagos se realizan automáticamente desde la oficina virtual del usuario cuan
 
 <p>Valores de bonificaciones constantes que se suman al monto del usuario. Son otorgados automáticamente por el sistema. Pueden ser números fraccionarios iguales o mayores que cero.</p>
 
-•	Bonificación por registro
-•	Bonificación por referido y la cantidad referidos a bonificar
-•	Bonificación por anuncio
-•	Bonificación por denuncia
-•	Bonificación por clasificación
-•	Bonificación por visualización y el valor minutos de espera
-•	Bonificación por subir a nivel BRONCE
-•	Bonificación por subir a nivel PLATA
-•	Bonificación por subir a nivel ORO
-•	Bonificación por subir a nivel DIAMANTE
+*	Bonificación por registro
+*	Bonificación por referido y la cantidad referidos a bonificar
+*	Bonificación por anuncio
+*	Bonificación por denuncia
+*	Bonificación por clasificación
+*	Bonificación por visualización y el valor minutos de espera
+*	Bonificación por subir a nivel BRONCE
+*	Bonificación por subir a nivel PLATA
+*	Bonificación por subir a nivel ORO
+*	Bonificación por subir a nivel DIAMANTE
 
 <p>Metas de claseque debe cumplir un usuario para alcanzar una clase superior. </p>
 
@@ -260,17 +260,17 @@ Los pagos se realizan automáticamente desde la oficina virtual del usuario cuan
 <h2>Ver estadísticas del negocio</h2>
 <p>Los usuarios registrados autorizados, pueden ver las estadísticas del negocio. Los datos que puede ver el usuario son los siguientes.</p>
 
-•	Cantidad total de usuarios registrados
-•	Cantidad total de puntos en el sistema
-•	Cantidad total de anuncios en el sistema. 
-•	Cantidad total de anuncios, del usuario INVITADO y % que representa.
-•	Cantidad total de anuncios autorrenovables y % que representa.
-•	Cantidad total de banners superiores
-•	Cantidad total de banners inferiores
-•	Cantidad total de referencias a web y % que representa.
-•	Cantidad total de visitantes (se mide por los accesos a las cuentas de usuario)
-•	Cantidad total de visualizaciones (visualización de anuncios)
-•	Por cada una de las clases de usuarios mostrar:
+*	Cantidad total de usuarios registrados
+*	Cantidad total de puntos en el sistema
+*	Cantidad total de anuncios en el sistema. 
+*	Cantidad total de anuncios, del usuario INVITADO y % que representa.
+*	Cantidad total de anuncios autorrenovables y % que representa.
+*	Cantidad total de banners superiores
+*	Cantidad total de banners inferiores
+*	Cantidad total de referencias a web y % que representa.
+*	Cantidad total de visitantes (se mide por los accesos a las cuentas de usuario)
+*	Cantidad total de visualizaciones (visualización de anuncios)
+*	Por cada una de las clases de usuarios mostrar:
 o	Cantidad de usuarios en la clase y % que representa.
 o	Cantidad total de anuncios publicados por usuarios de la clase y % que representa.
 o	Cantidad de autorrenovables publicados por usuarios de la clase
@@ -278,7 +278,7 @@ o	Cantidad total de puntos acumulados en la clase y % que representa.
 o	Histograma de cantidad de puntos acumulados por usuarios de la clase. Que se puedan modificar los rangos de puntos con que se hace el histograma. 
 o	Histograma de cantidad de anuncios publicados por usuarios de la clase. Que se puedan modificar los rangos de anuncios con que se hace el histograma.
 o	Histograma de la antigüedad en meses de usuarios de la clase. Que se puedan modificar los rangos de meses con que se hace el histograma.
-•	Por cada categoría y subcategoría de anuncios, se debe mostrar:
+*	Por cada categoría y subcategoría de anuncios, se debe mostrar:
 o	Total de anuncios en la categoría y % que representa.
 o	Cantidad de anuncios simples en la categoría.
 o	Cantidad de anuncios autorrenovables en la categoría.
@@ -286,7 +286,7 @@ o	Cantidad total de banners superiores y % que representa.
 o	Cantidad total de banners inferiores y % que representa.
 o	Cantidad total de referencias a web y % que representa.
 o	Cantidad de visualizaciones.
-•	Por cada provincia y municipio del país se debe mostrar:
+*	Por cada provincia y municipio del país se debe mostrar:
 o	Cantidad total de anuncios
 o	Cantidad de anuncios simples y % que representa.
 o	Cantidad de anuncios autorrenovables y % que representa.
@@ -296,6 +296,7 @@ o	Cantidad total de banners inferiores y % que representa.
 
 <h2>API de la web</h2>
 <p>La web del sistema está implementada de manera tal que brinda una API (Application Program Interface en ingles) al exterior mediante la cual se pueden conectar al sistema otras aplicaciones web, móviles y desktop. La aplicación para Android de Setvmás se conecta al sitio web por medio de esta API.</p>
+
 
 
 
