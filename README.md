@@ -145,7 +145,158 @@ El ADMINISTRADOR y los usuarios autorizados a acceder a la lista de pagos compru
 A continuación se ve el formulario para hacer las compras:</p>
 <img width="452" alt="_COMPRAR" src="https://github.com/user-attachments/assets/dd2e1337-b133-40d9-b0b5-bf56c98bad11" />
 
+<h2>Banner superior</h2>
+<p>El banner superior es una imagen rectangular que se coloca en las páginas publicitarias del sitio, en la parte superior de la página, por debajo del menú. El sitio admite la colocación de varias imágenes de diferentes anuncios, para mostrar como banner superior teniendo todas, la misma probabilidad de ser mostrada. Si un usuario hace clic sobre la imagen de un banner, se le conduce inmediatamente hasta el anuncio vinculado con el banner. Si el anuncio es un enlace directo a una página web, se le conduce directamente a la página web.A continuación se ve un ejemplo de un banner superior:</p>
+<img width="610" alt="_Banner sup" src="https://github.com/user-attachments/assets/5b86b2ed-3b56-4c02-a450-d742647e1e27" />
 
+<h2>Banner inferior</h2>
+<p>El banner inferior es la imagen principal de un anuncio que se coloca en las páginas publicitarias del sitio, en la parte inferior de la página, por encima del pié de página. El sitio admite la colocación de varias imágenes de diferentes anuncios, para mostrar como banner inferior teniendo todas, la misma probabilidad de ser mostradas. Al abrir una página, mientras el cliente permanezca en la misma, las imágenes mostradas como banner inferior cambian cada cierta cantidad de minutos y además existen controles que permiten al usuario desplazar manualmente las imágenes para ver las de otros anuncios. Si el usuario hace clic sobre la imagen de un banner inferior, se le conduce inmediatamente hasta el anuncio vinculado con el banner. Si el anuncio es un enlace directo a una página web, se le conduce directamente a la página web.A continuación se ve un ejemplo de un banner inferior:</p>
+<img width="616" alt="_Banner INF" src="https://github.com/user-attachments/assets/66bb7fd5-2312-45ed-879c-8c00a7e1af5f" />
+
+<h2>Pie de página</h2>
+<p>El pie de página muestra el copyright del sitio y enlaces a varios temas importantes para los usuarios. Son los siguientes:</p>
+
+•	Términos y condiciones de uso
+•	Nosotros (Explicación sobre Setvmás)
+•	Contáctanos (Para contactar por email con la administración)
+•	Puntuación (Página con texto para explicar el sistema de puntuación)
+•	Preguntas frecuentes
+
+<p>También se muestran íconos de acceso a los siguientes sitios:</p>
+
+•	Facebook (Para obtener información sobre Setvmás)
+•	Telegram (Para entrar al grupo Setvmás)
+•	GooglePlay (Para descargar la aplicación Setvmás)
+
+<h2>Contactanos</h2>
+<p>Esta es una página con el formulario de contacto, mediante el cual se puede enviar un email a la administración del sistema. Los datos que se piden son los básicos:</p>
+<img width="349" height="213" alt="_CONTACTANOS" src="https://github.com/user-attachments/assets/b48860f0-447e-4c2a-9b76-ed15fc2d7c8d" />
+
+<h2>Denunciar anuncios</h2>
+<p>Si un usuario registrado entra a ver un anuncio y detecta que el contenido incumple con las condiciones de uso, puede denunciarlo.Si un anuncio es denunciado, éste permanece a la vista pública. Sólo si la denuncia procede será eliminado el anuncio. En la imagen derecha se muestra señalado el enlace para denunciar el anuncio.</p>
+<img width="454" height="334" alt="_DENUNCIAR" src="https://github.com/user-attachments/assets/d62018dd-7356-4f72-a442-8c6ea36944cf" />
+
+<h2>Lista de denuncias, revisión y clasificación (Administración)</h2>
+<p>Los usuarios registrados y autorizados por el administrador, pueden acceder a la lista de denuncias y verificar las denuncias. Si la denuncia no procede, entonces el anuncio es eliminado de la lista de denuncias. Si la denuncia procede, entonces el anuncio es eliminado completamente del sistema y se le otorga una bonificación por denuncia al usuario que realizó la denuncia y se bloquea temporalmente al usuario que insertó el anuncio. También se eliminan los banners superiores e inferiores vinculados al anuncio eliminado. Al usuario que realizó la clasificación se le otorga una bonificación por clasificación, solo si el usuario que insertó el anuncio estaba desbloqueado en el momento que se realizó la clasificación. En otras palabras, los anuncios de usuarios bloqueados, no les da bonificaciones a los usuarios clasificadores. </p>
+<img width="452" height="235" alt="_DENUNCIAS" src="https://github.com/user-attachments/assets/7de27004-b5ab-46d0-a463-cc4ada9a80a4" />
+<p>Un usuario clasificador no puede clasificar un anuncio denunciado ni insertado por él mismo. Las bonificaciones para el denunciante y para el clasificador, así como el tiempo de bloqueo del usuario que insertó el anuncio, son establecidas por la administración del sistema.</p>
+
+<h2>Lista de usuarios (Administración)</h2>
+<p>Los usuarios registrados autorizados por el administrador, pueden acceder a la lista de usuarios. Desde la lista de usuarios es posible ver todos los datos de registro de cada usuario del sistema, ver sus permisos y acceder a su oficina virtual. También se pueden modificar los datos, eliminar usuarios, bloquearlo temporalmente para que no pueda actuar en la plataforma, desbloquearlo, desactivarlo o activarlo. También debe es posible otorgarle manualmente al usuario, una de las clases BRONCE, PLATA, ORO o DIAMANTE. </p>
+<p>Un usuario bloqueado puede recibir bonificaciones, autenticarse y entrar a su oficina virtual como observador. Mientras esté bloqueado no puede hacer ningún cambio en sus datos, ni insertar anuncios, ni vender puntos. Se debe mostrar en la oficina virtual del usuario bloqueado un cartelito que indique su estado y la fecha-hora del desbloqueo.
+Un usuario desactivado no puede autenticarse y por tanto no puede acceder a su oficina virtual y tampoco recibe bonificaciones, pero sus datos permanecen en el sistema. Cuando el usuario intenta autenticarse se le niega el acceso.</p>
+<p>A continuación se presenta un boceto de la lista de usuarios que ven los administradores:</p>
+<img width="1150" alt="Listar Usuarios" src="https://github.com/user-attachments/assets/e3098efa-2958-43a3-a4ca-fdf719f78083" />
+
+<h2>Lista de transferencias</h2>
+<p>Para los usuarios registrados y autorizados, es posible acceder a la lista de transferenciasdonde es posible ver todos los movimientos de puntos que se han realizado en el sistema. </p>
+<img width="452" alt="_TRANSFERENCIAS" src="https://github.com/user-attachments/assets/84c22233-63ac-49c0-92cb-39b1419028ba" />
+<p>Por cada transferencia se guardan los siguientes datos:</p>
+
+•	Fecha y hora de operación
+•	Tipo de operación
+•	Usuario fuente 
+•	Usuario destino
+•	Cantidad de puntos
+
+<h2>Bonificación manual</h2>
+<p>Las bonificaciones manuales las otorga el administrador y los usuarios autorizados. 
+Los puntos son creados en la cuenta del usuario destino. No se descuentan de nadie. </p>
+<img width="453" alt="_BONIFICAR" src="https://github.com/user-attachments/assets/52b03c5e-db81-4d25-9ac3-d7364b65d322" />
+
+<h2>Bonificación automática</h2>
+<p>Las bonificaciones automáticas son otorgadas por el sistema como respuesta a acciones de los usuarios. No se descuentan de nadie y se registran en la lista de transferencias. Los motivos de bonificaciones automáticas son:Por registrarse en el sistema, por insertar anuncios simples, por vender o comprar puntos, por alcanzar una nueva clase de usuario, por denunciar anuncios y por clasificar denuncias. Los detalles de cada una de estas bonificaciones automáticas se explican a lo largo del documento.</p>
+
+<h2>Venta de puntos</h2>
+<p>En esta operación los puntos se descuentan del monto del usuario fuente (Vendedor) que debe tener nivel BRONCE o superior. Los puntos descontados al usuario fuente son agregados al monto del usuario destino (el que compra los puntos), que puede ser cualquier usuario con nivel inferior al del usuario fuente. En otras palabras, el nivel del vendedor debe ser superior al del comprador. El ADMINISTRADOR es el nivel más alto, por lo tanto, a los diamantes solo les puede vender el administrador. Las ventas generan bonificaciones para el usuario fuente (Vendedor) y para su línea paterna, así como para el usuario destino (Comprador) si este tiene un nivel BRONCE o superior. La cantidad de puntos de estas bonificaciones las determina la administración del sistema. Lo de las bonificaciones para la línea paterna se explicará luego en el tema “Configuración de bonificaciones, metas y precios”.</p>
+<img width="232" alt="_VENDER" src="https://github.com/user-attachments/assets/b3bf3bb2-ec50-4184-991a-d91f6eaeb361" />
+<p>Las ventas se realizan manualmente desde la oficina virtual del usuario con nivel BRONCE o superior. Para hacerlo solo hay que indicar el usuario al que se le hace la venta y la cantidad de puntos. La venta se registra en la lista de transferencias. A la izquierda se muestra el formulario para vender puntos.
+El formulario es accesible desde la oficina virtual de cada usuario.</p>
+
+<h2>Compra directa de puntos</h2>
+<p>Las compras directas suceden cuando el usuario compra puntos al sistema. Estas compras pueden realizarse mediante transacción entre tarjetas bancarias o mediante transferencias de saldo móvil. Las compras directas solo generan bonificación por compra para el usuario destino. La bonificación por compra es multiplicada por un factor de bonificación por compra directaque la administración establece para estimular las compras directas. </p>
+<img width="452" alt="_COMPRAR" src="https://github.com/user-attachments/assets/753c1a65-03e9-40c2-90a1-70f9ede05991" />
+
+<h2>Pago con puntos</h2>
+<p>El pago lo realiza el usuario fuente para configurar un anuncio avanzado o para acceder a alguna funcionalidad extra del sistema. Esta operación descuenta puntos del usuario fuente, que puede ser cualquier usuario registrado. El usuario destino siempre es el SISTEMA. 
+Los pagos se realizan automáticamente desde la oficina virtual del usuario cuando este activa las opciones avanzadas en un anuncio y se registran en la lista de transferencias.</p>
+
+<h2>Configuración de bonificaciones, metas y precios (Administración)</h2>
+<p>El ADMINISTRADOR y los usuarios autorizados deben poder configurar los valores de las bonificaciones, las metas y los precios de las opciones avanzadas para controlar así el equilibrio del sistema de puntos. Los valores que se deben controlar son los siguientes…</p>
+
+<p>Valores de bonificaciones constantes que se suman al monto del usuario. Son otorgados automáticamente por el sistema. Pueden ser números fraccionarios iguales o mayores que cero.</p>
+
+•	Bonificación por registro
+•	Bonificación por referido y la cantidad referidos a bonificar
+•	Bonificación por anuncio
+•	Bonificación por denuncia
+•	Bonificación por clasificación
+•	Bonificación por visualización y el valor minutos de espera
+•	Bonificación por subir a nivel BRONCE
+•	Bonificación por subir a nivel PLATA
+•	Bonificación por subir a nivel ORO
+•	Bonificación por subir a nivel DIAMANTE
+
+<p>Metas de claseque debe cumplir un usuario para alcanzar una clase superior. </p>
+
+<p>Los factores de bonificación por red de referidos determinan lo que se suman al monto del usuario anfitrión cuyo referido inserta un anuncio, hace una denuncia, vende o compra puntos. La bonificación que obtiene cada usuario es igual a la cantidad de puntos vendidos/comprados o los ganados por denunciar o insertar un anuncio. En la tabla siguiente se muestran en las casillas de color blanco, ejemplos de factores de bonificación por red que ganan los usuarios según sus niveles y su clase.</p>
+<img width="706" alt="tabla1" src="https://github.com/user-attachments/assets/9797c7f6-2651-48f9-8f45-31db03a5c00f" />
+
+<p>La pseudo fórmula para calcular la bonificación por venta que se debe dar a un usuario anfitrión es:</p>
+
+<code>BonificaciónDeRed = CantidadVendida* Factores[ClaseDeUsuario, CantidadIntermediarios]</code>
+
+<p>En el caso de las bonificaciones por anuncio y bonificaciones por denuncia, se emplea esta misma pseudo fórmula, pero la bonificación de la red se calcula partiendo de la bonificación que se le da al usuario que realiza el anuncio o la denuncia. Las pseudo fórmulas para las bonificaciones de la red por anunciar y denunciar son:</p>
+
+<code>BonificaciónDeRed = BonificaciónPorAnuncio* Factores[ClaseDeUsuario, CantidadIntermediarios]</code>
+
+<code>BonificaciónDeRed = BonificaciónPorDenuncia* Factores[ClaseDeUsuario, CantidadIntermediarios]</code>
+
+<p>Las bonificaciones de red por venta ocurren solo cuando la venta de puntos es realizada entre dos usuario o cuando un usuario le compra puntos al sistema y se confirma correctamente dicha compra. </p>
+<p>En el caso de las bonificaciones de la red por denunciar, estas se otorgan solo cuando la denuncia es clasificada y procede. Solo así el sistema procede a bonificar al usuario y su red.</p>
+<p>En el caso de las bonificaciones por anunciar, estas se otorgan luego de X días de insertado el anuncio. Transcurridos los X días, si el anuncio no está en revisión (denunciado) o eliminado, entonces se le otorga la bonificación al usuario que lo insertó y a su red de referidos.</p>
+
+<p>Los precios de las opciones avanzadas, se pagan en puntos por días, y son configurados por la administración del sistema.</p>
+
+<h2>Ver estadísticas del negocio</h2>
+<p>Los usuarios registrados autorizados, pueden ver las estadísticas del negocio. Los datos que puede ver el usuario son los siguientes.</p>
+
+•	Cantidad total de usuarios registrados
+•	Cantidad total de puntos en el sistema
+•	Cantidad total de anuncios en el sistema. 
+•	Cantidad total de anuncios, del usuario INVITADO y % que representa.
+•	Cantidad total de anuncios autorrenovables y % que representa.
+•	Cantidad total de banners superiores
+•	Cantidad total de banners inferiores
+•	Cantidad total de referencias a web y % que representa.
+•	Cantidad total de visitantes (se mide por los accesos a las cuentas de usuario)
+•	Cantidad total de visualizaciones (visualización de anuncios)
+•	Por cada una de las clases de usuarios mostrar:
+o	Cantidad de usuarios en la clase y % que representa.
+o	Cantidad total de anuncios publicados por usuarios de la clase y % que representa.
+o	Cantidad de autorrenovables publicados por usuarios de la clase
+o	Cantidad total de puntos acumulados en la clase y % que representa.
+o	Histograma de cantidad de puntos acumulados por usuarios de la clase. Que se puedan modificar los rangos de puntos con que se hace el histograma. 
+o	Histograma de cantidad de anuncios publicados por usuarios de la clase. Que se puedan modificar los rangos de anuncios con que se hace el histograma.
+o	Histograma de la antigüedad en meses de usuarios de la clase. Que se puedan modificar los rangos de meses con que se hace el histograma.
+•	Por cada categoría y subcategoría de anuncios, se debe mostrar:
+o	Total de anuncios en la categoría y % que representa.
+o	Cantidad de anuncios simples en la categoría.
+o	Cantidad de anuncios autorrenovables en la categoría.
+o	Cantidad total de banners superiores y % que representa.
+o	Cantidad total de banners inferiores y % que representa.
+o	Cantidad total de referencias a web y % que representa.
+o	Cantidad de visualizaciones.
+•	Por cada provincia y municipio del país se debe mostrar:
+o	Cantidad total de anuncios
+o	Cantidad de anuncios simples y % que representa.
+o	Cantidad de anuncios autorrenovables y % que representa.
+o	Cantidad total de banners superiores y % que representa.
+o	Cantidad total de banners inferiores y % que representa.
+
+
+<h2>API de la web</h2>
+<p>La web del sistema está implementada de manera tal que brinda una API (Application Program Interface en ingles) al exterior mediante la cual se pueden conectar al sistema otras aplicaciones web, móviles y desktop. La aplicación para Android de Setvmás se conecta al sitio web por medio de esta API.</p>
 
 
 
