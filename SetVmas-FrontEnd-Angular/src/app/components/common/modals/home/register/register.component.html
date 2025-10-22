@@ -1,0 +1,136 @@
+<form [formGroup]="registerForm" #form="ngForm" (ngSubmit)="onSubmit()">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-start align-items-center mb-2 mb-sm-3">
+        <div class="mr-sm-4 mb-2 mb-sm-0 ico-register"></div>
+        <mat-label *ngIf="!isCartel" class="title-modals">Registrarse</mat-label>
+         <mat-label *ngIf="isCartel" class="title-modals">Cambiar Datos</mat-label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <mat-form-field *ngIf="!isCartel"  appearance="outline" class="w-100 input-text input-text-height mx-0 mb-2">
+          <input matInput  type="text" [readonly]="!chieldm" minlength="4" maxlength="4" placeholder="Código de quién te invita(Anfitrión). No obligatorio" formControlName="anfitrion" class="py-0 my-0">
+
+        </mat-form-field>
+        <p *ngIf="isCartel"> <span style="padding-bottom: 20px;"  style="padding-bottom: 11px;"><b>Anfitrión:</b> {{an}}</span></p>
+        <p *ngIf="isCartel"><span style="padding-bottom: 20px;"  style="padding-bottom: 11px;"><b>Correo actual:</b> {{co}}</span></p>
+
+        <mat-form-field *ngIf="!isCartel" appearance="outline" class="w-100 input-text input-text-height mx-0 mb-2">
+          <input matInput type="text" placeholder="Correo" formControlName="correo" required
+          [ngClass]="{ 'is-invalid': submitted && f.correo.errors }" class="py-0 my-0">
+          <mat-error *ngIf="f.correo.hasError('required')">
+            Debes introducir un valor
+          </mat-error>
+          <mat-error *ngIf="f.correo.hasError('email')">
+            Correo no válido
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field *ngIf="isCartel" appearance="outline" class="w-100 input-text input-text-height mx-0 mb-2">
+          <input matInput type="text" placeholder="Nuevo correo" formControlName="correo" required
+          [ngClass]="{ 'is-invalid': submitted && f.correo.errors }" class="py-0 my-0">
+          <mat-error *ngIf="f.correo.hasError('required')">
+            Debes introducir un valor
+          </mat-error>
+          <mat-error *ngIf="f.correo.hasError('email')">
+            Correo no válido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="!isCartel" appearance="outline"  class="w-100 input-text input-text-height mx-0 mb-2">
+          <div class="d-flex flex-row">
+          <input matInput [type]="this.hide2 ? 'password' : 'text'" placeholder="Contraseña" required formControlName="password"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="py-0 my-0">
+
+          <span class="ml-1" (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+            <i *ngIf="hide2" class="fa fa-eye"></i>
+            <i *ngIf="!hide2" class="fa fa-eye-slash"></i>
+          </span>
+          </div>
+            <mat-error *ngIf="f.password.hasError('required')">
+              Debes introducir un valor
+            </mat-error>
+            <mat-error *ngIf="f.password.hasError('minlength')">
+              Debes introducir al menos 6 carácteres
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="isCartel" appearance="outline" class="w-100 input-text input-text-height mx-0 mb-2">
+          <div class="d-flex flex-row">
+          <input matInput [type]="this.hide ? 'password' : 'text'"  placeholder="Nueva Contraseña" required formControlName="password"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="py-0 my-0">
+
+          <span class="ml-1" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <i *ngIf="hide" class="fa fa-eye"></i>
+            <i *ngIf="!hide" class="fa fa-eye-slash"></i>
+          </span>
+      </div>
+
+            <mat-error *ngIf="f.password.hasError('required')">
+              Debes introducir un valor
+            </mat-error>
+            <mat-error *ngIf="f.password.hasError('minlength')">
+              Debes introducir al menos 6 carácteres
+            </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" class="w-100 input-text input-text-height mx-0 mb-2">
+          <div class="d-flex flex-row">
+          <input matInput [type]="this.hide1 ? 'password' : 'text'"  placeholder="Confirmar contraseña" required formControlName="confirmPassword"
+          [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" class="py-0 my-0">
+
+            <span class="ml-1" (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
+            <i *ngIf="hide1" class="fa fa-eye"></i>
+            <i *ngIf="!hide1" class="fa fa-eye-slash"></i>
+          </span>
+          </div>
+            <mat-error *ngIf="f.confirmPassword.hasError('required')">
+              Debes introducir un valor
+            </mat-error>
+            <mat-error *ngIf="f.confirmPassword.hasError('mustMatch')">
+              Las contraseñas no coinciden
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100 input-text input-text-height mx-0 mb-2">
+          <input matInput type="text" placeholder="Teléfono" formControlName="telefono" required onkeypress="return (event.charCode>=48 && event.charCode<=57) ||  event.charCode==43" minlength="8" maxlength="12"
+          [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }">
+            <mat-error *ngIf="f.telefono.hasError('required')">
+              *Debes introducir un valor
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-6 d-flex flex-column justify-content-between mt-2 mt-lg-0">
+
+      <div class="captchar">
+        <!-- <div #recaptcha></div> d-flex w-100-->
+
+          <re-captcha (resolved)="resolved($event)" siteKey="6LfI1fcUAAAAAEwQ1Fb86Qkhabye30Y81fMYxsHM"></re-captcha><!--Setvmas
+        <re-captcha (resolved)="resolved($event)" siteKey="6LdX0fcUAAAAAC8xRIu0HAX4szjL2Ufavpf_8Chq"></re-captcha>--><!--Localhost-->
+
+      </div>
+        <p  *ngIf="isCartel" style="text-align: justify;"><b>¡Advertencia!</b> Si comete un error en los nuevos datos y pierde el acceso a su cuenta, vaya a la sección de Contacto de <a href="https://setvmas.com/#/pagina/5">setvmas.com</a> y déjenos un mensaje solicitando reactivación de su cuenta y un teléfono donde podamos localizarlo.</p>
+           <div class="container px-lg-0 mt-4">
+
+              <div class="row d-flex align-items-end">
+               <div class="col-12 col-sm-6 order-1 order-sm-0">
+                 <button class="d-flex justify-content-center align-items-center py-2 w-100 btn-oval-orange" (click)="onCloseClick()">
+                   CANCELAR
+                 </button>
+               </div>
+               <div class="col-12 col-sm-6 mb-2 mb-sm-0 order-0 order-sm-1">
+                 <button type="submit" mat-stroked-button [class.btn-disabled]="registerForm.invalid" [disabled]="registerForm.invalid"
+                 class="d-flex justify-content-center align-items-center py-2 w-100 btn-oval-orange">
+                   <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                   ACEPTAR
+                 </button>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </form>

@@ -1,0 +1,213 @@
+<form #form="ngForm" autocomplete="off" (submit)="salvarCambios()">
+  <div class="container pt-4 pb-3">
+    <div class="row">
+      <div class="col-12">
+        <p class="title-pages pl-3 py-3">Gestión de Tipos de Opciones Avanzadas</p>
+      </div>
+    </div>
+    <div class="row pt-4 pb-2">
+      <div class="col-12">
+        <div class="container bg-white py-3">
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden"
+                name="TipoOpcionId"
+                id="TipoOpcionId"
+                #TipoOpcionId="ngModel"
+                [(ngModel)]="servTO.formData.TipoOpcionId">
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4">
+              <label for="Nombre"></label>
+              <mat-form-field class="w-100">
+                <input matInput
+                  type="text"
+                  name="Nombre"
+                  id="Nombre"
+                  #Nombre="ngModel"
+                  required
+                  disabled
+                  [(ngModel)]="servTO.formData.Nombre"
+                  placeholder="Nombre de la opción">
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4">
+              <label for="TextoLabel"></label>
+              <mat-form-field class="w-100">
+                <input matInput type="text"
+                  name="TextoLabel"
+                  id="TextoLabel"
+                  #TextoLabel="ngModel"
+                  required
+                  [(ngModel)]="servTO.formData.TextoLabel"
+                  placeholder="Texto para Label de la Opción">
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <label for="Precio"></label>
+              <mat-form-field class="w-100">
+                <input matInput type="number"
+                  name="Precio"
+                  id="Precio"
+                  #Precio="ngModel"
+                  required
+                  min="0"
+                  [(ngModel)]="servTO.formData.Precio"
+                  placeholder="Precio de la Opción">
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <label for="CantidadFrecuencia"></label>
+              <mat-form-field class="w-100">
+                <input matInput type="number"
+                  name="CantidadFrecuencia"
+                  id="CantidadFrecuencia"
+                  #CantidadFrecuencia="ngModel"
+                  required
+                  min="0"
+                  [(ngModel)]="servTO.formData.CantidadFrecuencia"
+                  placeholder="Cantidad o Frecuencia de la Opción">
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <label for="MinimoComprar"></label>
+              <mat-form-field class="w-100">
+                <input matInput type="number"
+                  name="MinimoComprar"
+                  id="MinimoComprar"
+                  #MinimoComprar="ngModel"
+                  required
+                  min="0"
+                  [(ngModel)]="servTO.formData.MinimoComprar"
+                  placeholder="Mínimo a comprar">
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 d-flex flex-column">
+              <hr class="w-100 separator-btns-admin">
+              <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+                <button class="btn-admin px-4 mr-sm-3 mb-2 mb-sm-0" mat-raised-button [class.btn-disabled]="form.invalid" [disabled]="form.invalid" type="submit">
+                  <span><i class="fa fa-floppy-o px-2" aria-hidden="true"></i></span>
+                  <span class="btn-filter-border pr-3">Guardar</span>
+                </button>
+                <button class="btn-admin px-4" routerLink="/admin/nomencladores/tipos-opciones">
+                  <span><i class="fa fa-arrow-left px-2" aria-hidden="true"></i></span>
+                  <span class="btn-filter-border pr-3">Regresar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- <br> <br> <br> <br>
+<form #form="ngForm" autocomplete="off" (submit)="salvarCambios()">
+  <div id="edit-paginas-estaticas" class="grid">
+    <p class="grid-header">Gestión de Tipos de Opciones Avanzadas</p>
+    <div class="grid-body">
+      <div class="item-wrapper">
+        <input type="hidden"
+               name="TipoOpcionId"
+               id="TipoOpcionId"
+               #TipoOpcionId="ngModel"
+               [(ngModel)]="servTO.formData.TipoOpcionId">
+        <br>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="Nombre"></label>
+            <mat-form-field>
+              <input matInput
+                     type="text"
+                     name="Nombre"
+                     id="Nombre"
+                     #Nombre="ngModel"
+                     required
+                     disabled
+                     [(ngModel)]="servTO.formData.Nombre"
+                     placeholder="Nombre de la opción">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <label for="TextoLabel"></label>
+            <mat-form-field>
+              <input matInput type="text"
+                     name="TextoLabel"
+                     id="TextoLabel"
+                     #TextoLabel="ngModel"
+                     required
+                     [(ngModel)]="servTO.formData.TextoLabel"
+                     placeholder="Texto para Label de la Opción">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <label for="Precio"></label>
+            <mat-form-field>
+              <input matInput type="number"
+                     name="Precio"
+                     id="Precio"
+                     #Precio="ngModel"
+                     required
+                     min="0"
+                     [(ngModel)]="servTO.formData.Precio"
+                     placeholder="Precio de la Opción">
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="CantidadFrecuencia"></label>
+            <mat-form-field>
+              <input matInput type="number"
+                     name="CantidadFrecuencia"
+                     id="CantidadFrecuencia"
+                     #CantidadFrecuencia="ngModel"
+                     required
+                     min="0"
+                     [(ngModel)]="servTO.formData.CantidadFrecuencia"
+                     placeholder="Cantidad o Frecuencia de la Opción">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <label for="MinimoComprar"></label>
+            <mat-form-field>
+              <input matInput type="number"
+                     name="MinimoComprar"
+                     id="MinimoComprar"
+                     #MinimoComprar="ngModel"
+                     required
+                     min="0"
+                     [(ngModel)]="servTO.formData.MinimoComprar"
+                     placeholder="Mínimo a comprar">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <p *ngIf="(Nombre.invalid && Nombre.touched) || (TextoLabel.invalid && TextoLabel.touched)" style="color: #020448; ">* Campos obligatorios</p>
+
+
+        <br>
+        <hr>
+        <div class="row">
+          <div class="col-md-6 offset-6" style="text-align:right">
+            <div class="example-button-row">
+              <button mat-raised-button color="primary" [class.btn-disabled]="form.invalid" [disabled]="form.invalid" type="submit">
+                <i class="mdi mdi-tooltip-edit"> Guardar </i>
+              </button>
+              <button mat-raised-button color="primary" type="button" (click)="regresar()">
+                <i class="mdi mdi-arrow-left"> Regresar </i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</form> -->

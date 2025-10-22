@@ -1,0 +1,32 @@
+<ion-card *ngIf="item" [ngClass]="{relevant: item.IsDestacado}">
+  <ion-item>
+    <ion-thumbnail slot="start">
+      <img (click)="open(item)" *ngIf="item.ImageName !== ''"
+        [src]="rootURL + 'uploads/anuncios/mini/' + item.ImageName" />
+      <img (click)="open(item)" *ngIf="item.ImageName === '' && item.Categoria.ImageName"
+        [src]="rootURL + 'uploads/categorias/mini/' + item.Categoria.ImageName" />
+    </ion-thumbnail>
+    <ion-label class="ion-text-wrap">
+      <p style="white-space: nowrap;">{{words}}</p>
+      <ion-text color="primary">
+        <h2>{{item.Titulo}}</h2>
+      </ion-text>
+      <ion-buttons>
+        <ion-button style="margin-left: 0;" (click)="open(item)" slot="start" fill="outline" shape="round"
+          color="primary">
+          ${{ item.Precio }}
+        </ion-button>
+        <ion-button *ngIf="item.Url" (click)="details(item)" class="eye-button" shape="round" slot="end" fill="clear"
+          color="primary">
+          <ion-icon name="eye"></ion-icon>
+        </ion-button>
+        <ion-button (click)="sendShare(item.Titulo,item.AnuncioId)" class="share-button" shape="round" slot="end"
+          fill="clear" color="primary">
+          <ion-icon name="share-social"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-label>
+
+  </ion-item>
+</ion-card>
+  

@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar color="primary" class="custom-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon class="icon-title" name="funnel"></ion-icon>
+      <label>Filtros Avanzados</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen class="ion-padding">
+  <ion-item>
+    <ion-label>Categoría</ion-label>
+    <ionic-selectable #categorySelect [(ngModel)]="category" headerColor="primary"itemTextField="Nombre" [items]="categories" [canSearch]="true"
+      (onChange)="categoryChange($event)">
+    </ionic-selectable>
+  </ion-item>
+  <ion-item *ngIf="tags && tags.length > 0">
+    <ion-label>Etiquetas</ion-label>
+    <ionic-selectable headerColor="primary" [(ngModel)]="filters.ListaEtiquetas" [isMultiple]="true"
+      itemTextField="Nombre" [canClear]="true" clearButtonText="Limpiar" [items]="tags" [canSearch]="true">
+    </ionic-selectable>
+  </ion-item>
+  <ion-item>
+    <ion-label>Acción</ion-label>
+    <ionic-selectable headerColor="primary"[(ngModel)]="filters.Accion" [items]="actions">
+    </ionic-selectable>
+  </ion-item>
+  <ion-item>
+    <ion-label>Municipio</ion-label>
+    <ionic-selectable #municipioSelect [(ngModel)]="locality" itemValueField="Nombre" itemTextField="Nombre" groupValueField="provincia.Nombre"
+      groupTextField="provincia.Nombre" [items]="localities" searchPlaceholder="Buscar" closeButtonText="Cerrar"
+      closeButtonSlot="end" [canSearch]="true" headerColor="primary" (onChange)="municipioChange($event)">
+      <ng-template ionicSelectableGroupTemplate let-group="group">
+        {{group.text}}
+      </ng-template>
+    </ionic-selectable>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Título del anuncio</ion-label>
+    <ion-input [(ngModel)]="filters.Titulo"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Nombre del contacto</ion-label>
+    <ion-input [(ngModel)]="filters.NombreContacto"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Teléfono del contacto</ion-label>
+    <ion-input [(ngModel)]="filters.TelefonoContacto"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Correo del contacto</ion-label>
+    <ion-input [(ngModel)]="filters.CorreoContacto"></ion-input>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Precio Mínimo</ion-label>
+          <ion-input [(ngModel)]="filters.PrecioMin"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Precio Máximo</ion-label>
+          <ion-input [(ngModel)]="filters.PrecioMax"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-item lines="none">
+          <ion-label>Nuevo</ion-label>
+          <ion-checkbox class="custom-checkbox" slot="start" [(ngModel)]="filters.ProductoNuevo">
+          </ion-checkbox>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4">
+        <ion-item lines="none">
+          <ion-label>Fotos</ion-label>
+          <ion-checkbox class="custom-checkbox" slot="start" [(ngModel)]="filters.HasFoto"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4">
+        <ion-item lines="none">
+          <ion-label>Web</ion-label>
+          <ion-checkbox class="custom-checkbox" slot="start" [(ngModel)]="filters.IsWeb"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="clear()">
+        Limpiar Filtros
+      </ion-button>
+      <ion-button id="apply-button" fill="solid" shape="round" color="primary" (click)="save()">
+        Aplicar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

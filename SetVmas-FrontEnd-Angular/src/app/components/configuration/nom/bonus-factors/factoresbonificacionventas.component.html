@@ -1,0 +1,223 @@
+<div class="container pt-4 pb-3">
+  <div class="row">
+    <div class="col-12">
+      <p class="title-pages pl-3 py-3">Gestión de Factores de Bonificación por Red</p>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <form #form="ngForm" autocomplete="off" (submit)="salvarFactores( form )">
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="mat-elevation-z8">
+          <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource" id="tblBackend">
+
+            <ng-container matColumnDef="FactoresBonificacionVentasId">
+              <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+              <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.FactoresBonificacionVentasId}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Nivel">
+              <mat-header-cell *matHeaderCellDef class="tituloTablas col-md-1">Nivel</mat-header-cell>
+              <mat-cell class="col-md-1" *matCellDef="let row; let i = index" #idT>{{i+1}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ClaseDiamante">
+              <mat-header-cell *matHeaderCellDef class="tituloTablas">Clase Diamante</mat-header-cell>
+              <mat-cell *matCellDef="let row; let i = index">
+                <mat-form-field class="w-50">
+                  <input matInput
+                    type="number"
+                    name="ClaseDiamante{{i}}"
+                    [(ngModel)]="servFBV.formData[i].ClaseDiamante">
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ClaseOro">
+              <mat-header-cell *matHeaderCellDef class="tituloTablas">Clase Oro</mat-header-cell>
+              <mat-cell *matCellDef="let row; let i = index">
+                <mat-form-field class="w-50">
+                  <input matInput
+                    type="number"
+                    name="ClaseOro{{i}}"
+                    [(ngModel)]="servFBV.formData[i].ClaseOro">
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ClasePlata">
+              <mat-header-cell *matHeaderCellDef class="tituloTablas">Clase Plata</mat-header-cell>
+              <mat-cell *matCellDef="let row; let i = index">
+                <mat-form-field class="w-50">
+                  <input matInput
+                    type="number"
+                    name="ClasePlata{{i}}"
+                    [(ngModel)]="servFBV.formData[i].ClasePlata">
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ClaseBronce">
+              <mat-header-cell *matHeaderCellDef class="tituloTablas">Clase Bronce</mat-header-cell>
+              <mat-cell *matCellDef="let row; let i = index">
+                <mat-form-field class="w-50">
+                  <input matInput
+                    type="number"
+                    name="ClaseBronce{{i}}"
+                    [(ngModel)]="servFBV.formData[i].ClaseBronce">
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ClaseIniciada">
+              <mat-header-cell *matHeaderCellDef class="tituloTablas">Clase Iniciada</mat-header-cell>
+              <mat-cell *matCellDef="let row; let i = index">
+                <mat-form-field class="w-50">
+                  <input matInput
+                    type="number"
+                    name="ClaseIniciada{{i}}"
+                    [(ngModel)]="servFBV.formData[i].ClaseIniciada">
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
+
+          </mat-table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row py-2 mt-3">
+      <div class="col-12 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+        <button mat-raised-button class="btn-admin px-4" [class.btn-disabled]="form.invalid" [disabled]="form.invalid"
+                type="submit">
+          <span><i class="fa fa-floppy-o px-2" aria-hidden="true"></i></span>
+          <span class="btn-filter-border pr-3">Guardar</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<!-- <br> <br> <br> <br>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="col-lg-12 ">
+
+      <p class="grid-header">Gestión de Factores de Bonificación por Ventas</p>
+
+
+    </div>
+  </div>
+</div>
+<br><br>
+<div id="factoresbonifica">
+  <form #form="ngForm" autocomplete="off" (submit)="salvarFactores( form )">
+
+
+
+
+
+    <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+      <mat-spinner></mat-spinner>cargando...
+    </div>
+    <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"  id="tblBackend">
+      <ng-container matColumnDef="FactoresBonificacionVentasId">
+        <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+        <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.FactoresBonificacionVentasId}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Nivel">
+        <mat-header-cell *matHeaderCellDef class="tituloTablas col-md-1">Nivel</mat-header-cell>
+        <mat-cell class="col-md-1" *matCellDef="let row; let i = index" #idT>{{i+1}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="ClaseDiamante">
+        <mat-header-cell *matHeaderCellDef class="tituloTablas">Clase Diamante</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index">
+          <mat-form-field>
+            <input matInput
+                   type="number"
+                   name="ClaseDiamante{{i}}"
+                   [(ngModel)]="servFBV.formData[i].ClaseDiamante">
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="ClaseOro">
+
+        <mat-header-cell *matHeaderCellDef class="tituloTablas ">Clase Oro</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index">
+          <mat-form-field>
+            <input matInput
+                   type="number"
+                   name="ClaseOro{{i}}"
+                   [(ngModel)]="servFBV.formData[i].ClaseOro">
+          </mat-form-field>
+        </mat-cell>
+
+      </ng-container>
+
+      <ng-container matColumnDef="ClasePlata">
+
+        <mat-header-cell *matHeaderCellDef class="tituloTablas">Clase Plata</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index">
+          <mat-form-field>
+            <input matInput
+                   type="number"
+                   name="ClasePlata{{i}}"
+                   [(ngModel)]="servFBV.formData[i].ClasePlata">
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="ClaseBronce">
+
+        <mat-header-cell *matHeaderCellDef class="tituloTablas">Clase Bronce</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index">
+          <mat-form-field>
+            <input matInput
+                   type="number"
+                   name="ClaseBronce{{i}}"
+                   [(ngModel)]="servFBV.formData[i].ClaseBronce">
+          </mat-form-field>
+        </mat-cell>
+
+      </ng-container>
+      <ng-container matColumnDef="ClaseIniciada">
+
+        <mat-header-cell *matHeaderCellDef class="tituloTablas">Clase Iniciada</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index">
+          <mat-form-field>
+            <input matInput
+                   type="number"
+                   name="ClaseIniciada{{i}}"
+                   [(ngModel)]="servFBV.formData[i].ClaseIniciada">
+          </mat-form-field>
+        </mat-cell>
+
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
+
+    </mat-table>
+
+
+    <hr>
+    <div class="form-group col-lg-3" style="float:right">
+      <div class="example-button-row">
+        <button mat-raised-button color="primary" [class.btn-disabled]="form.invalid" [disabled]="form.invalid" type="submit">
+          <i class="mdi mdi-tooltip-edit"> Guardar </i>
+        </button>
+      </div>
+    </div>
+
+
+
+
+
+  </form>
+</div> -->

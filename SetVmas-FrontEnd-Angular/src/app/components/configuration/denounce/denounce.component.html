@@ -1,0 +1,136 @@
+
+<div class="container pt-4 pb-3">
+  <div class="row">
+    <div class="col-12">
+      <p class="title-pages pl-3 py-3">Gestión de Denuncias</p>
+    </div>
+  </div>
+  <!-- Filters -->
+  <div class="row pt-4 pb-2">
+    <div class="col-12">
+      <div class="container bg-white pt-3">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Días de Antiguedad</mat-label>
+                <input matInput type="number" min="0" placeholder="Días de Antiguedad" #input>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Anuncio</mat-label>
+                <input matInput type="text" placeholder="anuncio" #anuncio>
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field>
+                <mat-label>Estado</mat-label>
+                <mat-select name="estado" #estado>
+                  <mat-option selected (click)="filterEstado('')">Todos</mat-option>
+                  <mat-option *ngFor="let estado of service.listEstados" [value]="estado" (click)="filterEstado(estado)">
+                    {{estado}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pb-3 pt-2">
+    <div class="col-12 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+      <button class="btn-admin px-4 mr-sm-3 mb-2 mb-sm-0" (click)="removeSelectedRows()">
+        <span><i class="fa fa-trash px-2" aria-hidden="true"></i></span>
+        <span class="btn-filter-border pr-3">Eliminar</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="row">
+    <div class="col-12">
+      <div class="mat-elevation-z8">
+        <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+             matSort matSortActive="Anuncio" matSortDisableClear matSortDirection="asc"  id="tblBackend">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef class="col-md-1" style="width: 10%">
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-md-1" style="width: 10%">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="DenunciaId">
+      <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+      <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.DenunciaId}}</mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Anuncio">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2" style="width: 40%">Anuncio</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-md-2" style="width: 40%">
+       <a (click)='moreDetails(row.AnuncioId)'>{{row.Titulo}}</a>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Codigo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2" style="width: 20%">Código</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-md-2" style="width: 20%">{{row.Codigo}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Usuario">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2" style="width: 20%">Usuario</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-md-2" style="width: 20%">{{row.Correo}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Estado">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2" style="width: 10%">Estado</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-md-2" style="width: 10%">{{row.Estado}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="FechaCreacion">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2" style="width: 10%">Fecha Creación</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-md-2" style="width: 10%">{{row.FechaCreacion|date:'dd/MM/yyyy'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Motivo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2" style="width: 10%">Motivo</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-md-2" style="width: 10%">{{row.MotivoDenuncia}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Acciones">
+      <mat-header-cell *matHeaderCellDef class="tituloTablas col-lg-3" style="width: 10%">Editar</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-lg-3 text-center" style="width: 10%">
+        <mat-icon aria-hidden="false" *ngIf="row.Estado != 'Procede'" (click)="onEdit(row.DenunciaId)" aria-label="Editar" class="editar-icon"></mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: tableColumns" (click)="selection.toggle(row)"></mat-row>
+  </mat-table>
+        <mat-paginator [length]="service.resultsLength" [pageSize]="service.pageSize"
+                       [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorData($event)" [showFirstLastButtons]="true"></mat-paginator>
+    </div>
+  </div>
+
+</div>
+

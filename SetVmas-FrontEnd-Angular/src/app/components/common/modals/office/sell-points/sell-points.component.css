@@ -1,0 +1,15 @@
+.ico-sell-points {
+  background: url("../../../../../../assets//images/icons/icon-sell-points.png") no-repeat;
+  background-size: contain;
+  width: 65px !important;
+  height: 65px !important;
+}
+
+@media (max-width: 575.98px) {
+  .ico-sell-points {
+    background: url("../../../../../../assets//images/icons/icon-sell-points.png") no-repeat;
+    background-size: contain;
+    width: 55px !important;
+    height: 55px !important;
+  }
+}

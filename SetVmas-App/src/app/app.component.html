@@ -1,0 +1,68 @@
+<ion-app>
+  <ion-menu side="start" menuId="first" contentId="content1">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>
+          <img src="assets/logo_setvmas.png" height="43px" width="81px" alt="No Image"
+            style="vertical-align: bottom;" />
+        </ion-title>
+        <ion-item slot="end" color="primary" lines="none">
+          <label class="online" *ngIf="isConnected" slot="end">Online</label>
+          <label class="offline" disabled="true" *ngIf="!isConnected" slot="end">Offline</label>
+          <ion-icon color="light" *ngIf="!isConnected" slot="end" name="cloud-outline"></ion-icon>
+          <ion-icon color="light" *ngIf="isConnected" slot="end" name="cloud-done"></ion-icon>
+        </ion-item>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content color="primary">
+      <ion-list mode="ios" lines="full">
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/', 'home']" color="primary">
+            <ion-label>Inicio</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item *ngIf="currentUser" [routerLink]="['/', 'virtual-office']" color="primary">
+            <ion-label>Oficina</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/', 'add-announce']" color="primary">
+            <ion-label>Adicionar Anuncio</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/', 'contact']" color="primary">
+            <ion-label>Contáctenos</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/', 'help']" color="primary">
+            <ion-label>Ayuda</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+      </ion-list>
+      <div class="secondary-menu">
+        <ion-list lines="full" mode="ios">
+          <ion-item-divider *ngIf="currentUser" color="primary">
+            <ion-label>Acumulado de Puntos: <strong>{{ userPoint }}</strong></ion-label>
+          </ion-item-divider>
+          <ion-menu-toggle>
+            <ion-item *ngIf="currentUser" (click)="qr()" color="primary">
+              <ion-icon slot="start" name="scan"></ion-icon>
+              <ion-label>Mostrar Código de Referido</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle>
+            <ion-item *ngIf="currentUser" (click)="sell()" color="primary">
+              <ion-icon slot="start" src="/assets/icon/money.svg"></ion-icon>
+              <ion-label>Vender Puntos</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </div>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="content1"></ion-router-outlet>
+</ion-app>

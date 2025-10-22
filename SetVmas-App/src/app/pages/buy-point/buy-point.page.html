@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Comprar Puntos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form *ngIf="purchaseData">
+    <ion-item>
+      <ion-label color="primary">* Método de pago:</ion-label>
+      <ion-select (ionChange)="changeMethod()" cancelText="Cancelar" okText="Aceptar" [(ngModel)]="payType" name="saldo"
+        placeholder="Método de pago">
+        <ion-select-option [value]="op.value" *ngFor="let op of purchaseData.FormasDePago">{{op.label}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="full" class="ion-text-center" *ngIf="payType">
+      <ion-label color="warning" *ngIf="payType === 1">Mínimo a comprar
+        <strong>{{ fixedValue(purchaseData.MinPointsBankTransfer * purchaseData.PointPrice) }} CUP</strong></ion-label>
+      <ion-label color="warning" *ngIf="payType === 2">Mínimo a comprar
+        <strong>{{ fixedValue(purchaseData.MinPointsPhoneTransfer * purchaseData.PointPrice) }} CUP</strong></ion-label>
+      <ion-label color="warning" *ngIf="payType === 3">Mínimo a comprar
+        <strong>{{ purchaseData.MinPointsDirectContact }} Ptos</strong></ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label color="primary" position="floating">* Monto a pagar (CUP)</ion-label>
+      <ion-input [min]="fixedValue(purchaseData.MinPointsDirectContact * purchaseData.PointPrice)" [(ngModel)]="monto" name="monto" inputmode="numeric" type="number" spellcheck="false"
+        autocapitalize="off" required></ion-input>
+    </ion-item>
+    <ion-item *ngIf="monto && purchaseData" lines="full" class="ion-text-center">
+      <ion-label color="warning">Equivale a: <strong>{{fixedValue(monto / fixedValue(purchaseData.PointPrice), 0)}}
+          Ptos</strong></ion-label>
+    </ion-item>
+
+    <div *ngIf="payType === 1">
+      <ion-item>
+        <ion-label color="primary" position="floating">Desde:</ion-label>
+        <ion-input  (ionChange)="ccFormat($event)" [(ngModel)]="card" placeholder="xxxx-xxxx-xxxx-7800" name="card" type="text" spellcheck="false"
+          minlength="19" maxlength="19" inputmode="numeric" autocapitalize="off" required></ion-input>
+      </ion-item>
+      <ion-item class="ion-text-wrap">
+        <p style="color: #000030;">
+          El dinero debe ser enviado al siguiente número de tarjeta:
+          <strong>
+            {{ formatCard(purchaseData.NoCard) }}
+          </strong>
+        </p>
+        <ion-icon color="primary" (click)="copyToClipboard(purchaseData.NoCard, 'Ha sido copiado el núnero de cuenta.')"
+          name="copy-outline" slot="end"></ion-icon>
+      </ion-item>
+    </div>
+    <div *ngIf="payType === 2">
+      <ion-item>
+        <ion-label color="primary" position="floating">Su número de móvil:</ion-label>
+        <ion-input [(ngModel)]="phone" minlength="8" maxlength="8" inputmode="numeric" name="phone" type="text"
+          spellcheck="false" autocapitalize="off" placeholder="52425555" required></ion-input>
+      </ion-item>
+      <ion-item class="ion-text-wrap">
+        <p style="color: #000030;">
+          El saldo debe ser enviado desde su número de móvil al siguiente número de móvil:
+          <strong>
+            {{ purchaseData.NoPhone }}
+          </strong>
+        </p>
+        <ion-icon color="primary"
+          (click)="copyToClipboard(purchaseData.NoPhone, 'Ha sido copiado el núnero de teléfono.')" name="copy-outline"
+          slot="end"></ion-icon>
+      </ion-item>
+    </div>
+    <ion-item lines="none" class="ion-margin-top">
+      <ion-button class="buttons" [disabled]="!validate()" shape="round" fill="outline" color="primary" (click)="send()">Comprar Puntos
+      </ion-button>
+    </ion-item>
+    <ion-grid class="ion-margin-top" *ngIf="payType">
+      <ion-row>
+        <ion-col class="ion-text-wrap ion-text-center"
+          style="background-color: rgb(141, 201, 224);color: #000030; border-radius: 10px;padding: 10px;">
+          <p *ngIf="payType === 3">
+            Usted será contactado por un comercial en las próximas 24 horas.
+          </p>
+          <div *ngIf="payType !== 3">
+            <p style="margin: 0; text-align: left;">
+              Usted puede enviar la cantidad de saldo que desee, y el sistema otorgará los puntos correspondientes.
+            </p>
+            <p>
+              <strong *ngIf="purchaseData"> 1 punto equivale a {{ fixedValue(purchaseData.PointPrice) }} CUP</strong>
+            </p>
+            <p class="ion-text-left">
+              EL ENVÍO DEBE REALIZARSE EN LAS PRÓXIMAS 24 HORAS
+            </p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

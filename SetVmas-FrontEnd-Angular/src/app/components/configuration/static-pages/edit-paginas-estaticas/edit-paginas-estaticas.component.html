@@ -1,0 +1,133 @@
+<form #form="ngForm" autocomplete="off" (submit)="salvarCambios()">
+  <div class="container pt-4 pb-3">
+    <div class="row">
+      <div class="col-12">
+        <p class="title-pages pl-3 py-3">Gestión de Páginas Estáticas</p>
+      </div>
+    </div>
+    <div class="row pt-4 pb-2">
+      <div class="col-12">
+        <div class="container bg-white py-3">
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden"
+                    name="PaginasEstaticasId"
+                    id="PaginasEstaticasId"
+                    #PaginasEstaticasId="ngModel"
+                    class="form-control"
+                    [(ngModel)]="servPag.formData.PaginasEstaticasId">
+            </div>
+            <div class="col-12">
+              <label for="Titulo"></label>
+              <mat-form-field>
+                <input matInput
+                      type="text"
+                      name="Titulo"
+                      id="Titulo"
+                      #Titulo="ngModel"
+                      required
+                      disabled
+                      [(ngModel)]="servPag.formData.Titulo"
+                      placeholder="Título Página">
+              </mat-form-field>
+            </div>
+            <div id="textareaconte" class="col-12 d-flex flex-column">
+                <mat-label class="description">Contenido HTML</mat-label>
+                <ckeditor [config]="{uiColor: '#ffffff'}" [readonly]="false" name="Contenido" [(ngModel)]="servPag.formData.Contenido" debounce="500">
+                </ckeditor>
+            </div>
+            <div class="col-12">
+              <p *ngIf="(Titulo.invalid && Titulo.touched)" style="color: #020448; ">* Campos obligatorios</p>
+            </div>
+            <div class="col-12 d-flex flex-column">
+              <hr class="w-100 separator-btns-admin">
+              <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+                <button class="btn-admin px-4 mr-sm-3 mb-2 mb-sm-0" mat-raised-button [class.btn-disabled]="form.invalid" [disabled]="form.invalid" type="submit">
+                  <span><i class="fa fa-floppy-o px-2" aria-hidden="true"></i></span>
+                  <span class="btn-filter-border pr-3">Guardar</span>
+                </button>
+                <button class="btn-admin px-4" routerLink="/admin/paginas">
+                  <span><i class="fa fa-arrow-left px-2" aria-hidden="true"></i></span>
+                  <span class="btn-filter-border pr-3">Regresar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<!-- <br> <br> <br> <br>
+<form #form="ngForm" autocomplete="off" (submit)="salvarCambios()">
+<div id="edit-paginas-estaticas" class="grid">
+  <p class="grid-header">Gestión de Páginas Estáticas</p>
+  <div class="grid-body">
+    <div class="item-wrapper">
+
+      <input type="hidden"
+             name="PaginasEstaticasId"
+             id="PaginasEstaticasId"
+             #PaginasEstaticasId="ngModel"
+
+             class="form-control"
+             [(ngModel)]="servPag.formData.PaginasEstaticasId">
+
+      <div class="row">
+
+        <div class="col-md-9">
+          <label for="Titulo"></label>
+          <mat-form-field>
+            <input matInput
+                   type="text"
+                   name="Titulo"
+                   id="Titulo"
+                   #Titulo="ngModel"
+                   required
+                   disabled
+                   [(ngModel)]="servPag.formData.Titulo"
+                   placeholder="Título Página">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+      <div class="row">
+
+        <div id="textareaconte" class="col-md-9">
+          <mat-label class="description">Contenido HTML</mat-label>
+          <ckeditor [config]="{uiColor: '#ffffff'}" [readonly]="false" name="Contenido" [(ngModel)]="servPag.formData.Contenido" debounce="500">
+          </ckeditor>
+        </div>
+        <div class="col-md-3"></div>
+
+      </div>
+
+      <p *ngIf="(Titulo.invalid && Titulo.touched)" style="color: #020448; ">* Campos obligatorios</p>
+      <br>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-md-6 offset-6" style="text-align:right">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [class.btn-disabled]="form.invalid" [disabled]="form.invalid" type="submit">
+              <i class="mdi mdi-tooltip-edit"> Guardar </i>
+            </button>
+            <button mat-raised-button color="primary" type="button" (click)="regresar()">
+              <i class="mdi mdi-arrow-left"> Regresar </i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+</div>
+
+</form> -->

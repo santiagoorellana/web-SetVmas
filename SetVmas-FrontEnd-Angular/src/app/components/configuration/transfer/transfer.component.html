@@ -1,0 +1,127 @@
+<div class="container pt-4 pb-3">
+  <div class="row">
+    <div class="col-12">
+      <p class="title-pages pl-3 py-3">Gestión de Transferencias</p>
+    </div>
+  </div>
+  <!-- Filters -->
+  <div class="row pt-4 pb-2">
+    <div class="col-12">
+      <div class="container bg-white pt-3">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Usuario Destino</mat-label>
+                <input matInput placeholder="Usuario Destino" #input>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Días de Antiguedad</mat-label>
+                <input matInput type="number" min="0" placeholder="Días de Antiguedad" #antigueda>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pb-3 pt-2" *ngIf="currentUser.Rol === 'Director' ||currentUser.Rol === 'Administrador' || currentUser.Rol === 'Super Administrador'">
+    <!-- *ngIf="currentUser.Rol === 'Administrador'||currentUser.Rol === 'Super Administrador'" -->
+    <div class="col-12 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+      <button class="btn-admin px-4 mr-sm-3 mb-2 mb-sm-0" mat-raised-button (click)="onEdit(0)">
+        <span><i class="fa fa-plus px-2" aria-hidden="true"></i></span>
+        <span class="btn-filter-border pr-3">Bonificación</span>
+      </button>
+      <button class="btn-admin px-4" *ngIf="currentUser.Rol !== 'Director'" mat-raised-button (click)="removeSelectedRows()">
+        <span><i class="fa fa-trash px-2" aria-hidden="true"></i></span>
+        <span class="btn-filter-border pr-3">Eliminar</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="row">
+    <div class="col-12">
+      <div class="mat-elevation-z8">
+        <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+           matSort matSortActive="Fecha" matSortDisableClear matSortDirection="asc"  id="tblBackend">
+
+          <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef class="col-md-1">
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-1">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="TransferenciaId">
+            <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+            <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.TransferenciaId}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="UsuarioFuente">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2">Usuario Fuente</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-2">{{row.SourceUser}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="UsuarioDestino">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2">Usuario Destino</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-2">{{row.TargetUser}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Usuario">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2">Usuario Creador</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-2">{{row.User}}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="Fecha">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Fecha</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.OperationDate|date:'dd/MM/yyyy'}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Puntos">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Puntos</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.Points}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="TipoTransferencia">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Tipo</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.TransferType}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Acciones" *ngIf="currentUser.Rol === 'Administrador' || currentUser.Rol === 'Super Administrador'">
+            <mat-header-cell *matHeaderCellDef class="tituloTablas">Acciones</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <button mat-icon-button (click)="onDelete(row.TransferenciaId)">
+                <mat-icon aria-label="Eliminar" class="delete-icon" class="delete-icon">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container> -->
+>
+          <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: tableColumns" (click)="selection.toggle(row)"></mat-row>
+        </mat-table>
+
+        <mat-paginator [length]="service.resultsLength" [pageSize]="service.pageSize"
+                       [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorData($event)" [showFirstLastButtons]="true"></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+

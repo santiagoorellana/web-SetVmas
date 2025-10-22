@@ -1,0 +1,63 @@
+.ico-transfers {
+  background: url("../../../../../../assets/images/icons/icon-transfers.png") no-repeat;
+  background-size: contain;
+  width: 65px !important;
+  height: 65px !important;
+}
+
+.table-container {
+  /* max-height: 172px; */
+  width: 100%;
+  /* overflow: auto; */
+}
+
+mat-row:nth-child(even) {
+  background: #eee;
+}
+
+mat-row:nth-child(odd) {
+  background: #b8d0d6;
+}
+
+mat-row, mat-header-row, mat-footer-row {
+  min-height: 30px;
+  min-width: 1300px;
+}
+
+.separator {
+  border-bottom: 1px solid #020448;
+}
+
+/* mat-table {
+  max-width: 1000px;
+} */
+
+@media (max-width: 767.98px) {
+  .ico-transfers {
+    background: url("../../../../../../assets/images/icons/icon-transfers.png") no-repeat;
+    background-size: contain;
+    width: 55px !important;
+    height: 55px !important;
+  }
+
+  /* mat-table {
+    width: 1000px;
+  } */
+}
+
+@media (max-width: 1199.98px) {
+  .showDateDesktop {
+    display: none !important;
+  }
+
+  .showPointDesktop {
+    display: none !important;
+  }
+}
+
+/* @media (max-width: 1199.98px) and (min-width: 992px) {
+  mat-table {
+    width: 1050px;
+  }
+} */
+

@@ -1,0 +1,29 @@
+footer {
+  min-height: 60px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1em;
+  color: #fff !important;
+}
+
+.social-link {
+  background-color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.social-link i {
+  color: #020448;
+}
+
+.icon-size {
+  font-size: 28px;
+  margin-top: 2px;
+}
+
+.font-copy-right {
+  font-size: .7rem;
+}

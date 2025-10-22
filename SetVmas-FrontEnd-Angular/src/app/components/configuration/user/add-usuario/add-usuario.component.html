@@ -1,0 +1,259 @@
+<form #form="ngForm" autocomplete="off" (submit)="salvarCambios()">
+  <div class="container pt-4 pb-3">
+    <div class="row">
+      <div class="col-12">
+        <p class="title-pages pl-3 py-3">Gestión de Usuarios</p>
+      </div>
+    </div>
+    <div class="row pt-4 pb-2">
+      <div class="col-12">
+        <div class="container bg-white py-3">
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden" name="UsuarioId" id="UsuarioId" #UsuarioId="ngModel" class="form-control" [(ngModel)]="service.formData.UsuarioId">
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 w-100">
+              <div class="d-flex flex-row text-center align-items-center bg-white input-custom">
+                <mat-form-field class="w-100">
+                  <input matInput [(ngModel)]="service.formData.Codigo" name="Codigo" id="Codigo" disabled type="text" placeholder="Código">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 w-100">
+              <div class="d-flex flex-row text-center align-items-center bg-white">
+                <mat-form-field class="w-100">
+                  <input matInput [(ngModel)]="service.formData.Puntos" name="Puntos" id="Puntos" disabled type="text" placeholder="Puntos">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 w-100">
+              <div class="d-flex flex-row text-center align-items-center bg-white">
+                <mat-form-field class="w-100">
+                  <input matInput [(ngModel)]="service.formData.Correo" name="Correo" id="Correo" disabled type="text" placeholder="Correo">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 w-100">
+              <div class="d-flex flex-row text-center align-items-center bg-white">
+                <mat-form-field class="w-100">
+                  <input matInput [(ngModel)]="service.formData.Telefono" name="Telefono" id="Telefono" disabled type="text" placeholder="Teléfono" onkeypress="return (event.charCode>=48 && event.charCode<=57) ||  event.charCode==43" minlength="8" maxlength="12">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 w-100">
+              <div class="d-flex flex-row text-center align-items-center bg-white">
+                <mat-form-field class="w-100">
+                  <input matInput [(ngModel)]="service.formData.FechaCreacion" name="FechaCreacion" id="FechaCreacion" disabled type="text" placeholder="Fecha de Creación">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 w-100">
+              <div class="d-flex flex-row text-center align-items-center bg-white">
+                <!-- <mat-form-field class="w-100">
+                  <mat-label>Clases</mat-label>
+                  <mat-select [(ngModel)]="service.formData.ClasesUsuarios.ClasesUsuariosId" name="ClasesUsuariosId" id="ClasesUsuariosId">
+                    <mat-option> </mat-option>
+                    <mat-option *ngFor="let class of servClase.listaClases" [value]="class.ClasesUsuariosId">
+                      {{class.Nombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field> -->
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 w-100">
+              <div class="d-flex flex-row text-center align-items-center bg-white">
+                <mat-form-field class="w-100">
+                  <mat-label>Rol</mat-label>
+                  <mat-select [(ngModel)]="service.formData.Rol" name="Rol" id="Rol" [disabled]="currentUser.Rol === 'Administrador' && (service.formData.Rol==='Administrador' || service.formData.Rol==='Super Administrador')">
+                    <mat-option *ngFor="let rol of listaRoles" [value]="rol">
+                      {{rol}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 w-100">
+              <div class="d-flex flex-row text-center align-items-center bg-white">
+                <mat-form-field class="w-100">
+                  <mat-label>Activo</mat-label>
+                  <mat-select [(ngModel)]="activo" name="activo" id="activo">
+                    <mat-option value="Si">Si</mat-option>
+                    <mat-option value="No">No</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 w-100">
+              <div class="d-flex flex-row text-center align-items-center bg-white">
+                <mat-form-field class="w-100">
+                  <mat-label>Bloqueado</mat-label>
+                  <mat-select [(ngModel)]="bloqueado" name="bloqueado" id="bloqueado">
+                    <mat-option value="Si">Si</mat-option>
+                    <mat-option value="No">No</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                </div>
+            </div>
+
+            <div class="col-12 d-flex flex-column">
+              <hr class="w-100 separator-btns-admin">
+              <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+                <button class="btn-admin px-4 mr-sm-3 mb-2 mb-sm-0" mat-raised-button [class.btn-disabled]="form.invalid" [disabled]="form.invalid" type="submit">
+                  <span><i class="fa fa-floppy-o px-2" aria-hidden="true"></i></span>
+                  <span class="btn-filter-border pr-3">Guardar</span>
+                </button>
+                <button class="btn-admin px-4" routerLink="/admin/usuarios">
+                  <span><i class="fa fa-arrow-left px-2" aria-hidden="true"></i></span>
+                  <span class="btn-filter-border pr-3">Regresar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- <div class="row">
+  <div class="col-md-6 offset-6" style="text-align:right">
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" [class.btn-disabled]="form.invalid" [disabled]="form.invalid" type="submit">
+        <i class="mdi mdi-tooltip-edit"> Guardar </i>
+      </button>
+      <button mat-raised-button color="primary" type="button" (click)="regresar()">
+      <i class="mdi mdi-arrow-left"> Regresar </i>
+      </button>
+    </div>
+  </div>
+</div> -->
+
+<!-- <br><br><br><br>
+            <form #form="ngForm" autocomplete="off" (submit)="salvarCambios()">
+              <div id="edit-paginas-estaticas" class="grid">
+                <p class="grid-header">Gestión de Usuarios</p>
+                <div class="grid-body">
+                  <div class="item-wrapper">
+                    <div class="row ">
+
+                      <div class="col-md-12">
+                        <input type="hidden" name="UsuarioId" id="UsuarioId" #UsuarioId="ngModel" class="form-control" [(ngModel)]="service.formData.UsuarioId">
+
+
+                        <div class="row">
+                          <div class="col-md-4">
+                            <mat-form-field class="example-full-width">
+                              <input matInput [(ngModel)]="service.formData.Codigo" name="Codigo" id="Codigo" disabled type="text" placeholder="Código">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
+                            <mat-form-field class="example-full-width">
+                              <input matInput [(ngModel)]="service.formData.Puntos" name="Puntos" id="Puntos" disabled type="text" placeholder="Puntos">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
+                            <mat-form-field class="example-full-width">
+                              <input matInput [(ngModel)]="service.formData.Correo" name="Correo" id="Correo" disabled type="text" placeholder="Correo">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+
+                            <mat-form-field class="example-full-width">
+                              <input matInput [(ngModel)]="service.formData.Telefono" name="Telefono" id="Telefono" disabled type="text" placeholder="Teléfono">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
+
+                            <mat-form-field class="example-full-width">
+                              <input matInput [(ngModel)]="service.formData.FechaCreacion" name="FechaCreacion" id="FechaCreacion" disabled type="text" placeholder="Fecha de Creación">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
+
+                            <mat-form-field>
+                              <mat-label>Clases</mat-label>
+                              <mat-select [(ngModel)]="service.formData.ClasesUsuarios.ClasesUsuariosId" name="ClasesUsuariosId" id="ClasesUsuariosId">
+                                <mat-option> </mat-option>
+                                <mat-option *ngFor="let class of servClase.listaClases" [value]="class.ClasesUsuariosId">
+                                  {{class.Nombre}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-4">
+                            <mat-form-field>
+                              <mat-label>Rol</mat-label>
+                              <mat-select [(ngModel)]="service.formData.Rol" name="Rol" id="Rol" [disabled]="service.currentUser.Rol === 'Administrador' && (service.formData.Rol==='Administrador' || service.formData.Rol==='Super Administrador')">
+                                <mat-option> </mat-option>
+                                <mat-option *ngFor="let rol of listaRoles" [value]="rol">
+                                  {{rol}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>Activo</mat-label>
+                                  <mat-select [(ngModel)]="activo" name="activo" id="activo">
+                                    <mat-option selected> </mat-option>
+                                    <mat-option value="Si">Si</mat-option>
+                                    <mat-option value="No">No</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+
+                                <mat-form-field>
+                                  <mat-label>Bloqueado</mat-label>
+                                  <mat-select [(ngModel)]="bloqueado" name="bloqueado" id="bloqueado">
+                                    <mat-option selected> </mat-option>
+                                    <mat-option value="Si">Si</mat-option>
+                                    <mat-option value="No">No</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+
+
+
+
+
+
+
+
+                          </div>
+
+
+                        <br>
+                        <hr>
+                        <div class="row">
+                          <div class="col-md-6 offset-6" style="text-align:right">
+                            <div class="example-button-row">
+                              <button mat-raised-button color="primary" [class.btn-disabled]="form.invalid" [disabled]="form.invalid" type="submit">
+                                <i class="mdi mdi-tooltip-edit"> Guardar </i>
+                              </button>
+                              <button mat-raised-button color="primary" type="button" (click)="regresar()">
+                              <i class="mdi mdi-arrow-left"> Regresar </i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+
+                        </div>
+
+                    </div>
+                  </div>
+
+                    </div>
+
+                  </div>
+
+
+
+
+            </form> -->

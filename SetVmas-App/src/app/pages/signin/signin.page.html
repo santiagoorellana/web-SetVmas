@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-label color="primary">Iniciar Sesión</ion-label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+  <form>
+    <ion-item style="margin-top: 30px;">
+      <ion-label color="primary" position="floating">Email o ID de Usuario</ion-label>
+      <ion-input [(ngModel)]="email" name="email" type="text" #nombrev="ngModel" spellcheck="false" autocapitalize="off"
+        required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Contraseña</ion-label>
+      <ion-input #passwordEyeRegister  [type]="passwordTypeInput" [(ngModel)]="password" name="password" type="password" #puntosv="ngModel" spellcheck="false"
+        autocapitalize="off" required></ion-input>
+        <button  item-end  class="btn_eye_icon"  (click)="togglePasswordMode()">
+          <ion-icon  [name]="iconPassword"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item class="item-pass" lines="none">
+      <ion-buttons slot="start">
+        <ion-button color="primary" [routerLink]="['/', 'restore-account']">
+          ¿Ha olvidado la contraseña?
+        </ion-button>
+        <ion-button color="primary" [routerLink]="['/', 'signup']" style="right: 0;position: absolute;">
+          Registrarse
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item lines="none" style="margin-top: 20px;">
+      <div class="center-button">
+        <ion-button style="height: 30px;" (click)="signin()" slot="start" fill="outline" shape="round" color="primary">
+          <ion-icon name="log-in-outline" slot="start"></ion-icon>
+          Entrar
+        </ion-button>
+      </div>
+    </ion-item>
+  </form>
+</ion-content>

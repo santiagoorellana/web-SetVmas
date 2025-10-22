@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-label color="primary">Registrarse</ion-label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+  <form>
+    <ion-item>
+      <ion-label color="primary" position="floating">* Anfitrión</ion-label>
+      <ion-input [(ngModel)]="anfitrion" name="anfitrion" type="text" #nombrev="ngModel" spellcheck="false"
+        autocapitalize="off" required></ion-input>
+      <ion-icon name="scan" slot="end" (click)="scanCode()" style="margin-top: 16px;"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">* Email</ion-label>
+      <ion-input [(ngModel)]="email" name="email" type="text" #puntosv="ngModel" spellcheck="false" autocapitalize="off"
+        required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">* Contraseña</ion-label>
+      <ion-input [(ngModel)]="password" name="password" type="password" #puntosv="ngModel" spellcheck="false"
+        autocapitalize="off" required></ion-input>
+      <div *ngIf="error" style="color:red;font-size: 80%;">
+        Las contraseña no son iguales
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">* Confirmar contraseña</ion-label>
+      <ion-input [(ngModel)]="confirmpassword" (change)="confirmPassword()" name="confirmpassword" type="password"
+        #confirmpasswordv="ngModel" spellcheck="false" autocapitalize="off" required></ion-input>
+      <div *ngIf="error" style="color:red;font-size: 80%;">
+        Las contraseña no son iguales
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">* Teléfono</ion-label>
+      <ion-input [(ngModel)]="telephone" name="telephone" type="text" #puntosv="ngModel" spellcheck="false"
+        autocapitalize="off" required></ion-input>
+    </ion-item>
+    <ion-item lines="none" class="captcha-item">
+      <div class="center-button">
+        <re-captcha (resolved)="captchaResolved($event)" siteKey="6LfI1fcUAAAAAEwQ1Fb86Qkhabye30Y81fMYxsHM"></re-captcha>
+      </div>
+    </ion-item>
+    <ion-item lines="none">
+      <div class="center-button">
+        <ion-button style="height: 30px;" (click)="register()" slot="start" fill="outline" shape="round"
+          color="primary">
+          <ion-icon name="log-in-outline" slot="start"></ion-icon>
+          Registrarse
+        </ion-button>
+      </div>
+    </ion-item>
+    <ion-item lines="none">
+      <div class="center-button">
+        <ion-button style="height: 30px;" (click)="confirmAccount()" slot="start" fill="outline" shape="round"
+          color="primary">
+          <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
+          Verifcar Cuenta
+        </ion-button>
+      </div>
+    </ion-item>
+  </form>
+</ion-content>

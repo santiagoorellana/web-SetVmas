@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar color="primary" class="custom-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <!-- <ion-icon class="icon-title" name="megaphone"></ion-icon> -->
+      <label>Detalles del Anuncio</label>
+    </ion-title>
+    <ion-buttons slot="end">
+
+      <ion-button (click)="sendShare(anuncio.Titulo,anuncio.AnuncioId)" class="share-button" shape="round" slot="end"
+        fill="clear">
+        <ion-icon name="share-social"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen class="ion-padding">
+  <ion-title color="primary">
+    {{anuncio.Titulo}}
+  </ion-title>
+  <ion-item lines="full">
+    <ion-thumbnail slot="start">
+      <img (click)="openPhotoAd(anuncio.ImageName)" *ngIf="anuncio.ImageName !== ''" [src]="'https://setvmas.com/api/uploads/anuncios/mini/' + anuncio.ImageName" />
+      <img *ngIf="anuncio.ImageName === '' && anuncio.Categoria.ImageName"
+        [src]="'https://setvmas.com/api/uploads/categorias/mini/' + anuncio.Categoria.ImageName" />
+    </ion-thumbnail>
+    <ion-label class="ion-text-wrap category">
+
+      <ion-label color="primary">
+        <h2><b>Acción: </b>{{anuncio.Accion}}</h2>
+        <h2><b>Nuevo: </b>{{anuncio.ProductoNuevo ? 'Si' : 'No'}}</h2>
+        <h2><b>Creado: </b>{{moment(anuncio.FechaCreacion).format('DD/MM/YY')}}</h2>
+        <h2><b>Categoría: </b>{{anuncio.Categoria.Nombre}}</h2>
+        <h2><b>Localidad: </b>{{anuncio.Provincia}} - {{anuncio.Municipio}}</h2>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="outline" shape="round" color="primary">
+          <ion-icon name="cash" slot="start"></ion-icon> ${{ anuncio.Precio.toFixed(2)}}
+        </ion-button>
+        <ion-button slot="start" fill="outline" shape="round" color="primary">
+          <ion-icon name="eye" slot="start"></ion-icon>
+          {{ anuncio.ContadorView}}
+        </ion-button>
+      </ion-buttons>
+    </ion-label>
+  </ion-item>
+  <ion-item lines="full" class="ion-text-center custom" *ngIf="anuncio.Etiquetas && anuncio.Etiquetas.length > 0">
+    <div style="padding: 3px 0 0;">
+      <ion-badge color="primary" *ngFor="let tag of anuncio.Etiquetas">{{tag.Nombre}}</ion-badge>
+    </div>
+  </ion-item>
+  <ion-item>
+    <ion-text color="primary">
+      {{anuncio.Descripcion}}
+    </ion-text>
+  </ion-item>
+  <ion-item *ngIf="anuncio.AlmacenImagen && anuncio.AlmacenImagen.length > 0">
+    <ion-slides pager page="true" [options]="slideOpts">
+      <ion-slide *ngFor="let item of anuncio.AlmacenImagen">
+        <img (click)="openPhoto(item.ImageName)" [src]="'https://setvmas.com/api/uploads/almacen/mini/'+item.ImageName" class="banner" alt="No Image" />
+      </ion-slide>
+    </ion-slides>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-icon name="person" size="large" color="primary" slot="start" class="person-icon"></ion-icon>
+    <ion-label class="ion-text-wrap" color="primary">
+      <h2 class="person"><b>Nombre: </b>{{anuncio.NombreContacto}}</h2>
+      <h2 class="person">
+        <b>Teléfono: </b>{{anuncio.TelefonoContacto}} 
+        <ion-button href="tel:{{anuncio.TelefonoContacto}}" class="contact-button" size="small" fill="clear">
+          <ion-icon size="small" name="call"></ion-icon>
+        </ion-button>
+      </h2>
+      <h2 class="person">
+        <b>Correo: </b>{{anuncio.CorreoContacto}}
+        <ion-button href="mailto:{{anuncio.CorreoContacto}}" target="_top" class="contact-button" size="small" fill="clear">
+          <ion-icon size="small" name="mail"></ion-icon>
+        </ion-button>
+      </h2>
+      <h2 class="person" *ngIf="anuncio.Url">
+        <b>Web: </b><span (click)="openWeb(anuncio.Url)">{{anuncio.Url}}</span>
+        <ion-button (click)="openWeb(anuncio.Url)" class="contact-button" size="small" fill="clear">
+          <ion-icon size="small" name="globe-outline"></ion-icon>
+        </ion-button>
+      </h2>
+    </ion-label>
+  </ion-item>
+  <ion-item lines="full" class="ion-text-center custom">
+    <div style="padding: 3px 0 0;">
+      <ion-badge color="secondary" *ngFor="let op of anuncio.OpcionesAvanzadas">{{op.TextoLabel}}</ion-badge>
+    </div>
+  </ion-item>
+  <ion-item lines="none" *ngIf="isConnected && currentUser && !reported && currentUser.UsuarioId !== anuncio.Usuario.UsuarioId">
+    <div class="center-button">
+      <ion-button style="height: 30px;" (click)="presentPopover($event)" slot="start" fill="outline" shape="round" color="primary">
+        <ion-icon name="thumbs-down" slot="start"></ion-icon>
+        Denunciar Anuncio
+      </ion-button>
+    </div>
+    <ion-select #reportSelect class="ion-hide" [interfaceOptions]="customAlertOptions" cancelText="Cancelar" okText="Aceptar" 
+    interface="alert" (ionChange)="ionChangeReport($event)">
+      <ion-select-option *ngFor="let reason of reasons" [value]="reason.MotivoDenunciaId">{{reason.Nombre}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-content>

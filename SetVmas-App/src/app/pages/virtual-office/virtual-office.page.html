@@ -1,0 +1,130 @@
+<ion-header id="ad-header">
+  <ion-toolbar color="primary" class="custom-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <label>Mi Oficina Virtual</label>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="openWeb()" color="warning" slot="end">
+        <ion-icon size="large" slot="icon-only" name="globe-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="tab">
+      <ion-segment-button [value]="DATA_TAB">
+        <ion-label> Mis Datos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button [value]="AD_TAB" layout="icon-start">
+        <ion-label> Mis Anuncios</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content [scrollEvents]="true" style="background-color: white;">
+  <div *ngIf="tab === DATA_TAB">
+    <ion-item lines="none">
+      <div class="center-button">
+        <ion-button (click)="refresh()" class="ion-text-capitalize" size="small"  shape="round" color="primary" fill="outline">
+          <ion-icon slot="start" name="reload"></ion-icon>
+          Refrescar Puntos
+        </ion-button>
+      </div>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" class="ion-text-right">
+          <ion-label color="primary">Clase:</ion-label>
+        </ion-col>
+        <ion-col size="6" class="ion-text-left">
+          <ion-label color="warning">{{ clase }} </ion-label>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <ion-label color="primary">Código:</ion-label>
+        </ion-col>
+        <ion-col size="6" class="ion-text-left">
+          <ion-label color="warning">{{ codigo }} </ion-label>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <ion-label color="primary">Puntos acumulados:</ion-label>
+        </ion-col>
+        <ion-col size="6" class="ion-text-left">
+          <ion-label color="warning">{{ acumuladoPuntos }} </ion-label>
+        </ion-col>
+        <ion-col size="12" class="ion-text-center" style="font-size: 12px;">
+          <ion-label *ngIf="precioPunto" color="medium">1 pto. equivale a {{ precioPunto }} CUP</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-top">
+        <ion-col size="6">
+          <ion-button class="ion-text-capitalize" size="small" (click)="compra()" fill="outline" shape="round"
+            color="primary">
+            <ion-icon name="cart" slot="start"></ion-icon>
+            Comprar Puntos
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button class="ion-text-capitalize" size="small" (click)="vende()" fill="outline" shape="round"
+            color="primary">
+            <ion-icon name="cash" slot="start"></ion-icon>
+            Vender Puntos
+          </ion-button>
+        </ion-col>
+        <ion-col size="12" class="ion-text-center">
+          <ion-label color="primary">Cant. de referidos: <span>{{ cantReferidos }}</span></ion-label>
+        </ion-col>
+        <ion-col size="12" class="ion-text-center">
+          <ion-label color="primary">Compras directas: <span>{{ compras }}</span></ion-label>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button style="text-transform: inherit;" size="small" (click)="enlace()" fill="outline" shape="round"
+            color="primary">
+            <ion-icon name="copy" slot="start"></ion-icon>
+            Enlace de Ref.
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button class="ion-text-capitalize" size="small" (click)="qr()" fill="outline" shape="round"
+            color="primary">
+            <ion-icon name="scan" slot="start"></ion-icon>
+            Mostrar Código
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="messageAdmin">
+      <ion-row>
+        <ion-col class="ion-text-wrap"
+          style="background-color: rgb(141, 201, 224);color: #000030; border-radius: 10px;margin: 10px;">
+          <p style="margin: 0; text-align: center;">
+            {{messageAdmin}}
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div *ngIf="tab === AD_TAB">
+    <ion-list class="list-ad">
+      <ion-item lines="full" *ngFor="let item of anuncios">
+        <ion-label color="primary" slot="start">
+          <h2>{{item.Titulo}}</h2>
+          <p style="font-size: 12px;color:#888">{{moment(item.FechaModificacion).format('DD-MM-YYYY HH:mm:ss')}}</p>
+        </ion-label>
+        <ion-buttons slot="end">
+          <ion-button fill="clear" (click)="editAd(item)" color="primary">
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" (click)="changeStatusAd(item)" color="primary">
+            <ion-icon *ngIf="item.IsActivo" name="eye"></ion-icon>
+            <ion-icon *ngIf="!item.IsActivo" name="eye-off"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" (click)="onDeleteAnnounce(item.AnuncioId)" color="danger">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

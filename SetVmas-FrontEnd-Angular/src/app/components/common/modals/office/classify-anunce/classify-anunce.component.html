@@ -1,0 +1,158 @@
+<div class="container">
+  <!-- Desktop -->
+  <div class="row mb-3 mt-4 d-none d-lg-block">
+    <div class="col-12 d-flex flex-row justify-content-start align-items-center mt-4">
+      <div class="ico-classify-anunce mr-lg-4"></div>
+      <div class="title-modals">
+        Amplificador Yamaha, calidad profesional
+      </div>
+    </div>
+  </div>
+  <!-- Movil -->
+  <div class="row d-flex flex-row d-block d-lg-none border-separator pb-3">
+    <div class="col-3 col-sm-2 d-flex align-items-center px-0">
+      <div class="ico-classify-anunce"></div>
+    </div>
+    <div class="col d-flex align-items-center pl-2 pl-md-0 pr-0">
+      <div class="title-modals-small">
+        Amplificador Yamaha, calidad profesional
+      </div>
+    </div>
+  </div>
+
+  <hr class="separator my-0 d-none d-lg-block">
+
+  <!-- Desktop -->
+  <div class="row d-flex flex-row mt-3 showDesktop">
+    <div class="col-5 col-xl d-flex flex-row justify-content-between pr-0">
+      <div class="img-principal-anunce">
+        <img src="../../../../../../assets/images/imagen-anuncio-principal.png">
+      </div>
+      <div class="pt-4 mr-3 mr-xl-0">
+        <div class="d-flex justify-content-center money px-3 py-1">
+          <span class="font-osextrabold">$ 520.00</span>
+        </div>
+        <div class="d-flex flex-row align-items-center pl-1">
+          <div class="ico-eye mr-2 d-flex align-items-center mt-2"></div>
+          <span class="color-blue font-osbold">120</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-7 col-xl-8 color-blue pt-3">
+      <div class="d-flex flex-row align-items-center">
+        <span class="pr-1">Acción:</span>
+        <span class="font-osbold">Vendo</span>
+      </div>
+      <div class="d-flex flex-row align-items-center mb-1">
+        <span>Categoría: COMPUTADORAS, CONSOLAS Y ACCESORIOS</span>
+      </div>
+      <div class="container px-0">
+        <div class="row">
+          <div class="col d-flex flex-row flex-wrap scroll-wrap">
+            <div class="tags px-3 py-1 mr-1 mb-1" *ngFor="let tag of tags">
+              <span>{{ tag }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Movil -->
+  <div class="row d-flex flex-row mt-3 d-block d-lg-none">
+    <div class="col-12 d-flex flex-column flex-sm-row align-items-center justify-content-sm-center px-0">
+      <div class="img-principal-anunce">
+        <img src="../../../../../assets/images/imagen-anuncio-principal.png">
+      </div>
+      <div class="d-flex flex-row flex-sm-column justify-content-between px-4 pt-2">
+        <div class="d-flex justify-content-center money px-3 py-1 mr-3 mr-sm-0">
+          <span class="font-osextrabold">$ 520.00</span>
+        </div>
+        <div class="d-flex flex-row align-items-center pl-1">
+          <div class="ico-eye mr-2 d-flex align-items-center mt-2"></div>
+          <span class="color-blue font-osbold">120</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 color-blue pt-2 px-0">
+      <div class="d-flex flex-row align-items-center">
+        <span class="pr-1">Acción:</span>
+        <span class="font-osbold">Vendo</span>
+      </div>
+      <div class="d-flex flex-row align-items-center mb-1">
+        <span>Categoría: COMPUTADORAS, CONSOLAS Y ACCESORIOS</span>
+      </div>
+      <div class="d-flex flex-row flex-wrap">
+        <div class="tags px-3 py-1 mr-1 mb-1" *ngFor="let tag of tags">
+          <span>{{ tag }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2 pb-3 border-separator">
+    <div class="col-12 color-blue overflow-auto scroll-wrap-anunce px-0 px-lg-3">
+      Este es el texto del anuncio, aquí de describen las prestaciones del producto o servicio a criterio del anunciante.
+      Genere un buen texto, sintético, con información relevante para el usuario. Una buena ortografía y redacción ayudarán
+      a potenciar positivamente su imagen.
+      Este es el texto del anuncio, aquí de describen las prestaciones del producto o servicio a criterio del anunciante.
+      Genere un buen texto, sintético, con información relevante para el usuario. Una buena ortografía y redacción ayudarán
+      a potenciar positivamente su imagen.
+      Este es el texto del anuncio, aquí de describen las prestaciones del producto o servicio a criterio del anunciante.
+      Genere un buen texto, sintético, con información relevante para el usuario. Una buena ortografía y redacción ayudarán
+      a potenciar positivamente su imagen.
+    </div>
+  </div>
+
+  <hr class="separator my-0 d-none d-lg-block">
+
+  <div class="row mt-3 mt-xl-2 border-separator">
+    <div class="col-12 col-lg-6 col-xl-5 px-0 pr-lg-0 pl-lg-3 mb-3 mb-lg-0 w-50" style="overflow-x: auto">
+      <div class="d-flex flex-row" >
+        <div class="img-secondary-anunce mr-2" *ngFor="let img of imgsAnunce">
+          <img src="{{img}}">
+        </div>
+    </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-7 mb-2 color-blue contact px-0 px-xl-3">
+      <span>Datos de contacto:</span>
+      <div class="d-flex flex-row align-items-center">
+        <span class="pr-1 d-none d-xl-block">Nombre:</span>
+        <span class="font-ossemibold">Fulanito Pérez,</span>
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="pr-1 d-none d-xl-block">Teléfono:</span>
+        <span class="font-ossemibold">52525252,</span>
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="pr-1 d-none d-xl-block">E-mail:</span>
+        <span class="font-ossemibold">direcciondecorreo@gmail.com,</span>
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="pr-1 d-none d-xl-block">Localidad:</span>
+        <span class="font-ossemibold">Plaza de la Revolución,</span>
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="pr-1 d-none d-xl-block">Sitio web:</span>
+        <span class="font-ossemibold">www.direcciondelsitioweb.com</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="separator my-0 d-none d-lg-block">
+
+  <div class="row mt-3 mt-lg-4">
+    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-9 offset-lg-0 d-flex flex-column flex-lg-row justify-content-center justify-content-lg-start align-items-lg-center color-blue px-0 px-lg-3">
+      <mat-label class="label-phone mr-lg-2 mb-2 mb-lg-0 text-center">Estado de la denuncia:</mat-label>
+      <mat-form-field  appearance="outline" class="fs-input btnCheck btnSelect">
+        <mat-select placeholder="No publicable">
+          <mat-option value="0">No publicable</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-3 offset-lg-0 d-flex justify-content-center justify-content-lg-end align-items-center mt-4 mt-lg-0">
+      <div class="d-flex justify-content-center align-items-center cursor-pointer w-100 oval-btn color-blue font-osbold py-2">
+        CLASIFICAR
+      </div>
+    </div>
+  </div>
+</div>

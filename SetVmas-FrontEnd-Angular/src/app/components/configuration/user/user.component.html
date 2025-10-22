@@ -1,0 +1,377 @@
+<div class="container pt-4 pb-3">
+  <div class="row">
+    <div class="col-12">
+      <p class="title-pages pl-3 py-3">Gestión de Usuarios</p>
+    </div>
+  </div>
+  <!-- Filters -->
+  <div class="row pt-4 pb-2">
+    <div class="col-12">
+      <div class="container bg-white pt-3">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Correo</mat-label>
+                <input matInput type="search" placeholder="Correo" #correo>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Rol</mat-label>
+                <mat-select name="rol" #rol>
+                  <mat-option selected (click)="filterRol('')">Todos</mat-option>
+                  <mat-option *ngFor="let rol of listaRoles" [value]="rol" (click)="filterRol(rol)">
+                    {{rol}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Clase</mat-label>
+                <mat-select name="clase" #clase>
+                  <mat-option selected (click)="filterClase(0)">Todos</mat-option>
+                  <mat-option *ngFor="let clase of servClase.listaClases" [value]="clase.ClasesUsuariosId" (click)="filterClase(clase.ClasesUsuariosId)">
+                    {{clase.Nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Fecha</mat-label>
+                <input type="date" matInput #fecha>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Código</mat-label>
+                <input matInput type="search" placeholder="Código" #codigo>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Inactividad</mat-label>
+                <input type="number" matInput value="0" min="0" #inactividad>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Puntos</mat-label>
+                <input type="number" matInput value="0" min="0" #puntos>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pb-3 pt-2">
+    <div class="col-12 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end" *ngIf="currentUser.Rol === 'Administrador'|| currentUser.Rol === 'Super Administrador'">
+    <!-- <div class="col-12 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end"> -->
+      <button class="btn-admin px-4" (click)="removeSelectedRows()">
+        <span><i class="fa fa-trash px-2" aria-hidden="true"></i></span>
+        <span class="btn-filter-border pr-3">Eliminar</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="row">
+    <div class="col-12">
+      <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+                 matSort matSortActive="Correo" matSortDisableClear matSortDirection="asc" style="overflow-x:auto;" id="tblBackend">
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef class="col-md-1">
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="col-md-1">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </mat-cell>
+
+        </ng-container>
+        <ng-container matColumnDef="UsuarioId">
+          <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+          <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.UsuarioId}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Codigo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Código</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.Codigo}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Correo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2">Correo</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="col-md-2">{{row.Correo}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Telefono">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Teléfono</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.Telefono}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ClasesUsuarios">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Clase</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.Clase}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Rol">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-1">Rol</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="col-md-1">{{row.Rol}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Puntos">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Puntos</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.Puntos}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Activo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Activo</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{IsActivo(row.Activo)}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Bloqueado">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Bloqueado</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{IsBloqueado(row.Bloqueado)}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="FechaCreacion">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2">Fecha Creación</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="col-md-2">{{row.FechaCreacion|date:'dd/MM/yyyy'}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="FechaUltimaEntrada">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Fecha Entrada</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.FechaUltimaEntrada|date:'dd/MM/yyyy'}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Acciones" *ngIf="currentUser.Rol === 'Administrador'|| currentUser.Rol === 'Super Administrador'">
+        <!-- <ng-container matColumnDef="Acciones"> -->
+          <mat-header-cell *matHeaderCellDef class="tituloTablas">Editar</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-icon aria-hidden="false" (click)="onEdit(row.UsuarioId)" aria-label="Editar" class="editar-icon"></mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="service.tableColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: service.tableColumns"></mat-row>
+      </mat-table>
+
+      <mat-paginator [length]="service.resultsLength" [pageSize]="service.pageSize"
+                     [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorData($event)" [showFirstLastButtons]="true"></mat-paginator>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <br><br><br><br>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="col-lg-12 equel-grid">
+      <div class="grid">
+        <p class="grid-header">Gestión de Usuarios</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3 col-sm-6">
+    <i class="fa fa-search fa-2x iconos"></i>
+    <mat-form-field>
+      <input matInput type="search" placeholder="Correo" #correo>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-3 col-sm-6">
+    <i class="fa fa-search fa-2x iconos"></i>
+    <mat-form-field>
+      <mat-label>Rol</mat-label>
+      <mat-select name="rol" #rol>
+        <mat-option selected (click)="filterRol('')"> </mat-option>
+        <mat-option *ngFor="let rol of listaRoles" [value]="rol" (click)="filterRol(rol)">
+          {{rol}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-3 col-xs-6">
+    <i class="fa fa-search fa-2x iconos"></i>
+    <mat-form-field>
+      <mat-label>Clase</mat-label>
+      <mat-select name="clase" #clase>
+        <mat-option selected (click)="filterClase(0)">Todos </mat-option>
+        <mat-option *ngFor="let clase of servClase.listaClases" [value]="clase.ClasesUsuariosId" (click)="filterClase(clase.ClasesUsuariosId)">
+          {{clase.Nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-3 col-xs-6">
+    <i class="fa fa-search fa-2x iconos"></i>
+    <mat-form-field>
+      <input matInput type="date" placeholder="Fecha" #fecha>
+    </mat-form-field>
+  </div>
+
+
+
+  <div class="col-md-3 col-xs-6">
+
+    <i class="fa fa-search fa-2x iconos"></i>
+    <mat-form-field style="width:100px !important">
+      <input matInput type="number" min="0" placeholder="Inactividad" #inactividad>
+    </mat-form-field>
+  </div>
+  <div class="col-md-3 col-xs-6">
+    <i class="fa fa-search fa-2x iconos"></i>
+    <mat-form-field style="width:100px !important">
+      <input matInput type="number" min="0" placeholder="Puntos" #puntos>
+    </mat-form-field>
+  </div>
+
+
+
+  <div class="col-md-4 offset-2 col-xs-12"  *ngIf="service.currentUser.Rol === 'Administrador'|| service.currentUser.Rol === 'Super Administrador'">
+    <div class="example-button-row" style="float:right;">
+      <button mat-raised-button color="primary" (click)="removeSelectedRows()">
+        <i class="mdi mdi-delete-forever"> Eliminar</i>
+      </button>
+    </div>
+  </div>
+</div>
+
+  <br>
+
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>cargando...
+  </div>
+
+  <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+             matSort matSortActive="Correo" matSortDisableClear matSortDirection="asc" style="overflow-x:scroll;" id="tblBackend">
+
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef class="col-md-1">
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-md-1">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+
+    </ng-container>
+    <ng-container matColumnDef="UsuarioId">
+      <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+      <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.UsuarioId}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Codigo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Código</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.Codigo}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Correo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2">Correo</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-md-2">{{row.Correo}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Telefono">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Teléfono</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.Telefono}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ClasesUsuarios">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Clase</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.ClasesUsuarios.Nombre}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Rol">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-1">Rol</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-md-1">{{row.Rol}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Puntos">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Puntos</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.Puntos}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Activo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Activo</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{IsActivo(row.Activo)}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Bloqueado">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Bloqueado</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{IsBloqueado(row.Bloqueado)}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="FechaCreacion">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2">Fecha Creación</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-md-2">{{row.FechaCreacion|date:'dd/MM/yyyy'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="FechaUltimaEntrada">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Fecha Entrada</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.FechaUltimaEntrada|date:'dd/MM/yyyy'}}</mat-cell>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="Acciones" *ngIf="service.currentUser.Rol === 'Administrador'|| service.currentUser.Rol === 'Super Administrador'">
+      <mat-header-cell *matHeaderCellDef class="tituloTablas">Editar</mat-header-cell>
+      <mat-cell *matCellDef="let Acciones">
+
+        <button mat-icon-button (click)="onEdit(Acciones.UsuarioId)">
+          <mat-icon aria-label="Editar" class="editar-icon"></mat-icon>
+        </button>
+      </mat-cell>
+
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="service.tableColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: service.tableColumns"></mat-row>
+  </mat-table>
+
+  <mat-paginator [length]="service.resultsLength" [pageSize]="10"
+                 [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+  <br><br> -->
+
+
+

@@ -1,0 +1,159 @@
+<div class="container" *ngIf = "isLoading" class="scroll_vertical"><!--style="overflow-y: scroll;-->
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center align-items-center title-modals-small d-block d-xl-none">
+      Iniciar compra directa
+    </div>
+    <div class="col-12 d-flex justify-content-center justify-content-xl-start align-items-center mt-4col-12 d-flex justify-content-center justify-content-xl-start align-items-center mt-3">
+      <div class="ico-direct-purchase mr-xl-4"></div>
+      <div class="title-modals d-none d-xl-block">
+        Iniciar compra directa
+      </div>
+    </div>
+  </div>
+
+  <!--  <div class="row mt-2">
+    <div class="col-12 col-xl-5 d-flex flex-row justify-content-center justify-content-xl-start align-items-center color-blue px-0 px-lg-3 mt-2 mt-lg-0">
+      <span class="label-phone pr-1 d-none d-md-block">Mínimo de puntos a comprar:</span>
+      <span class="label-phone pr-1 d-block d-md-none">Mínimo a comprar:</span>
+      <span class="font-osbold" *ngIf="selectedOption == '1'">{{purchaseData.MinPointsBankTransfer}}</span>
+      <span class="font-osbold" *ngIf="selectedOption == '2'">{{purchaseData.MinPointsPhoneTransfer}}</span>
+      <span class="font-osbold" *ngIf="selectedOption == '3'">{{purchaseData.MinPointsDirectContact}}</span>
+    </div>
+    <div class="col-12 col-xl-7 d-flex flex-column flex-lg-row justify-content-center justify-content-xl-end align-items-center color-blue mt-1 mt-lg-0">
+      <div class="d-flex flex-row justify-content-center align-items-center pl-3 pl-xl-0">
+        <mat-label class="label-phone mr-sm-2 text-center" style="padding-right: 5px;">Monto a pagar</mat-label>
+        <mat-form-field appearance="outline" class="btnInput btnInputPoints mr-2" >
+          <input matInput placeholder="1" onkeypress="return event.charCode==46 || (event.charCode>=48 && event.charCode<=57)" [(ngModel)]="monto" (keyup)="totalPoints()" class="py-0 my-0" >
+        </mat-form-field>
+        <mat-form-field  appearance="outline" class="fs-input btnCheck btnSelect btnInputCurrency mr-3">
+          <mat-select placeholder="CUP">
+            <mat-option value="0">CUP</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <span class="font-osbold" *ngIf="total != 0">Equivale a {{total}} puntos</span>
+    </div>
+  </div>-->
+
+
+  <div class="row mt-2 d-flex justify-content-center justify-content-lg-end mt-3 mt-lg-2">
+    <div class="col-12 col-lg-7 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end align-items-center color-blue mr-xl-3">
+      <mat-label class="label-phone mr-sm-2 ">Método de pago:</mat-label>
+      <mat-form-field  appearance="outline" class="fs-input btnCheck btnSelect">
+        <mat-select placeholder="Seleccione forma de pago" [(ngModel)]="selectedOption" (change)="captureSelection()">
+          <mat-option *ngFor="let item of purchaseData.FormasDePago" [value]="item.value">
+            {{item.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- Wire Transfer (keyup)="validar($event)"-->
+    <div class="col-12 col-lg-4 col-xl-3 d-flex flex-row justify-content-end align-items-center color-blue px-0 px-sm-3" *ngIf="selectedOption == '1'">
+      <mat-label class="label-phone mr-2">Desde:</mat-label>
+      <mat-form-field appearance="outline" class="btnInput btnInputCreditCard">
+        <input #box matInput placeholder="xxxx-xxxx-xxxx-xxxx"  (keypress)="restrictValue($event)" minlength="16" maxlength="19" [(ngModel)]="tarjeta" class="py-0 my-0" >
+      </mat-form-field>
+
+    </div>
+    <div class="col-12 d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center justify-content-center align-items-end color-blue px-0 px-sm-3" *ngIf="selectedOption == '1'">
+      <mat-label class="label-phone mr-lg-2 text-right">El dinero debe ser enviado usando TransferMovil, EnZona o un Cajero, a la tarjeta:</mat-label>
+      <div class="ico-copiar cursor-pointer" title="Copiar al portapapeles" (click)="copiarEnlace()"></div>
+      <mat-form-field appearance="outline" class="btnInput btnInputCreditCard">
+        <input matInput value={{purchaseData.NoCard}} disabled class="py-0 my-0" style="font-weight: 900">
+      </mat-form-field>
+    </div>
+    <div class="col-12 d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center justify-content-center align-items-end color-blue px-0 px-sm-3 mt-3 mb-3" *ngIf="selectedOption == '1'">
+      <mat-label class="label-phone mr-lg-2 text-right">Pagar usando Transfermovil:</mat-label>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 pl-md-2 order-1 order-sm-2" style="margin-right: -50px" (click)="openDialogQR(2)">
+
+        <span class="color-blue cursor-pointer"><i class="fa fa-qrcode fa-2x"></i></span>
+        <span class="labels-blue pl-2 cursor-pointer">Guardar/Pagar</span>
+
+
+      </div>
+    </div>
+
+<!--    <div class="col-12 d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center justify-content-center align-items-end color-blue px-0 px-sm-3 mt-3 mb-3" *ngIf="selectedOption == '1'">-->
+<!--    <mat-label class="label-phone mr-lg-2 text-right">Pagar usando EnZona:</mat-label>-->
+<!--    <div class="col-12 col-sm-6 col-md-4 col-lg-3 pl-md-2 order-1 order-sm-2" style="margin-right: -50px" (click)="openDialogQR(1)">-->
+
+<!--      <span class="color-blue cursor-pointer"><i class="fa fa-qrcode fa-2x"></i></span>-->
+<!--      <span class="labels-blue pl-2 cursor-pointer">Guardar/Pagar</span>-->
+
+
+<!--    </div>-->
+<!--  </div>-->
+   <!-- Balance Transfer -->
+    <div class="col-12 col-lg-4 col-xl-3 d-flex flex-row justify-content-end align-items-center color-blue px-0 px-sm-3" *ngIf="selectedOption == '2'">
+      <mat-label class="label-phone mr-2">Desde:</mat-label>
+      <mat-form-field appearance="outline" class="btnInput btnInputBalanceTransfer">
+        <input matInput placeholder="Su número de móvil" (keypress)="restrictValue($event)" minlength="8" maxlength="12" [(ngModel)]="phone" class="py-0 my-0" >
+      </mat-form-field>
+    </div>
+    <div class="col-12 d-flex flex-column flex-lg-row justify-content-lg-end align-items-lg-center justify-content-center align-items-end color-blue px-0 px-sm-3" *ngIf="selectedOption == '2'">
+      <mat-label class="label-phone mr-lg-2 text-right">El saldo debe ser transferido desde su teléfono, usando transfer móvil o USSD al teléfono:</mat-label>
+      <mat-form-field appearance="outline" class="btnInput btnInputBalanceTransfer">
+        <input matInput value={{purchaseData.NoPhone}} disabled class="py-0 my-0" >
+      </mat-form-field>
+    </div>
+  </div>
+
+
+
+<!--mr-2 text-right text-justify-->
+  <hr class="separator my-0 d-none d-sm-block">
+
+
+  <div class="row mt-2">
+    <div class="col-12 col-xl-5 d-flex flex-row justify-content-center justify-content-xl-start align-items-center color-blue px-0 px-lg-3 mt-2 mt-lg-0">
+      <span *ngIf="selectedOption == '1' || selectedOption == '2' || selectedOption == '3' " class="label-phone pr-1 d-none d-md-block">Mínimo de puntos a comprar:</span>
+      <span  class="label-phone pr-1 d-block d-md-none">Mínimo a comprar:</span>
+      <span class="font-osbold" *ngIf="selectedOption == '1'">{{purchaseData.MinPointsBankTransfer}}</span>
+      <span class="font-osbold" *ngIf="selectedOption == '2'">{{purchaseData.MinPointsPhoneTransfer}}</span>
+      <span class="font-osbold" *ngIf="selectedOption == '3'">{{purchaseData.MinPointsDirectContact}}</span>
+    </div>
+    <div class="col-12 col-xl-7 d-flex flex-column flex-lg-row justify-content-center justify-content-xl-end align-items-center color-blue mt-1 mt-lg-0">
+      <div class="d-flex flex-row justify-content-center align-items-center pl-3 pl-xl-0">
+        <mat-label class="label-phone mr-sm-2 text-center" style="padding-right: 5px;">Monto a pagar</mat-label>
+        <mat-form-field appearance="outline" class="btnInput btnInputPoints mr-2" >
+          <input matInput placeholder="1" onkeypress="return event.charCode==46 || (event.charCode>=48 && event.charCode<=57)" [(ngModel)]="monto" (keyup)="totalPoints()" class="py-0 my-0" >
+        </mat-form-field>
+        <mat-form-field  appearance="outline" class="fs-input btnCheck btnSelect btnInputCurrency mr-3">
+          <mat-select placeholder="CUP">
+            <mat-option value="0">CUP</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <span class="font-osbold" *ngIf="total != 0">Equivale a {{total}} puntos</span>
+    </div>
+  </div>
+
+
+
+
+  <div class="row mt-1">
+    <div class="col-12 px-0 px-sm-3">
+      <div class="notice color-blue px-3 py-2 text-center text-md-left" *ngIf="selectedOption == '1' || selectedOption == '2' ">
+        <p class="mb-0">Usted puede enviar la cantidad de dinero que desee, y el sistema le otorgará los puntos correspondientes.</p>
+        <span class="font-osbold">1 punto equivale a {{purchaseData.PointPrice}} CUP.</span>
+        <p class="mt-3 mt-md-0 mb-0">EL ENVÍO DEBE REALIZARSE EN LAS PRÓXIMAS 48 HORAS.</p>
+      </div>
+      <div class="notice color-blue px-3 py-2 text-center text-md-left" *ngIf="selectedOption == '3'">
+        <p class="mb-0">Usted será contactado por un comercial en las próximas 48 horas.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4 mt-md-3 d-flex flex-row justify-content-center justify-content-lg-end align-items-center">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 pr-md-2 mt-2 mt-sm-0 order-2 order-sm-1">
+      <div class="d-flex justify-content-center align-items-center cursor-pointer oval-btn color-blue font-osbold py-2" (click)="onCloseClick()">
+        CANCELAR
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 pl-md-2 order-1 order-sm-2">
+      <div class="d-flex justify-content-center align-items-center cursor-pointer oval-btn color-blue font-osbold py-2" (click)="Comprar()">
+        GUARDAR PEDIDO
+      </div>
+    </div>
+  </div>
+</div>

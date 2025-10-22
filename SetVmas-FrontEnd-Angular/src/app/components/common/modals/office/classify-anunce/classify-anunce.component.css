@@ -1,0 +1,125 @@
+.ico-classify-anunce {
+  background: url("../../../../../../assets/images/icons/icon-classify-anunce.png") no-repeat;
+  background-size: contain;
+  width: 65px !important;
+  height: 65px !important;
+}
+
+.separator {
+  border-bottom: 1px solid #020448;
+}
+
+.img-principal-anunce {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 15px;
+  border: 1px solid #c0c0d1;
+  width: 160px;
+  height: 160px;
+}
+
+.img-principal-anunce img{
+  width: 100%;
+  height: auto;
+}
+
+@supports(object-fit: cover) {
+  .img-principal-anunce img{
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+.img-secondary-anunce {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 15px;
+  /* border: 1px solid #c0c0d1; */
+  width: 105px;
+  height: 105px;
+}
+
+.img-secondary-anunce img{
+  width: 105px;
+  height: auto;
+}
+
+@supports(object-fit: cover) {
+  .img-secondary-anunce img{
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+.money {
+  border-radius: 16px;
+  border: 2px solid #c0c0d1;
+  font-size: .9rem;
+}
+
+.ico-eye {
+  background: url("../../../../../../assets/images/icons/ojo-anuncio.png") no-repeat;
+  background-size: contain;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.tags {
+  border-radius: 2px;
+  background: #b8d0d6;
+  font-size: .9rem;
+  /* overflow: hidden; */
+  /* float: left !important; */
+}
+
+.scroll-wrap-anunce {
+  min-height: 130px;
+  max-height: 130px;
+}
+
+.contact {
+  font-size: .9rem;
+}
+
+/* .container-imgs-secondary {
+  width: 100%;
+  overflow: auto;
+} */
+
+@media (max-width: 991.98px) {
+  .ico-classify-anunce {
+    background: url("../../../../../../assets/images/icons/icon-classify-anunce.png") no-repeat;
+    background-size: contain;
+    width: 55px !important;
+    height: 55px !important;
+  }
+
+  .showDesktop {
+    display: none !important;
+  }
+
+  .border-separator {
+    border-bottom: 1px solid #020448;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .scroll-wrap-anunce {
+    min-height: 300px;
+    max-height: 300px;
+  }
+}
+
+/* @media (max-width: 991.98px) {
+  .border-separator {
+    border-bottom: 1px solid #020448;
+  }
+} */

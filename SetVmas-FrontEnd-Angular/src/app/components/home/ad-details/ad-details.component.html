@@ -1,0 +1,278 @@
+<div class="container my-4">
+  <!-- Desktop -->
+  <div class="row mb-3 mt-4 d-none d-lg-block">
+    <div class="col-12 d-flex flex-row justify-content-start align-items-center mt-4">
+      <div class="ico-classify-anunce mr-lg-4"></div>
+      <div class="title-modals text-black">
+        <h1>  {{anuncio.Titulo}}</h1>
+      </div>
+    </div>
+  </div>
+  <!-- Movil -->
+  <div class="row d-flex flex-row d-block d-lg-none border-separator pb-3">
+    <div class="col-3 col-sm-2 d-flex align-items-center px-0">
+      <div class="ico-classify-anunce"></div>
+    </div>
+    <div class="col d-flex align-items-center pl-2 pl-md-0 pr-0">
+      <div class="title-modals-small">
+        <h1>  {{anuncio.Titulo}}</h1>
+      </div>
+    </div>
+  </div>
+
+  <hr class="separator my-0 d-none d-lg-block">
+
+  <!-- Desktop -->
+  <div class="row my-3 d-flex flex-row showDesktop">
+    <div class="col-6 col-md-3 justify-content-between">
+      <div class="img-principal-anunce">
+<!--        <img [src]="'anuncios/mini/'+anuncio.ImageName | safeUrl">-->
+        <img [src]="'anuncios/mini/'+anuncio.ImageName | safeUrl" *ngIf="anuncio.ImageName" data-toggle="modal"
+             data-target="#myModal" class="imgDetail" alt={{anuncio.Titulo}}>
+        <img [src]="'categorias/mini/'+anuncio.Categoria.ImageName | safeUrl" *ngIf="!anuncio.ImageName" data-toggle="modal"
+             data-target="#myModal" class="imgDetail" alt={{anuncio.Titulo}}>
+        <!-- <canvas id="micanvas1"></canvas> -->
+      </div>
+    </div>
+    <div class="col-6 col-md-9 px-0">
+      <div class="row">
+        <div class="col-6 col-md-2 d-flex justify-content-center align-items-start">
+          <div class="pt-4 d-inline-flex flex-column">
+            <div class="text-center money px-3 py-1">
+              <span class="font-osextrabold">{{anuncio.Precio | currency}}</span>
+            </div>
+            <div class="d-flex flex-row align-items-center pl-1">
+              <div class="ico-eye mr-2 d-flex align-items-center mt-2"></div>
+              <span class="color-blue font-osbold">{{anuncio.ContadorView}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col color-blue pt-3">
+          <div class="d-flex flex-row align-items-center">
+            <span class="pr-1">Acción:</span>
+            <span class="font-osbold">{{anuncio.Accion}}</span>
+          </div>
+          <div class="d-flex flex-row align-items-center mb-1">
+            <span>Categoría: {{anuncio.Categoria.Nombre | uppercase}}</span>
+          </div>
+          <div class="container px-0">
+            <div class="row">
+              <div class="col d-flex flex-row flex-wrap scroll-wrap">
+                <div class="tags px-3 py-1 mr-1 mb-1" *ngFor="let tag of anuncio.Etiquetas">
+                  <span>{{ tag.Nombre }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<div class="row mt-2 pb-3 border-separator">Zuleidy lo comento porque no conserva los saltos de linea
+        <div class="container">
+          <div class="col-12 color-blue overflow-auto scroll-wrap-anunce">
+            {{anuncio.Descripcion}}
+          </div>
+        </div>
+      </div>-->
+
+      <div class="container">
+        <div class="row mt-2 pb-3">
+          <mat-form-field class="w-100 fs-input" appearance="overflow-auto" style="background-color:#fcfcfc;padding:5px; border-radius: 15px; border: 1px solid #c0c0d1;" >
+            <textarea maxlength="1000" disabled="true" class="w-100" matInput rows="5" style="color: #000;"
+                     [(ngModel)]="anuncio.Descripcion" name="descripcion">
+              </textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+  <!-- Movil -->
+  <div class="row d-flex flex-row justify-content-start flex-sm-row  mt-3 d-block d-lg-none">
+    <div class="col-12 col-sm-3 d-flex flex-row px-sm-0">
+      <div class="img-principal-anunce cursor-pointer">
+        <!--        <img [src]="'anuncios/mini/'+anuncio.ImageName | safeUrl">-->
+        <img [src]="'anuncios/mini/'+anuncio.ImageName | safeUrl" *ngIf="anuncio.ImageName" data-toggle="modal"
+             data-target="#myModal" class="imgDetail" alt={{anuncio.Titulo}}>
+        <img [src]="'categorias/mini/'+anuncio.Categoria.ImageName | safeUrl" *ngIf="!anuncio.ImageName" data-toggle="modal"
+             data-target="#myModal" class="imgDetail" alt={{anuncio.Titulo}}>
+        <!--        <canvas id="micanvas1"></canvas>-->
+      </div>
+      <!--      <div class="img-principal-anunce">-->
+      <!--        <img src="{{anuncio.Imagen}}">-->
+      <!--      </div>-->
+
+    </div>
+    <div class="col-12 col-sm-9">
+      <div class="row">
+        <div class="col-12 col-sm-2 ">
+          <div class="d-inline-flex flex-column justify-content-between px-0 pt-2">
+            <div class="d-flex justify-content-center money px-3 py-1 mr-3 mr-sm-0">
+              <span class="font-osextrabold">{{anuncio.Precio | currency}}</span>
+            </div>
+            <div class="d-flex flex-row align-items-center pl-1">
+              <div class="ico-eye mr-2 d-flex align-items-center mt-2"></div>
+              <span class="color-blue font-osbold">{{anuncio.ContadorView}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-9 offset-sm-1 color-blue pt-2">
+          <div class="d-flex flex-row align-items-center">
+            <span class="pr-1">Acción:</span>
+            <span class="font-osbold">{{anuncio.Accion}}</span>
+          </div>
+          <div class="d-flex flex-row align-items-center mb-1">
+            <span>Categoría: {{anuncio.Categoria.Nombre}}</span>
+          </div>
+          <div class="d-flex flex-row flex-wrap">
+            <div class="tags px-3 py-1 mr-1 mb-1" *ngFor="let tag of anuncio.Etiquetas">
+              <span>{{ tag.Nombre }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<div class="row mt-2 pb-3">Zuleidy lo comento porque no conserva los saltos de linea
+        <div class="col-12 color-blue overflow-auto scroll-wrap-anunce">
+          {{anuncio.Descripcion}}
+        </div>
+      </div>-->
+      <div class="row mt-2 pb-3">
+        <mat-form-field class="w-100 fs-input" appearance="overflow-auto" style="background-color:#fcfcfc;padding:5px; border-radius: 15px; border: 1px solid #c0c0d1;" >
+          <textarea maxlength="1000" disabled="true" class="w-100" matInput rows="5" style="color: #000;"
+                   [(ngModel)]="anuncio.Descripcion" name="descripcion">
+            </textarea>
+          </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12  border-separator pt-2" ></div>
+  </div>
+
+  <hr class="separator my-0 d-none d-lg-block">
+
+  <div class="row mt-3 mt-xl-2 border-separator">
+    <div class="col-12 col-lg-6 col-xl-5 px-0 pr-lg-0 pl-lg-3 mb-3 mb-lg-0 w-50" style="overflow-x: auto" *ngIf="anuncio.AlmacenImagen">
+      <div class="d-flex flex-row">
+        <div class="img-secondary-anunce mr-2  cursor-pointe" *ngFor="let img of anuncio.AlmacenImagen">
+        <!--  <img src="{{img.ImageContent}}">
+          <img [src]="'anuncios/mini/'+anuncio.ImageName | safeUrl" >-->
+          <div (click)="setImageAlmacenName(img)"> <img [src]="'almacen/mini/'+img.ImageName | safeUrl" data-toggle="modal"
+                                                        data-target="#myModalImg2" class="imgDetail" ></div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-7 mb-2 color-blue contact">
+      <span>Datos de contacto:</span>
+      <div class="d-flex flex-row align-items-center">
+        <span class="pr-1 d-none d-md-block">Nombre:</span>
+        <span class="font-ossemibold">{{anuncio.NombreContacto}}</span>
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="pr-1 d-none d-md-block">Teléfono:</span>
+        <span class="font-ossemibold">{{anuncio.TelefonoContacto}}</span>
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="pr-1 d-none d-md-block">E-mail:</span>
+        <span class="font-ossemibold">{{anuncio.CorreoContacto}}</span>
+      </div>
+      <div class="d-flex flex-row align-items-center" *ngIf="anuncio.Provincia && anuncio.Municipio">
+        <span class="pr-1 d-none d-md-block">Localidad:</span>
+        <span class="font-ossemibold">{{anuncio.Provincia}} -> {{anuncio.Municipio}}</span>
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="pr-1 d-none d-md-block">Sitio web:</span>
+        <span class="font-ossemibold"> <a href="{{anuncio.Url}}" rel="nofollow" target="_blank">{{anuncio.Url}}</a></span>
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="pr-1 d-none d-md-block">Fecha de Creación:</span>
+        <span class="font-ossemibold">{{anuncio.FechaCreacion | date: "dd/MM/yyyy"}}</span>
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <span class="pr-1 d-none d-md-block">Fecha de Renovación:</span>
+        <span class="font-ossemibold">{{anuncio.FechaModificacion | date: "dd/MM/yyyy"}}</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="separator my-0 d-none d-lg-block">
+
+  <div class="row color-blue border-separator" *ngIf="tags2.length > 0">
+    <div class="col-12 d-flex flex-row justify-content-center flex-wrap scroll-sm-wrap px-0 px-lg-3 py-1">
+      <span class="mr-3 mr-sm-4 " *ngFor="let tag2 of tags2">{{tag2}}</span>
+    </div>
+  </div>
+
+  <hr class="separator my-0 d-none d-lg-block" *ngIf="tags2.length > 0">
+  <div class="row mt-3" *ngIf="!denunce && currentUser">
+    <div class="col-12 col-md-12 col-lg-9 d-flex flex-row justify-content-center justify-content-md-start align-items-center color-blue px-0 px-lg-3" (click)="reportAnunce()">
+      <div class="ico-hand-report cursor-pointer mt-2 mr-2"></div>
+      <span class="labels-blue cursor-pointer">Denunciar el anuncio</span>
+    </div>
+
+    <!-- <div class="col-12 col-sm-2 offset-sm-3 col-md-2 offset-md-0 col-lg-3 d-flex justify-content-center justify-content-md-end align-items-center mt-3 mt-md-0 px-0 px-lg-3" (click)="onCloseClick()">
+      <div class="d-flex justify-content-center align-items-center cursor-pointer w-100 oval-btn color-blue font-osbold py-2">
+        SALIR
+      </div>
+    </div> -->
+  </div>
+
+  <!-- Dunciar -->
+  <div class="row mt-2 mt-lg-1" *ngIf="denunce && currentUser">
+    <div class="col-12 col-lg-8 col-xl-7 d-flex flex-column flex-md-row justify-content-center justify-content-xl-start align-items-center">
+      <mat-label class="label-phone mr-sm-2">Causa de la denuncia:</mat-label>
+      <mat-form-field appearance="outline" class="fs-input btnCheck btnSelect btnInputMotiveDenunce mt-1 mt-xl-0">
+        <mat-select  placeholder="Motivo de denuncia">
+          <mat-option *ngFor="let m of listaMotivos" [value]="m"  (click)="changeMotivo(m)">{{m.Nombre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+
+    </div>
+    <!--<div class="col-12 col-lg-4 col-xl-5 d-flex justify-content-center justify-content-lg-start align-items-center pl-0">
+      <mat-checkbox class="ml-2 transfer-check">Confirmar denuncia</mat-checkbox>
+    </div>-->
+    <div class="col-12 align-items-center d-inline-flex justify-content-center justify-content-md-end mt-3 mt-xl-1">
+      <!-- <div class="d-flex justify-content-center align-items-center cursor-pointer w-100 oval-btn color-blue font-osbold py-2 mr-sm-3 mr-md-5 mr-lg-2 order-2 order-sm-1" (click)="onCloseClick()">
+        SALIR
+      </div> -->
+      <button class="cursor-pointer oval-btn color-blue font-osbold py-2 px-3 mb-2 mb-sm-0 order-1 order-sm-2" (click)="onDenunciarClick()" >
+        DENUNCIAR
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade " id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="rounded-circle bg-dark p-2 closeModal d-flex justify-content-center align-items-center" data-dismiss="modal">
+        <i class="fa fa-close text-white"></i>
+      </div>
+     <!-- <img [src]="getUrl()" alt="" id="image" class="img-fluid img-thumbnail w-10">-->
+      <img [src]="getUrl(anuncio.ImageName,'anuncios/')" alt="" id="image" class="img-fluid img-thumbnail w-10"  *ngIf="anuncio.ImageName">
+      <img [src]="getUrl(anuncio.Categoria.ImageName,'categorias/')" alt="" id="image" class="img-fluid img-thumbnail w-10" *ngIf="!anuncio.ImageName">
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade " id="myModalImg2" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="rounded-circle bg-dark p-2 closeModal d-flex justify-content-center align-items-center" data-dismiss="modal">
+        <i class="fa fa-close text-white"></i>
+      </div>
+      <img [src]="getUrl(urlImg,'almacen/')" alt="" id="image" class="img-fluid img-thumbnail w-10">
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,83 @@
+<div class="container pt-4 pb-3">
+  <div class="row">
+    <div class="col-12">
+      <p class="title-pages pl-3 py-3">Gestión de Categorías</p>
+    </div>
+  </div>
+  <!-- Filters -->
+  <div class="row pt-4 pb-2">
+    <div class="col-12">
+      <div class="container bg-white pt-3">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Buscar</mat-label>
+                <input matInput placeholder="Buscar" #input>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pb-3 pt-2">
+    <div class="col-12 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+      <button class="btn-admin px-4" routerLink="/admin/categorias/add/0">
+        <span><i class="fa fa-plus px-2" aria-hidden="true"></i></span>
+        <span class="btn-filter-border pr-3">Añadir</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="row">
+    <div class="col-12">
+      <div class="mat-elevation-z8">
+        <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+                   matSort matSortActive="Nombre" matSortDisableClear matSortDirection="asc"  id="tblBackend">
+
+          <ng-container matColumnDef="CategoriaId">
+            <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+            <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.CategoriaId}}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="Nombre">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-7 pl-3">Nombre</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-7 pl-3">{{row.Nombre}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ImageName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-2">Imagen</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-2 text-center">{{row.ImageName}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="CantAutoRenovables">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-2">Cant. de Auto-renovables</mat-header-cell>
+            <mat-cell *matCellDef="let row"  class="col-2 text-center">{{row.CantAutoRenovables}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Acciones">
+            <mat-header-cell *matHeaderCellDef class="tituloTablas col">Acciones</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col text-center">
+              <mat-icon aria-hidden="false" (click)="onEdit(row.CategoriaId)" aria-label="Editar" class="editar-icon"></mat-icon>
+              <mat-icon aria-hidden="false" (click)="onDelete(row.CategoriaId)" aria-label="Eliminar" class="delete-icon"></mat-icon>
+
+              <!-- <a class="underline-none mt-1 mr-3" (click)="onEdit(row.CategoriaId)"><span class="text-dark-blue btn-option-table"><i class="fa fa-pencil"></i></span></a>
+              <a class="underline-none" (click)="onDelete(row.CategoriaId)"><span class="text-dark-blue btn-option-table"><i class="fa fa-trash"></i></span></a> -->
+            </mat-cell>
+
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="service.tableColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: service.tableColumns"></mat-row>
+        </mat-table>
+
+    <mat-paginator [length]="service.resultsLength" [pageSize]="service.pageSize"
+                     [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorData($event)" [showFirstLastButtons]="true"></mat-paginator>
+
+      </div>
+    </div>
+  </div>
+</div>

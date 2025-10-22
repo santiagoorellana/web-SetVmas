@@ -1,0 +1,58 @@
+
+
+<form [formGroup]="confirmarForm" #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center align-items-center mb-2 mb-sm-3">
+                <div class="ico-login"></div>
+            </div>
+            <div class="col-12 d-flex justify-content-center align-items-center title-modals mb-2 mb-sm-4">
+                Verificar cuenta
+            </div>
+            <div class="col-12 d-flex flex-column justify-content-center align-items-center mb-3 mb-sm-4 px-0 px-sm-3 font-regular">
+                <mat-form-field appearance="outline" class="input-text input-text-height mx-0 mx-sm-2 my-2 w-100">
+                    <mat-label>Código</mat-label>
+                    <input matInput type="text" formControlName="codigo" required [ngClass]="{ 'is-invalid': submitted  }" />
+                    <mat-error *ngIf="f.codigo.hasError('required')">
+                        Debes introducir un valor
+                    </mat-error>
+                </mat-form-field>
+               <!-- <mat-label class="text-dark-blue label-text-decoration cursor-pointer mt-1" (click)="openDialogRegister()">Registrarse</mat-label>-->
+            </div>
+            <div class="col-12 d-flex  justify-content-center align-items-center">
+                <div class="container px-0">
+                    <div class="row">
+                       <!-- <div class="col-12 col-sm-6 order-1 order-sm-0">
+                            <button class="d-flex justify-content-center align-items-center btn-oval-orange py-2 w-100" (click)="onCloseClick()">
+                                CANCELAR
+                            </button>
+                        </div>-->
+                        <div class="col-12 col-sm-6 mb-2 mt-sm-0 order-0 order-sm-1">
+                            <button type="submit" mat-stroked-button [class.btn-disabled]="form.invalid" [disabled]="form.invalid"
+                                    class="d-flex justify-content-center align-items-center btn-oval-orange py-2 w-100">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                ACEPTAR
+                            </button>
+                        </div>
+
+                        <!-- <div class="col-12 col-sm-6 pl-sm-0 pr-sm-2 order-1 order-sm-0 mt-2 mt-sm-0">
+                          <div class="d-flex justify-content-center align-items-center btn-oval-orange py-2" (click)="onCloseClick()">
+                            CANCELAR
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 pr-sm-0 pl-sm-2 order-0 order-sm-1">
+                          <div class="d-flex justify-content-center align-items-center btn-oval-orange py-2">
+                            ACEPTAR
+                          </div>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div id="deivis" style="height: 250px">
+
+</div>

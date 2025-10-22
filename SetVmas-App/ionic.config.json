@@ -1,0 +1,7 @@
+{
+  "name": "setvmas",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

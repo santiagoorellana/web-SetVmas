@@ -1,0 +1,467 @@
+<div id="vistaNormal" >
+  <section style="background-color: white">
+    <!-- <app-buscar-anuncios [mostrarSiempreResultados]="false"></app-buscar-anuncios>-->
+  </section>
+  <!-- Virtual Office -->
+  <section>
+    <div class="container-fluid px-0 content-office">
+      <div class="row">
+        <div class="col-12">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 my-2 degraded">
+                <div class="color-gray font-ossemibold">
+                  MI OFICINA VIRTUAL
+                </div>
+              </div>
+<!--              <div class="col-12 my-2 d-block d-sm-none">-->
+<!--                <div class="color-gray font-ossemibold degraded">-->
+<!--                  MI OFICINA VIRTUAL-->
+<!--                </div>-->
+<!--              </div>-->
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-12 col-xl-7 order-2 order-md-1"> -->
+        <div class="col-12 col-xl-7 order-2 order-md-1 pr-xl-0">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 order-4 order-md-1 notice text-center px-4 px-sm-5 py-2 mb-0 mb-sm-2 color-blue overflow-auto scroll-wrap-office">
+                {{mensaje}}
+              </div>
+              <div class="col-7 col-md-4 order-3 order-md-2 d-flex flex-row justify-content-end justify-content-md-start align-items-center
+                   pl-0 mb-2 mb-xl-0 specific-font-size" (click)="openDialogQR()">
+                <span class="color-blue cursor-pointer"><i class="fa fa-qrcode fa-2x"></i></span>
+                <span class="labels-blue pl-2 cursor-pointer">Mostrar código</span>
+
+              </div>
+
+
+              <div class="col-12 col-md-4 order-1 order-md-3 d-flex flex-column flex-sm-row justify-content-center justify-content-md-end
+                   align-items-center pr-xl-0 mb-1 mb-xl-0 specific-font-size">
+               <!-- <span class="color-blue pr-1">Enlace de referido:</span>-->
+                <span class="color-blue" id="urlreferido">{{currentUser.Url}}</span>
+              </div>
+              <div class="e"class="col-5 col-md-4 order-2 order-md-4 d-flex flex-row justify-content-start justify-content-lg-end align-items-center
+                   pr-0 mb-2 mb-xl-0 specific-font-size">
+                <!-- <span class="color-blue cursor-pointer"><i class="fa fa-files-o fa-2x"></i></span> -->
+                <div class="ico-copiar cursor-pointer" (click)="copiarEnlace()"></div>
+                <span  class="labels-blue cursor-pointer" (click)="copiarEnlace()">Copiar Enlace de Referido</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-xl-5 order-1 order-md-2">
+          <div class="container">
+            <div class="row row-orange text-white mb-2 mb-sm-0">
+              <div class="col-8 col-sm-4 px-0 pl-1 d-flex flex-row justify-content-start align-items-center">
+                <span class="">Clase:</span>
+                <span class="pl-1 font-osbold">{{currentUser.Clase}}</span>
+              </div>
+              <div class="col-4 col-sm-2 pr-1 px-sm-0 d-flex flex-row justify-content-end justify-content-sm-center align-items-center">
+                <span class="">Código:</span>
+                <span class="pl-1 font-osbold">{{currentUser.Codigo}}</span>
+              </div>
+              <div class="col-sm-6 px-0 pr-1 d-flex flex-row justify-content-end align-items-center points">
+                <span class="">Puntos:</span>
+                <span class="pl-1 font-osbold">{{currentUser.Puntos}}</span>
+              </div>
+            </div>
+            <div class="row row-orange text-white mb-2">
+              <div class="col-12 d-flex flex-row justify-content-center align-items-center d-block d-sm-none">
+                <span class="">Puntos:</span>
+                <span class="pl-1 font-osbold">{{currentUser.Puntos}}</span>
+              </div>
+            </div>
+            <div class="row border-blue pb-2 pb-xl-1">
+              <div class="col-6 col-sm-4 d-flex flex-row justify-content-start align-items-end px-0 pl-sm-0 specific-font-size" (click)="openDialogSellPoints()">
+                <!-- <span class="color-blue cursor-pointer"><i class="fa fa-files-o fa-2x"></i></span> -->
+                <div class="ico-vender-puntos cursor-pointer"></div>
+                <span class="labels-blue cursor-pointer">Vender puntos</span>
+              </div>
+              <div class="col-6 col-sm-4 d-flex flex-row justify-content-end justify-content-sm-center align-items-end px-0 specific-font-size" (click)="openDialogDirectPurchase()">
+                <!-- <span class="color-blue cursor-pointer"><i class="fa fa-shopping-cart fa-2x"></i></span> -->
+                <div class="ico-comprar-puntos cursor-pointer"></div>
+                <span class="labels-blue cursor-pointer">Comprar puntos</span>
+              </div>
+              <div class="col-12 col-sm-4 d-flex flex-row justify-content-center justify-content-sm-end align-items-end px-sm-0 mt-2 mt-sm-0 specific-font-size" (click)="openDialogAssignBonuses()">
+                <!-- <span class="color-blue cursor-pointer"><i class="fa fa-files-o fa-2x"></i></span> -->
+                <div class="ico-bonificaciones cursor-pointer"></div>
+                <span class="labels-blue cursor-pointer">Bonos</span>
+              </div>
+            </div>
+            <div class="row color-blue mt-2 mb-1 mb-xl-0 pt-0 pt-xl-1">
+              <div class="col-12 col-sm-5 d-flex flex-row justify-content-center justify-content-sm-start align-items-center pl-sm-0 specific-font-size">
+                <span class="pr-1">Cantidad de referidos:</span>
+                <span class="font-osbold">{{cantReferidos}}</span>
+              </div>
+              <div class="col-12 col-sm-7 d-flex flex-row justify-content-center justify-content-sm-end align-items-center pr-sm-0 specific-font-size">
+                <span class="pr-1 ">Volumen de compras directas:</span>
+                <span class="font-osbold">{{volumenCompra}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion -->
+      <div class="row mt-xl-2 pb-4 pb-sm-0">
+        <!-- Panel-Column1 -->
+        <!-- <div class="col-12 col-lg-7"> -->
+        <div class="col-12 col-lg-7 pr-lg-0">
+          <div id="accordion" class="accordion" role="tablist">
+            <div class="card border-0 mb-sm-2">
+              <div class="card-header cursor-pointer border-0 py-1 px-2 d-none d-sm-block collapsed" role="tab" data-toggle="collapse" href="#panel1" aria-expanded="false" aria-controls="panel1">
+                <div class="d-flex flex-row align-items-center justify-content-between w-100">
+                      <span class="collapsed fs-header-panel pr-1 font-ossemibold">
+                        MIS ANUNCIOS
+                      </span>
+                  <span class="icon-panel"></span>
+                </div>
+              </div>
+              <div class="card-header header-custom cursor-pointer border-0 py-3 pr-2 d-block d-sm-none collapsed" role="tab" data-toggle="collapse" href="#panel1" aria-expanded="false" aria-controls="panel1">
+                    <span class="collapsed fs-header-panel font-ossemibold">
+                        MIS ANUNCIOS
+                    </span>
+              </div>
+              <div id="panel1" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body pt-3 pb-2">
+                  <div class="container-fluid px-0">
+                    <div class="row d-flex justify-content-end">
+                      <div class="col-12 px-2">
+                        <div class="table-container-anunces">
+
+                         <!-- <table mat-table [dataSource]="dataSource2" class="w-100">-->
+                          <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource2"
+                                     #sortAnuncios="matSort" matSort matSortActive="FechaModificacion" matSortDisableClear matSortDirection="asc" >
+                            <!-- Checkbox Column -->
+                            <ng-container matColumnDef="select">
+                              <mat-header-cell *matHeaderCellDef class="title-table pl-2 pr-1">
+                                <!-- <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                [aria-label]="checkboxLabel()">
+                                </mat-checkbox> -->
+
+                              </mat-header-cell>
+                              <mat-cell *matCellDef="let row" class="rows-table pl-2 pr-1"
+                                        style="white-space: nowrap; overflow: hidden;">
+                                <mat-checkbox (click)="$event.stopPropagation()"
+                                              (change)="$event ? selection.toggle(row) : null"
+                                              [checked]="selection.isSelected(row)"
+                                              [aria-label]="checkboxLabel(row)">
+                                </mat-checkbox>
+                              </mat-cell>
+
+                            </ng-container>
+
+                            <!-- title Column -->
+                            <ng-container matColumnDef="Titulo">
+                              <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start pl-2 pr-1">Anuncios</mat-header-cell>
+                              <mat-cell *matCellDef="let row" class="rows-table pl-2 pr-1"
+                                        style="white-space: nowrap; overflow: hidden;">{{row.Titulo}}</mat-cell>
+                              <!-- <th mat-header-cell *matHeaderCellDef> Anuncios </th>
+                              <td mat-cell *matCellDef="let element"> {{element.title}} </td> -->
+                            </ng-container>
+
+                            <!-- type Column -->
+                            <ng-container matColumnDef="Tipo">
+                              <mat-header-cell *matHeaderCellDef class="title-table pl-2 pr-1 d-flex justify-content-start">Tipo de anuncio</mat-header-cell>
+                              <mat-cell *matCellDef="let row" class="rows-table pl-2 pr-1 justify-content-center"
+                                        style="white-space: nowrap; overflow: hidden;">{{row.Tipo}}</mat-cell>
+                              <!-- <th mat-header-cell *matHeaderCellDef> Tipo de anuncio </th>
+                              <td mat-cell *matCellDef="let element"> {{element.type}} </td> -->
+                            </ng-container>
+
+                            <!-- option Column -->
+                            <ng-container matColumnDef="options">
+                              <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-center pl-2 pr-1">Opciones</mat-header-cell>
+                              <mat-cell *matCellDef="let row" class="rows-table d-flex pl-2 pr-1 justify-content-center"
+                                        style="white-space: nowrap; overflow: hidden;">
+                                <div class="d-flex justify-content-center align-items-center">
+                                  <!--<a class="" [routerLink]="'/'"><div class="ico-flecha_circular mr-2"></div></a>-->
+                                  <a class="underline-none" (click)="editarAnuncio(row)"><span class="text-dark-blue mr-2 cursor-pointer"><i class="fa fa-pencil-square-o fa-2x"></i></span></a>
+                                  <a class="underline-none" (click)="ocultarAnuncio(row)"><span class="text-dark-blue mr-2 cursor-pointer"><i *ngIf="row.IsVisible" class="fa fa-eye fa-2x"></i><i *ngIf="!row.IsVisible" class="fa fa-eye-slash fa-2x"></i></span></a>
+                                  <a class="underline-none" (click)="eliminarAnuncio(row)"><span class="text-dark-blue cursor-pointer"><i class="fa fa-trash-o fa-2x"></i></span></a>
+                                </div>
+                              </mat-cell>
+                              <!-- <th mat-header-cell *matHeaderCellDef> Tipo de anuncio </th>
+                              <td mat-cell *matCellDef="let element"> {{element.type}} </td> -->
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="tableColumns2"
+                                            class="office-mat-header-row"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: tableColumns2" (click)="selection.toggle(row)"></mat-row>
+                            <!-- <tr mat-header-row *matHeaderRowDef="tableColumns2"></tr>
+                            <tr mat-row *matRowDef="let row; columns: tableColumns2;"
+                                (click)="selection.toggle(row)">
+                            </tr> -->
+                          <!--</table>-->
+                          </mat-table>
+                          <mat-paginator #paginatorAnuncios="matPaginator" [length]="cantAnuncios" [pageSize]="pageSize"
+                                         [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorAdvert($event)" ></mat-paginator>
+                        </div>
+
+                      </div>
+                      <div class="col-12 d-flex justify-content-end align-content-center mt-2" (click)="insertarAnuncio()">
+                        <div class="ico-anunciar-blue cursor-pointer"></div>
+                        <span class="labels-blue cursor-pointer ml-1" >Insertar anuncio</span>
+                        <!-- <a [routerLink]="'/'" class="color-blue underline pt-1">Insertar anuncio</a> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card border-0 mb-sm-2">
+              <div class="card-header cursor-pointer border-0 py-1 px-2 d-none d-sm-block collapsed" role="tab" data-toggle="collapse" href="#panel2" aria-expanded="false" aria-controls="panel2">
+                <div class="d-flex flex-row align-items-center justify-content-between w-100">
+                      <span class="collapsed fs-header-panel pr-1 font-ossemibold">
+                        MIS REFERIDOS
+                      </span>
+                  <span class="icon-panel"></span>
+                </div>
+              </div>
+              <div class="card-header header-custom cursor-pointer border-0 py-3 pr-2 d-block d-sm-none collapsed" role="tab" data-toggle="collapse" href="#panel2" aria-expanded="false" aria-controls="panel2">
+                    <span class="collapsed fs-header-panel font-ossemibold">
+                        MIS REFERIDOS
+                    </span>
+              </div>
+              <div id="panel2" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body pt-2 p-2">
+                  <!-- <div class="card-body pt-2 pb-2 pl-2 pr-4"> -->
+                  <!-- <div class="container-fluid px-0">
+                    <div class="row d-flex justify-content-end">
+                      <div class="col-12 pr-0"> -->
+                  <div class="table-container-referrals">
+                    <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+                               #sortReferidos="matSort" matSort matSortActive="FechaModificacion" matSortDisableClear matSortDirection="asc" >
+
+
+
+                    <!-- Position Column -->
+                      <ng-container matColumnDef="Correo">
+                        <!-- <th mat-header-cell *matHeaderCellDef class="tituloTablas col-md-3"> Referidos </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td> -->
+                        <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start pl-2 pr-1">Referidos</mat-header-cell>
+                        <mat-cell style="width: 250px;" *matCellDef="let row" class="rows-table pl-2 pr-1" style="white-space: nowrap; overflow: hidden;">{{row.Correo}}</mat-cell>
+                      </ng-container>
+
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="Codigo">
+                        <!-- <th mat-header-cell *matHeaderCellDef class="tituloTablas col-md-2"> ID Usuario </th>
+                        <td mat-cell *matCellDef="let element"> {{element.UserID}} </td> -->
+                        <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-center px-1">Codigo</mat-header-cell>
+                        <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-center px-1">{{row.Codigo}}</mat-cell>
+                      </ng-container>
+
+<!--                      &lt;!&ndash; Weight Column &ndash;&gt;-->
+<!--                      <ng-container matColumnDef="Email">-->
+<!--                        &lt;!&ndash; <th mat-header-cell *matHeaderCellDef class="tituloTablas col-md-3"> E-mail </th>-->
+<!--                        <td mat-cell *matCellDef="let element"> {{element.email}} </td> &ndash;&gt;-->
+<!--                        <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-center px-1">E-mail</mat-header-cell>-->
+<!--                        <mat-cell *matCellDef="let row" class="rows-table px-1">{{row.email}}</mat-cell>-->
+<!--                      </ng-container>-->
+
+                      <!-- Symbol Column -->
+                      <ng-container matColumnDef="Telefono">
+                        <!-- <th mat-header-cell *matHeaderCellDef class="tituloTablas col-md-2"> Móvil </th>
+                        <td mat-cell *matCellDef="let element"> {{element.movil}} </td> -->
+                        <mat-header-cell *matHeaderCellDef class="title-table px-1 d-flex justify-content-center">Móvil</mat-header-cell>
+                        <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-center px-1">{{row.Telefono}}</mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="CantReferidos">
+                        <!-- <th mat-header-cell *matHeaderCellDef class="tituloTablas col-md-2"> Cantidad </th>
+                        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td> -->
+                        <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-center px-1">Cant. Referidos</mat-header-cell>
+                        <mat-cell *matCellDef="let row" class="rows-table px-1 d-flex justify-content-center">{{row.CantReferidos}}</mat-cell>
+                      </ng-container>
+
+                      <!-- <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr> -->
+                      <mat-header-row *matHeaderRowDef="tableColumns" class="office-mat-header-row"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
+                    </mat-table>
+                    <mat-paginator #paginatorReferidos="matPaginator" [length]="cantReferidos" [pageSize]="10"
+                                   [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+                  </div>
+                  <!-- </div>
+          </div>
+        </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Panel-Column2 -->
+        <div class="col-12 col-lg-5">
+          <div id="accordion1" class="accordion" role="tablist">
+            <div class="card border-0 mb-sm-2">
+              <div class="card-header cursor-pointer border-0 py-1 px-2 d-none d-sm-block collapsed" role="tab" data-toggle="collapse" href="#panel3" aria-expanded="false" aria-controls="panel3">
+                <div class="d-flex flex-row align-items-center justify-content-between w-100">
+                          <span class="collapsed fs-header-panel pr-1 font-ossemibold">
+                            DATOS DE REGISTRO
+                          </span>
+                  <span class="icon-panel"></span>
+                </div>
+              </div>
+              <div class="card-header header-custom cursor-pointer border-0 py-3 pr-2 d-block d-sm-none collapsed" role="tab" data-toggle="collapse" href="#panel3" aria-expanded="false" aria-controls="panel3">
+                        <span class="collapsed fs-header-panel font-ossemibold">
+                          DATOS DE REGISTRO
+                        </span>
+              </div>
+              <div id="panel3" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion1">
+                <div class="card-body px-2 pt-1 pb-2">
+                  <div class="container-fluid px-0 color-blue">
+                    <div class="row d-flex align-items-center">
+                     <!-- <div class="col-4 col-sm-3 col-lg-4 col-xl-3 pr-0">
+                        <mat-label class="label-phone">Teléfono:</mat-label>
+                      </div>-->
+                      <div class="col-8 col-sm-7 col-lg-8 col-xl-7 pr-0">
+                        <mat-label>Teléfono</mat-label>
+                        <mat-form-field appearance="outline" class="w-100 btnInput">
+                          <input matInput [disabled]="deshabilitarDatosRegT" placeholder="7766 6287" [(ngModel)]="currentUser.Telefono" maxlength="12" class="py-0 my-0">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-4 col-sm-5 col-lg-4 col-xl-5 d-flex flex-row align-items-center pr-0 pl-2 pt-lg-4 pt-sm-1">
+                        <span class="color-blue cursor-pointer" *ngIf="!currentUser.Bloqueado"><i class="fa fa-pencil-square-o fa-2x"  (click)="habilitarDatosRegistroT()"></i></span>
+                       <!-- <span class="labels-blue pl-1 cursor-pointer" (click)="editarUsuario('T')" *ngIf="!deshabilitarDatosRegT">Editar</span>-->
+                        <span class="labels-blue pl-1 cursor-pointer" (click)="editarUsuario('T')" *ngIf="false">Editar</span>
+                      </div>
+                    </div>
+                    <div class="row d-flex align-items-center">
+                      <!--<div class="col-2 col-sm-3 col-lg-2 col-xl-3 pr-0">
+                        <mat-label class="label-phone">Contraseña:</mat-label>
+                      </div>-->
+                      <div class="col-8 col-sm-7 col-lg-8 col-xl-7 pr-0">
+                      <!--  <mat-form-field appearance="outline" class="w-100 btnInput">
+                          <input matInput [disabled]="deshabilitarDatosRegP" placeholder="Contraseña" min="6" type="password" [(ngModel)]="currentUser.Password" class="py-0 my-0">
+                        </mat-form-field>-->
+                        <mat-label>Contraseña</mat-label>
+                        <mat-form-field appearance="outline" class="w-100 btnInput">
+                        <div class="d-flex flex-row">
+                          <input matInput [disabled]="deshabilitarDatosRegP" placeholder="Contraseña" min="6" type="password" [(ngModel)]="currentUser.Password" class="py-0 my-0 color-blue cursor-pointer" required [type]="hide ? 'password' : 'text'" >
+
+                          <span class="ml-1" (click)="hide = !hide" *ngIf="!deshabilitarDatosRegP" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <i *ngIf="hide" class="fa fa-eye"></i>
+                            <i *ngIf="!hide" class="fa fa-eye-slash"></i>
+                          </span>
+                        </div>
+
+                        </mat-form-field>
+
+                      </div>
+
+                      <div class="col-4 col-sm-5 col-lg-4 col-xl-5 d-flex flex-row align-items-center pr-0 pl-2 pt-lg-4 pt-sm-1">
+                        <span class="color-blue cursor-pointer" *ngIf="!currentUser.Bloqueado"><i class="fa fa-pencil-square-o fa-2x" (click)="habilitarDatosRegistroP()"></i></span>
+                       <!-- <span class="labels-blue pl-1 cursor-pointer" (click)="editarUsuario('P')" *ngIf="!deshabilitarDatosRegP">Editar</span>-->
+                        <span class="labels-blue pl-1 cursor-pointer" (click)="editarUsuario('P')" *ngIf="false">Editar</span>
+                      </div>
+                    </div>
+                    <div class="row d-flex align-items-center">
+                      <!--<div class="col-3 col-sm-3 col-lg-3 col-xl-3 pr-0">
+                        <mat-label class="label-phone">E-mail:</mat-label>
+                      </div>
+                      <div class="col-12 col-sm-7 col-lg-12 col-xl-7 pl-0 pr-4 px-sm-0 pr-lg-4 px-xl-0">-->
+                        <div class="col-12 col-sm-7 col-lg-12 col-xl-7 pr-0">
+                          <mat-label>E-mail</mat-label>
+                        <mat-form-field appearance="outline" class="w-100 btnInput">
+                          <input matInput [disabled]="deshabilitarDatosCorreo" placeholder="dulcesdetalles@nauta.cu" [(ngModel)]="currentUser.Correo" class="py-0 my-0">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-12 col-sm-5 col-lg-12 col-xl-5 d-flex flex-row justify-content-end justify-content-sm-start justify-content-lg-end justify-content-xl-start align-items-center pr-4 pr-sm-0 pr-lg-4 pr-xl-0 pl-sm-2 mt-1 mt-sm-0 mt-lg-1 mt-xl-0 pt-4">
+                        <!-- <span class="color-blue cursor-pointer"><i class="fa fa-pencil-square-o fa-2x"></i></span> -->
+                        <!--Cambiado por Zuleidy <div class="ico-re-autenticar cursor-pointer" *ngIf="!currentUser.Bloqueado" (click)="habilitarDatosRegistroC()" ></div>
+                          <span class="labels-blue cursor-pointer" *ngIf="!deshabilitarDatosRegC" (click)="openDialogReAutenticarse()">Cambiar Datos</span>-->
+                        <div class="ico-re-autenticar cursor-pointer" *ngIf="!currentUser.Bloqueado && currentUser.Codigo != '0001'" (click)="openDialogReAutenticarse()" ></div>
+
+                        </div>
+                    </div>
+                    <div class="row pt-2 pt-sm-1 pt-lg-2 pt-xl-1">
+                      <div class="col-12 col-sm-8 col-lg-12 col-xl-8 d-flex flex-column align-items-center align-items-sm-start align-items-lg-center align-items-xl-start pr-sm-0 pr-lg-3 pr-xl-0">
+                        <div class="d-flex flex-row align-items-center mb-1">
+                          <span>ID de mi anfitrión:</span>
+                          <span class="pl-1">{{currentUser.Anfitrion}}</span>
+                        </div>
+                        <div class="d-flex flex-row align-items-center">
+                          <span>E-mail de mi anfitrión:</span>
+                          <span class="pl-1">{{anfitrionUser.Correo}}</span>
+                        </div>
+
+<!--                        <div class="d-flex flex-row align-items-center">-->
+<!--                          <span>Cancelar subscripción</span>-->
+<!--                          <span class="pl-1"></span>-->
+<!--                        </div>-->
+                        <div class="col-12 d-flex flex-column justify-content-center align-items-center " style="margin-bottom: 50px; margin-top: -20px">
+                          <button type="button" (click)="eliminarSubscripcion()" class="d-flex justify-content-center align-items-center btn-oval-orange py-1 px-5">
+<!--                            <span  class="spinner-border spinner-border-sm mr-1"></span>-->
+                            Cancelar Subscripción
+                          </button>
+                        </div>
+                        <!-- <div class="d-flex flex-row align-items-center">
+                <span>Fecha de registro:</span>
+                <span class="pl-1">13/10/2019</span>
+              </div> -->
+                      </div>
+                      <div class="col-12 col-sm-4 col-lg-12 col-xl-4 d-flex flex-column align-items-center align-items-sm-start align-items-lg-center align-items-xl-start mt-1 mt-sm-0 mt-lg-1 mt-xl-0 pr-0 pl-2">
+                        <span class="mb-1">Fecha de registro:</span>
+                        <span>{{currentUser.FechaCreacion | date: "dd/MM/yyyy"}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card border-0 mb-sm-2">
+              <div class="card-header cursor-pointer border-0 py-1 px-2 d-none d-sm-block collapsed" role="tab" data-toggle="collapse" href="#panel4" aria-expanded="false" aria-controls="panel4">
+                <div class="d-flex flex-row align-items-center justify-content-between w-100">
+                      <span class="collapsed fs-header-panel pr-1 font-ossemibold">
+                        ADMINISTRACIÓN
+                      </span>
+                  <span class="icon-panel"></span>
+                </div>
+              </div>
+              <div class="card-header header-custom cursor-pointer border-0 py-3 pr-2 d-block d-sm-none collapsed" role="tab" data-toggle="collapse" href="#panel4" aria-expanded="false" aria-controls="panel4">
+                    <span class="collapsed fs-header-panel font-ossemibold">
+                      ADMINISTRACIÓN
+                    </span>
+              </div>
+              <div id="panel4" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion1">
+                <div class="card-body px-2 py-3">
+                  <div class="container-fluid px-0">
+                    <div class="row">
+                      <div class="col-12 d-flex flex-column align-items-center align-items-sm-start">
+                        <!-- <div class="oval d-flex flex-row align-items-center pl-3 pr-2 py-2 mb-2 cursor-pointer" (click)="openDialogAssignBonuses()">
+                          <span class="color-blue font-ossemibold pr-2">ASIGNAR BONIFICACIONES</span>
+                          <div class="d-flex justify-content-center align-items-center rounded-circle bg-blue btn-arrow-img">
+                            <span><i class="fa fa-arrow-right text-white"></i></span>
+                          </div>
+                        </div> -->
+                        <div class="oval d-flex flex-row align-items-center pl-3 pr-2 py-2 mb-2 cursor-pointer" (click)="openDialogTransfers()">
+                          <span class="color-blue font-ossemibold pr-2">LISTA DE TRANSFERENCIAS</span>
+                          <div class="d-flex justify-content-center align-items-center rounded-circle bg-blue btn-arrow-img">
+                            <span><i class="fa fa-arrow-right text-white"></i></span>
+                          </div>
+                        </div>
+                        <div class="oval d-flex flex-row align-items-center pl-3 pr-2 py-2 cursor-pointer" (click)="openDialogComplaints()">
+                          <span class="color-blue font-ossemibold" style="padding-right: 3.3rem!important;">LISTA DE DENUNCIAS</span>
+                          <div class="d-flex justify-content-center align-items-center rounded-circle bg-blue btn-arrow-img">
+                            <span><i class="fa fa-arrow-right text-white"></i></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Virtual Office -->
+</div>

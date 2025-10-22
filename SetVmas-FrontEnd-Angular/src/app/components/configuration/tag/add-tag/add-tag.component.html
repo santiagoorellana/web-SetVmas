@@ -1,0 +1,68 @@
+<form #form="ngForm" autocomplete="off" (submit)="salvarCambios()">
+  <div class="container pt-4 pb-3">
+    <div class="row">
+      <div class="col-12">
+        <p class="title-pages pl-3 py-3">Gestión de Etiquetas</p>
+      </div>
+    </div>
+    <div class="row pt-4 pb-2">
+      <div class="col-12">
+        <div class="container bg-white py-3">
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden" name="EtiquetaId" id="EtiquetaId" #EtiquetaId="ngModel" class="form-control" [(ngModel)]="service.formData.EtiquetaId">
+            </div>
+            <div class="col-12">
+              <div class="d-flex flex-row text-center align-items-center bg-white input-custom">
+                <mat-form-field class="w-100">
+                  <mat-label>Nombre</mat-label>
+                  <input matInput [(ngModel)]="service.formData.Nombre" required name="Nombre" id="Nombre" type="text" placeholder="Nombre">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="d-flex flex-row text-center align-items-center bg-white input-custom">
+                <mat-form-field class="w-100">
+                  <mat-label>Cantidad Usada</mat-label>
+                  <input matInput [(ngModel)]="service.formData.CantUsada" name="CantUsada" min="0" id="CantUsada" type="number" value="0">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="d-flex flex-row text-center align-items-center bg-white">
+                <mat-form-field class="w-100">
+                  <mat-chip-list #chipList>
+                    <mat-chip *ngFor="let category of service.formData.Categorias;let indx=index;" [selectable]="selectable" [removable]="removable" (removed)="remove(category,indx)">
+                      {{category.Nombre}}
+                      <mat-icon matChipRemove *ngIf="removable">close</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Categorias" #categoryInput [formControl]="categoryCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                  </mat-chip-list>
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let category of filteredCategory | async" [value]="category">
+                      {{category.Nombre}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-12 d-flex flex-column">
+              <hr class="w-100 separator-btns-admin">
+              <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+                <button class="btn-admin px-4 mr-sm-3 mb-2 mb-sm-0" mat-raised-button [class.btn-disabled]="form.invalid" [disabled]="form.invalid" type="submit">
+                  <span><i class="fa fa-floppy-o px-2" aria-hidden="true"></i></span>
+                  <span class="btn-filter-border pr-3">Guardar</span>
+                </button>
+                <button class="btn-admin px-4" routerLink="/admin/etiquetas">
+                  <span><i class="fa fa-arrow-left px-2" aria-hidden="true"></i></span>
+                  <span class="btn-filter-border pr-3">Regresar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,126 @@
+
+<div class="container pt-4 pb-3">
+  <div class="row">
+    <div class="col-12">
+      <p class="title-pages pl-3 py-3">Gestión de Pagos</p>
+    </div>
+  </div>
+  <!-- Filters -->
+  <div class="row pt-4 pb-2">
+    <div class="col-12">
+      <div class="container bg-white pt-3">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field>
+                <mat-label>Estado</mat-label>
+                <mat-select name="estado" #estado>
+                  <mat-option selected (click)="filterEstado('')">Todos</mat-option>
+                  <mat-option *ngFor="let estado of listEstados" [value]="estado" (click)="filterEstado(estado)">
+                    {{estado}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pb-3 pt-2">
+    <div class="col-12 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+      <button class="btn-admin px-4 mr-sm-3 mb-2 mb-sm-0" cmat-raised-button (click)="confirmarCompra()">
+        <span><i class="fa fa-thumbs-up px-2" aria-hidden="true"></i></span>
+        <span class="btn-filter-border pr-3">Confirmar</span>
+      </button>
+      <button class="btn-admin px-4" mat-raised-button (click)="removeSelectedRows()">
+        <span><i class="fa fa-trash px-2" aria-hidden="true"></i></span>
+        <span class="btn-filter-border pr-3">Eliminar</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="row">
+    <div class="col-12">
+      <div class="mat-elevation-z8">
+        <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+           matSort matSortActive="Fecha" matSortDisableClear matSortDirection="asc"  id="tblBackend">
+
+  <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef class="col-md-1">
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-1">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="PagoId">
+            <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+            <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.PagoId}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="TransferenciaId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-1">Transf.</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-1">{{row.TransferenciaId}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Tipo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Tipo</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-1">{{row.Tipo}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Fuente">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Fuente</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-1">{{row.Fuente}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="CantCup">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-1">Precio</mat-header-cell>
+            <mat-cell *matCellDef="let row; let i = index">
+              <mat-form-field>
+                <input matInput
+                      type="number"
+                      (change)="salvar(row)"
+                      [disabled]="!isActivo(row.Estado)"
+                      [(ngModel)]="row.CantCup">
+              </mat-form-field>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Fecha">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2">Fecha</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-2">{{row.Fecha|date:'dd/MM/yyyy h:mm a'}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Estado">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-2">Estado</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-2">{{row.Estado}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Usuario">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Usuario</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-2">{{row.Usuario}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: tableColumns" (click)="selection.toggle(row)"></mat-row>
+        </mat-table>
+          <mat-paginator [length]="service.resultsLength" [pageSize]="service.pageSize"
+                         [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorData($event)" [showFirstLastButtons]="true"></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+

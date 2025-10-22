@@ -1,0 +1,237 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center align-items-center title-modals-small d-block d-md-none">
+      Lista de transferencias
+    </div>
+    <div class="col-12 d-flex justify-content-center justify-content-md-start align-items-center mt-4">
+      <div class="ico-transfers mr-md-4"></div>
+      <div class="title-modals d-none d-md-block">
+        Lista de transferencias
+      </div>
+    </div>
+  </div>
+
+  <div class="row color-blue mt-3 mb-1 px-2 pb-2 pb-md-0 border-separator">
+    <div class="col-12 col-xl-5 d-flex flex-column flex-md-row justify-content-center justify-content-xl-start align-items-center mb-1 mb-xl-0">
+      <mat-label class="label-phone mb-1 mb-xl-0">Tipo de operación:</mat-label>
+      <mat-checkbox class="ml-md-3 ml-xl-4 transfer-check" [(ngModel)]="opTypePagoPublicidad">Pago por publicidad</mat-checkbox>
+    </div>
+    <div class="col-5 col-md-4 col-xl-2 d-flex justify-content-start justify-content-sm-center justify-content-md-start justify-content-xl-center align-items-center px-0 px-md-3">
+      <mat-checkbox class="ml-2 transfer-check" [(ngModel)]="opTypeVenta">Venta</mat-checkbox>
+    </div>
+    <div class="col-7 col-md-4 col-xl-2 d-flex justify-content-end justify-content-sm-center justify-content-md-start justify-content-xl-end align-items-center px-0 px-md-3 pr-xl-0">
+      <mat-checkbox class="ml-2 transfer-check" [(ngModel)]="opTypeBonificacion">Bonificación</mat-checkbox>
+    </div>
+    <div class="col-12 col-md-4 col-xl-3 d-flex justify-content-center justify-content-md-end align-items-center mt-1">
+      <mat-checkbox class="ml-2 transfer-check" [(ngModel)]="opTypeCompraDirecta">Compra directa</mat-checkbox>
+    </div>
+  </div>
+
+  <hr class="separator my-0 d-none d-xl-block">
+
+  <div class="row color-blue mt-2 px-1">
+    <div class="col-12 col-xl-3 d-flex justify-content-center justify-content-sm-start align-items-center px-0 px-xl-3">
+      <mat-label class="label-phone mr-2">ID Transferencia:</mat-label>
+      <mat-form-field appearance="outline" class="btnInput btnInputPoints">
+        <input matInput (keypress)="restrictValue($event)" placeholder="0000" class="py-0 my-0" [(ngModel)]="idTransfer">
+      </mat-form-field>
+    </div>
+    <div class="col d-flex justify-content-end justify-content-sm-start align-items-center px-0 px-xl-3">
+      <mat-label class="label-phone mr-2 mr-sm-3 mr-md-2">Usuario fuente:</mat-label>
+      <mat-form-field appearance="outline" class="btnInput btnInputTransferUser">
+        <input matInput placeholder="Nombre" class="py-0 my-0" [(ngModel)]="sourceUser">
+      </mat-form-field>
+    </div>
+    <div class="col d-flex justify-content-end justify-content-sm-start justify-content-xl-end align-items-center px-0 px-xl-3">
+      <mat-label class="label-phone mr-2">Usuario destino:</mat-label>
+      <mat-form-field appearance="outline" class="btnInput btnInputTransferUser">
+        <input matInput placeholder="Nombre" class="py-0 my-0" [(ngModel)]="targetUser">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row color-blue mt-2 px-0 px-sm-1 mt-xl-1 px-xl-2">
+    <!-- Desktop -->
+    <div class="col-5 d-flex justify-content-start align-items-center showDateDesktop">
+      <mat-label class="label-phone mr-2">Fecha y hora de la operación:</mat-label>
+      <mat-form-field  appearance="outline" class="fs-input btnCheck btnSelect btnInputTransferTime text-right">
+        <mat-select placeholder="igual" [(ngModel)]="selectedOptionDateDesktop" (change)="captureSelectionDateDesktop()">
+          <mat-option value="0">igual</mat-option>
+          <mat-option value="1">entre</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-7 px-0 d-flex align-items-center showDateDesktop">
+      <mat-form-field  appearance="outline" class="fs-input btnCheck btnSelect btnInputTransferDate mr-3">
+        <input matInput (keydown)="noescribe()" (keypress)="noescribe()" placeholder="dd/mm/aaaa HH:hh" [matDatepicker]="picker1" [(ngModel)]="dateFrom" class="py-0 my-0">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <span *ngIf="selectedOptionDateDesktop == '1'">Y</span>
+      <mat-form-field  appearance="outline" class="fs-input btnCheck btnSelect btnInputTransferDate ml-3" *ngIf="selectedOptionDateDesktop == '1'">
+        <input matInput (keydown)="noescribe()" (keypress)="noescribe()" placeholder="dd/mm/aaaa HH:hh" [matDatepicker]="picker1" [(ngModel)]="dateTo"  class="py-0 my-0">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <!-- Movil -->
+    <div class="col-12 d-flex justify-content-start align-items-center px-0 mb-1 d-block d-xl-none">
+      <mat-label class="label-phone">Fecha y hora de la operación:</mat-label>
+    </div>
+    <div class="col-5 col-sm-3 col-md-2 px-0 d-block d-xl-none">
+      <mat-form-field  appearance="outline" class="fs-input btnCheck btnSelect btnInputTransferTime text-right">
+        <mat-select placeholder="igual"  [(ngModel)]="selectedOptionDate" (change)="captureSelectionDate()">
+          <mat-option value="0">igual</mat-option>
+          <mat-option value="1">entre</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-7 col-sm-9 col-md-4 col-lg-3 px-0 d-block d-xl-none">
+      <mat-form-field  appearance="outline"  class="fs-input btnCheck btnSelect btnInputTransferDate">
+        <input matInput (keydown)="noescribe()" (keypress)="noescribe()" placeholder="dd/mm/aaaa HH:hh"  [matDatepicker]="picker" [(ngModel)]="dateFrom"  class="py-0 my-0">
+        <mat-datepicker-toggle matSuffix   [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-5 col-sm-3 col-md-1 pr-2 px-md-3 pr-lg-1 pr-xl-2 d-flex justify-content-end justify-content-md-center justify-content-xl-end align-items-center d-block d-xl-none">
+      <span class="mr-sm-3 mr-md-0" *ngIf="selectedOptionDate == '1'">Y</span>
+    </div>
+    <div class="col-7 col-sm-9 col-md-4 col-lg-3 px-0 d-block d-xl-none">
+      <mat-form-field  appearance="outline" class="fs-input btnCheck btnSelect btnInputTransferDate" *ngIf="selectedOptionDate == '1'">
+        <input matInput  placeholder="dd/mm/aaaa HH:hh"  [matDatepicker]="picker" [(ngModel)]="dateTo"  class="py-0 my-0">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row color-blue my-1 px-0 px-sm-1 pb-2 pb-xl-0 border-separator">
+    <!-- Desktop -->
+    <div class="col-5 d-flex justify-content-start align-items-center showPointDesktop">
+      <mat-label class="label-phone mr-2">Cantidad de puntos:</mat-label>
+      <mat-form-field  appearance="outline" class="fs-input btnCheck btnSelect btnInputTransferPoints text-right">
+        <mat-select placeholder="igual" [(ngModel)]="selectedOptionPoints" (change)="captureSelectionPoints()">
+          <mat-option value="0">igual</mat-option>
+          <mat-option value="1">entre</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-7 showPointDesktop">
+      <div class="container pl-0">
+        <div class="row">
+          <div class="col-6 pl-0 d-flex align-items-center">
+            <mat-form-field appearance="outline" class="btnInput btnInputPoints mr-3">
+              <input (keypress)="restrictValue($event)" matInput placeholder="0000" [(ngModel)]="pointsFrom" class="py-0 my-0">
+            </mat-form-field>
+            <span *ngIf="selectedOptionPoints == '1'">Y</span>
+            <mat-form-field appearance="outline" class="btnInput btnInputPoints ml-3" *ngIf="selectedOptionPoints == '1'">
+              <input (keypress)="restrictValue($event)" matInput placeholder="0000" [(ngModel)]="pointsTo" class="py-0 my-0">
+            </mat-form-field>
+          </div>
+          <div class="col-6 px-0 d-flex justify-content-end align-items-end">
+            <div class="d-flex flex-row align-items-center mr-4">
+              <div class="ico-flecha_circular cursor-pointer mr-2"></div>
+              <span class="labels-blue cursor-pointer" (click)="filterClean()">Limpiar filtros</span>
+            </div>
+            <div class="d-flex flex-row align-items-center pb-1">
+              <div class="ico-buscar cursor-pointer mr-2"></div>
+              <span class="labels-blue cursor-pointer" (click)="loadTransfersPage()">Buscar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Movil -->
+    <div class="col-12 d-flex justify-content-start align-items-center px-0 d-block d-xl-none">
+      <mat-label class="label-phone mr-2">Cantidad de puntos:</mat-label>
+    </div>
+    <div class="col-5 col-sm-3 col-md-2 px-0 d-block d-xl-none">
+      <mat-form-field  appearance="outline" class="fs-input btnCheck btnSelect btnInputTransferPoints text-right">
+        <mat-select placeholder="igual" [(ngModel)]="selectedOptionPoints" (change)="captureSelectionPoints()">
+          <mat-option value="0">igual</mat-option>
+          <mat-option value="1">entre</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-7 col-sm-3 col-md-4 px-0 d-flex align-items-center d-block d-xl-none">
+      <mat-form-field appearance="outline" class="btnInput btnInputPoints mr-2 mr-md-3">
+        <input (keypress)="restrictValue($event)" matInput  placeholder="0000" [(ngModel)]="pointsFrom" class="py-0 my-0">
+      </mat-form-field>
+      <span *ngIf="selectedOptionPoints == '1'">Y</span>
+      <mat-form-field appearance="outline" class="btnInput btnInputPoints ml-2 ml-md-3" *ngIf="selectedOptionPoints == '1'">
+        <input (keypress)="restrictValue($event)" matInput  placeholder="0000" [(ngModel)]="pointsTo" class="py-0 my-0">
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6 px-0 d-flex justify-content-center justify-content-md-end align-items-end mt-2 mt-md-0 pb-md-2 pr-md-2 d-block d-xl-none">
+      <div class="d-flex flex-row align-items-center mr-3">
+        <div class="ico-flecha_circular cursor-pointer mr-1"></div>
+        <span class="labels-blue cursor-pointer" (click)="filterClean()">Limpiar filtros</span>
+      </div>
+      <div class="d-flex flex-row align-items-center pb-1 pb-lg-0">
+        <div class="ico-buscar cursor-pointer mr-1"></div>
+        <span class="labels-blue cursor-pointer" (click)="loadTransfersPage()">Buscar</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="separator my-0 d-none d-xl-block">
+
+  <div class="row color-blue mt-1 px-xl-2">
+    <div class="col-12 px-0 px-xl-2">
+      <span class="d-flex justify-content-center d-flex justify-content-md-start">Lista de Transferencias</span>
+      <!-- Table -->
+      <div class="table-container mt-1">
+        <mat-table [dataSource]="dataSource">
+          <!-- ID Transfer Column -->
+          <ng-container matColumnDef="transferID">
+            <mat-header-cell fxFlex="100px" *matHeaderCellDef class="title-table d-flex justify-content-center px-1 showB">ID</mat-header-cell>
+            <mat-cell fxFlex="100px" *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.TransferId}}</mat-cell>
+          </ng-container>
+
+          <!-- Date Column -->
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">Fecha y hora</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.OperationDate|date:'dd/MM/yyyy HH:mm'}}</mat-cell>
+          </ng-container>
+
+          <!-- Type Column -->
+          <ng-container matColumnDef="type">
+            <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">Tipo</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.TransferType}}</mat-cell>
+          </ng-container>
+
+          <!-- Source User Column -->
+          <ng-container matColumnDef="sourceUser">
+            <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">Usuario fuente</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.SourceUser}}</mat-cell>
+          </ng-container>
+
+          <!-- Target User Column -->
+          <ng-container matColumnDef="targetUser">
+            <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">Usuario destino</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.TargetUser}}</mat-cell>
+          </ng-container>
+
+          <!-- Points Column -->
+          <ng-container matColumnDef="points">
+            <mat-header-cell fxFlex="50px" *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">Cant. ptos.</mat-header-cell>
+            <mat-cell fxFlex="50px" *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.Points}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="tableColumns" class="office-mat-header-row"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
+        </mat-table>
+        <mat-paginator [length]="service.resultsLength" [pageSize]="10"
+        [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3 d-flex flex-row justify-content-center justify-content-md-end align-items-center">
+    <div class="col-12 col-md-3">
+      <div class="d-flex flex-row justify-content-center align-items-center cursor-pointer oval-btn color-blue font-osbold py-2" (click)="onCloseClick()">
+        Salir
+      </div>
+    </div>
+  </div>
+</div>

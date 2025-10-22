@@ -1,0 +1,75 @@
+<div class="container pt-4 pb-3">
+  <div class="row">
+    <div class="col-12">
+      <p class="title-pages pl-3 py-3">Gestión de Páginas Estáticas</p>
+    </div>
+  </div>
+  <!-- Filters -->
+  <div class="row pt-4 pb-2 mb-2">
+    <div class="col-12">
+      <div class="container bg-white pt-3">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Buscar</mat-label>
+                <input matInput placeholder="Buscar" #input>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="row">
+    <div class="col-12">
+      <div class="mat-elevation-z8">
+
+        <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+        matSort matSortActive="Titulo" matSortDirection="asc" matSortDisableClear  id="tblBackend">
+
+          <ng-container matColumnDef="PaginasEstaticasId">
+            <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+            <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.PaginasEstaticasId}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Titulo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Título</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-3">{{row.Titulo}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Contenido">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Contenido</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.Contenido}}</mat-cell>
+          </ng-container>
+
+<!--          <ng-container matColumnDef="Acciones">-->
+<!--            <mat-header-cell *matHeaderCellDef class="tituloTablas col-md-2">Acciones</mat-header-cell>-->
+<!--            <mat-cell *matCellDef="let Acciones" class="col-md-2">-->
+<!--              <button mat-icon-button (click)="onEdit(Acciones.PaginasEstaticasId)">-->
+<!--                <mat-icon aria-label="Editar" class="editar-icon"></mat-icon>-->
+<!--              </button>-->
+<!--            </mat-cell>-->
+<!--          </ng-container>-->
+
+          <ng-container matColumnDef="Acciones">
+            <mat-header-cell *matHeaderCellDef class="tituloTablas col-lg-3">Acciones</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-lg-3 text-center">
+              <mat-icon aria-hidden="false" (click)="onEdit(row.PaginasEstaticasId)" aria-label="Eliminar" class="editar-icon moveleft"></mat-icon>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: tableColumns" (click)="onRowClicked(row)"></mat-row>
+
+        </mat-table>
+
+        <mat-paginator [length]="servPagEst.resultsLength" [pageSize]="servPagEst.pageSize"
+                       [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorData($event)" [showFirstLastButtons]="true"></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

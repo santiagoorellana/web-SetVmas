@@ -1,0 +1,64 @@
+.ico-direct-purchase {
+  background: url("../../../../../../assets/images/icons/icon-direct-purchase.png") no-repeat;
+  background-size: contain;
+  width: 65px !important;
+  height: 65px !important;
+}
+
+/* .ico-buy-start {
+  background: url("../../../../../assets/images/comprar-puntos-iniciar.png") no-repeat;
+  background-size: contain;
+  width: 25px !important;
+  height: 25px !important;
+}
+
+.ico-buy-cancel {
+  background: url("../../../../../assets/images/comprar-puntos-cancelar.png") no-repeat;
+  background-size: contain;
+  width: 25px !important;
+  height: 25px !important;
+} */
+
+.separator {
+  border-bottom: 1px solid #020448;
+}
+
+div.scroll_vertical {
+	max-height: 100%;
+
+}
+
+
+
+@media (max-width: 575.98px) {
+
+  
+div.scroll_vertical {
+	max-height: 404px;
+	overflow-y: scroll;
+  padding-right: 23px;
+  overflow-x: hidden;
+}
+
+}
+
+
+.notice {
+  background: #b8d0d6;
+  border-radius: 5px;
+}
+
+@media (max-width: 991.98px) {
+  .ico-direct-purchase {
+    background: url("../../../../../../assets/images/icons/icon-direct-purchase.png") no-repeat;
+    background-size: contain;
+    width: 55px !important;
+    height: 55px !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .border-separator {
+    border-bottom: 1px solid #020448;
+  }
+}

@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center align-items-center mb-2 mb-sm-3">
+      <div class="ico-login"></div>
+    </div>
+    <div class="col-12 d-flex justify-content-center align-items-center title-modals mb-4">
+      Iniciar sesión
+    </div>
+    <form #form="ngForm" class="w-100" autocomplete="off" (ngSubmit)="onSubmit()">
+      <div class="col-12 d-flex flex-column justify-content-center align-items-center mb-4 px-0 px-sm-3 font-regular">
+        <mat-form-field appearance="outline" class="w-100 input-text input-text-height mx-0 mx-sm-2">
+          <mat-label>Correo o Código</mat-label>
+          <input (keypress)="restrictValue($event)" matInput [formControl]="email" class="py-0 my-0" required>
+          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100 input-text input-text-height mx-0 mx-sm-2 my-4">
+          <mat-label>Contraseña</mat-label>
+        <div class="d-flex flex-row">
+          <input matInput [formControl]="pass" class="py-0 my-0" required [type]="hide ? 'password' : 'text'"  >
+
+          <span class="ml-1" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <i *ngIf="hide" class="fa fa-eye"></i>
+            <i *ngIf="!hide" class="fa fa-eye-slash"></i>
+          </span>
+        </div>
+
+<!--          <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">-->
+<!--            <mat-icon [ngClass]="hide ? 'visible-icon' : 'visibleoff-icon'">eye</mat-icon>-->
+<!--            -->
+<!--          </button>-->
+          <mat-error *ngIf="pass.invalid">{{getErrorPassMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-label (click)="openDialogRecoverAccount()" class="text-dark-blue label-text-decoration cursor-pointer mt-1">¿Ha olvidado su contraseña?</mat-label>
+        <mat-label (click)="openDialogRegister()" class="text-dark-blue label-text-decoration cursor-pointer">Registrarse</mat-label>
+      </div>
+      <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+        <button type="submit" class="d-flex justify-content-center align-items-center btn-oval-orange py-2 px-5">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          ACEPTAR
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<!-- <div class="container">
+  <div class="row mt-sm-3">
+    <div class="col-12 col-sm-3 order-2 order-sm-1 d-flex justify-content-center align-items-center pr-sm-0 mt-4 mt-sm-0">
+      <div class="ico-sell-points"></div>
+    </div>
+    <div class="col-12 col-sm-9 order-1 order-sm-2 d-flex justify-content-center align-items-center title-modals">
+      Vender puntos
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-4 d-flex flex-column justify-content-center align-items-start align-items-sm-end px-0 pr-sm-3">
+      <mat-label class="label-phone color-blue">Usuario</mat-label>
+      <mat-label class="label-phone color-blue">destino:</mat-label>
+    </div>
+    <div class="col-8 pl-0 pr-0 pr-md-2">
+      <mat-form-field appearance="outline" class="w-100 btnInput">
+        <input matInput placeholder="Nombre" class="py-0 my-0">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row mt-1 mt-lg-3">
+    <div class="col-5 col-sm-4 d-flex flex-column justify-content-center align-items-start align-items-sm-end px-0 pr-sm-3">
+      <mat-label class="label-phone color-blue">Cantidad</mat-label>
+      <mat-label class="label-phone color-blue">de puntos:</mat-label>
+    </div>
+    <div class="col-3 col-sm-2 px-0">
+      <mat-form-field appearance="outline" class="w-100 btnInput">
+        <input matInput placeholder="0000" class="py-0 my-0">
+      </mat-form-field>
+    </div>
+    <div class="col-4 col-sm-6 d-flex justify-content-left align-items-center pr-0">
+      <span class="color-blue cursor-pointer"><i class="fa fa-qrcode fa-2x"></i></span>
+      <span class="labels-blue pl-2 cursor-pointer d-none d-md-block">Mostrar código</span>
+    </div>
+  </div>
+  <div class="row mt-3 mt-lg-5 pt-lg-4">
+    <div class="col-12 col-lg-6 pl-lg-0 pr-lg-1 mt-2 mt-lg-0 order-2 order-lg-1">
+      <div class="d-flex justify-content-center align-items-center cursor-pointer oval-btn color-blue font-osbold py-2" (click)="onCloseClick()">
+        CANCELAR
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 pr-lg-0 pl-lg-1 order-1 order-lg-2">
+      <div class="d-flex justify-content-center align-items-center cursor-pointer oval-btn color-blue font-osbold py-2">
+        VENDER
+      </div>
+    </div>
+  </div>
+</div> -->

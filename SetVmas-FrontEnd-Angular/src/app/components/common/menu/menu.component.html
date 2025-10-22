@@ -1,0 +1,241 @@
+<div id="menu">
+<header>
+  <div id="overlay" class="overlay-menu">
+    <div id="mySidenav" class="sidenav bg-dark-blue">
+      <div class="d-flex flex-row justify-content-between align-items-start pl-2 mb-3">
+        <img ALT="Logotipo de Setevemás" src="assets/images/logo.png">
+        <a href="javascript:void(0)" class="mr-2" (click)="closeNav()"><span><i class="fa fa-close fa-2x"></i></span></a>
+      </div>
+<!--      <span class="text-white ml-3">Menú</span>-->
+      <hr class="separator my-2">
+      <ul id="main-menu" class="px-0 mb-0">
+        <li routerLink="/inicio" [class.activeMenu]="router == '/inicio'" class="nav-item d-flex flex-row align-items-center" (click)="closeNav()">
+          <a class="nav-link pl-3" >Inicio</a>
+        </li>
+
+        <li class="nav-item d-flex flex-row align-items-center" (click)="openDialogAnunciar()">
+          <a class="nav-link pl-3" >Anunciar</a>
+        </li>
+
+        <li class="nav-item d-flex flex-row align-items-center" (click)="openDialogLogin()" *ngIf="!mostrarBtnMenu()">
+          <a class="nav-link pl-3" >Acceder</a>
+        </li>
+
+        <li class="nav-item d-flex flex-row align-items-center" (click)="openDialogRegister()" *ngIf="!mostrarBtnMenu()">
+          <a class="nav-link pl-3" >Registrarse</a>
+        </li>
+
+        <li routerLink="/oficina" [class.activeMenu]="router == '/oficina'" class="nav-item d-flex flex-row align-items-center" (click)="closeNav()" *ngIf="mostrarBtnMenu()" >
+          <a class="nav-link pl-3" >Oficina</a>
+        </li>
+        
+        <li class="nav-item d-flex flex-row align-items-center" (click)="logout()" *ngIf="mostrarBtnMenu()">
+          <a class="nav-link pl-3" >Salir</a>
+        </li>
+
+
+        
+
+        <!-- <li routerLink="/" [class.activeMenu]="router =='/'" class="nav-item d-flex flex-row align-items-center" (click)="closeNav()">
+        <a class="nav-link pl-3" [href]="linkApp" target="_blank" >APP</a>
+
+         </li>
+         <li routerLink="/ayuda" [class.activeMenu]="router == '/ayuda'" class="nav-item d-flex flex-row align-items-center" (click)="closeNav()">
+           <a class="nav-link pl-3" >Ayuda</a>
+         </li>-->
+        <hr *ngIf="mostrarBtnMenu()"  class="separator my-2">
+        <li class="nav-item" routerLink="/admin" [class.activeMenu]="router == '/admin'" *ngIf="mostrarBtnMenu() && (currentUser.Rol === 'Administrador' || currentUser.Rol === 'Super Administrador'|| currentUser.Rol === 'Director')"  (click)="closeNav()">
+          <div class="d-flex flex-row align-items-center">
+            <span><i class="fa fa-cog text-white text-center icons-center"></i></span>
+            <a class="nav-link pl-1" >Administración</a>
+          </div>
+        </li>
+        <li class="nav-item" routerLink="/admin/anuncios"  [class.activeMenu]="router == '/admin/anuncios'" *ngIf="mostrarBtnMenu() && (currentUser.Rol === 'Administrador' || currentUser.Rol === 'Super Administrador')"  (click)="closeNav()">
+          <div class="d-flex flex-row align-items-center">
+            <span><i class="fa fa-bullhorn text-white text-center icons-center"></i></span>
+            <a class="nav-link pl-1" >Anuncios</a>
+          </div>
+        </li>
+        <li class="nav-item" routerLink="/admin/usuarios" [class.activeMenu]="router == '/admin/usuarios'" *ngIf="mostrarBtnMenu() && (currentUser.Rol === 'Administrador' || currentUser.Rol === 'Super Administrador')"  (click)="closeNav()">
+          <div class="d-flex flex-row align-items-center">
+            <span><i class="fa fa-users text-white text-center icons-center"></i></span>
+            <a class="nav-link pl-1" >Usuarios</a>
+          </div>
+        </li>
+        <li class="nav-item" routerLink="/admin/categorias" [class.activeMenu]="router == '/admin/categorias'" *ngIf="mostrarBtnMenu() && (currentUser.Rol === 'Administrador' || currentUser.Rol === 'Super Administrador' || currentUser.Rol === 'Director')" (click)="closeNav()">
+          <div class="d-flex flex-row align-items-center" (click)="closeNav()">
+            <span><i class="fa fa-th-list text-white text-center icons-center"></i></span>
+            <a class="nav-link pl-1"  >Categorías</a>
+          </div>
+        </li>
+        <li class="nav-item" routerLink="/admin/etiquetas" [class.activeMenu]="router == '/admin/etiquetas'" *ngIf="mostrarBtnMenu() && (currentUser.Rol === 'Administrador' || currentUser.Rol === 'Super Administrador' || currentUser.Rol === 'Director')"  (click)="closeNav()">
+          <div class="d-flex flex-row align-items-center">
+            <span><i class="fa fa-tags text-white text-center icons-center"></i></span>
+            <a class="nav-link pl-1" >Etiquetas</a>
+          </div>
+        </li>
+        <li class="nav-item" routerLink="/admin/transferencias" [class.activeMenu]="router == '/admin/transferencias'" *ngIf="mostrarBtnMenu() && (currentUser.Rol === 'Administrador' || currentUser.Rol === 'Super Administrador' || currentUser.Rol === 'Director')"  (click)="closeNav()">
+          <div class="d-flex flex-row align-items-center">
+            <span><i class="fa fa-exchange text-white text-center icons-center"></i></span>
+            <a class="nav-link pl-1" >Transferencias</a>
+          </div>
+        </li>
+        <li class="nav-item" routerLink="/admin/denuncias" [class.activeMenu]="router == '/admin/denuncias'" *ngIf="mostrarBtnMenu() && (currentUser.Rol != 'Colaborador' && currentUser.Rol != 'Cliente')"  (click)="closeNav()">
+          <div class="d-flex flex-row align-items-center">
+            <span><i class="fa fa-comments text-white text-center icons-center"></i></span>
+            <a class="nav-link pl-1" >Denuncias</a>
+          </div>
+        </li>
+        <li class="nav-item" routerLink="/admin/pagos" [class.activeMenu]="router == '/admin/pagos'" *ngIf="mostrarBtnMenu() && (currentUser.Rol != 'Clasificador'  && currentUser.Rol != 'Cliente')"  (click)="closeNav()">
+          <div class="d-flex flex-row align-items-center">
+            <span><i class="fa fa-money text-white text-center icons-center"></i></span>
+            <a class="nav-link pl-1" >Pagos</a>
+          </div>
+        </li>
+        <li class="nav-item" routerLink="/admin/paginas" [class.activeMenu]="router == '/admin/paginas'" *ngIf="mostrarBtnMenu() && (currentUser.Rol === 'Administrador' || currentUser.Rol === 'Super Administrador' || currentUser.Rol === 'Director')"  (click)="closeNav()">
+          <div class="d-flex flex-row align-items-center">
+            <span><i class="fa fa-files-o text-white text-center icons-center"></i></span>
+            <a class="nav-link pl-1" >Páginas Estáticas</a>
+          </div>
+        </li>
+        <li class="nav-item" routerLink="/admin/variables" [class.activeMenu]="router == '/admin/variables'" *ngIf="mostrarBtnMenu() && (currentUser.Rol === 'Administrador' || currentUser.Rol === 'Super Administrador' || currentUser.Rol === 'Director')"  (click)="closeNav()">
+          <div class="d-flex flex-row align-items-center">
+            <span><i class="fa fa-superscript text-white text-center icons-center"></i></span>
+            <a class="nav-link pl-1" >Variables de Configuración</a>
+          </div>
+        </li>
+        <li class="nav-item d-flex flex-column" [class.activeMenu]="subMenuActive" data-target="#ui-menu" data-toggle="collapse" aria-expanded="false" *ngIf="mostrarBtnMenu() && (currentUser.Rol === 'Administrador' || currentUser.Rol === 'Super Administrador' || currentUser.Rol === 'Director')" >
+          <div class="d-flex flex-row align-items-center">
+            <span><i class="fa fa-wrench text-white text-center icons-center"></i></span>
+            <a  class="nav-link pl-1">Nomencladores</a>
+          </div>
+
+        </li>
+        <div id="ui-menu" class="collapse">
+          <ul class="text-white ml-2">
+            <li class="nav-item" routerLink="/admin/nomencladores/clases-usuarios" [class.activeSubMenu]="router == '/admin/nomencladores/clases-usuarios'" (click)="closeNav()" >
+              <a class="nav-link pl-1" >Clases de Usuarios</a>
+            </li>
+            <li class="nav-item" routerLink="/admin/nomencladores/tipo-transferencias" [class.activeSubMenu]="router == '/admin/nomencladores/tipo-transferencias'" (click)="closeNav()">
+              <a class="nav-link pl-1" >Tipos Transf. y Bonific.</a>
+            </li>
+            <li class="nav-item" routerLink="/admin/nomencladores/tipos-opciones" [class.activeSubMenu]="router == '/admin/nomencladores/tipos-opciones'" (click)="closeNav()">
+              <a class="nav-link pl-1" >Opciones Avanzadas</a>
+            </li>
+            <li class="nav-item" routerLink="/admin/nomencladores/motivos-denuncia" [class.activeSubMenu]="router == '/admin/nomencladores/motivos-denuncia'" (click)="closeNav()">
+              <a class="nav-link pl-1" >Motivos de Denuncias</a>
+            </li>
+            <li class="nav-item" routerLink="/admin/nomencladores/factores-bonificacion" [class.activeSubMenu]="router == '/admin/nomencladores/factores-bonificacion'" (click)="closeNav()">
+              <a class="nav-link pl-1" >Fact. de Bonificación por Red</a>
+            </li>
+          </ul>
+        </div>
+
+         <li class="nav-item d-flex flex-column" [class.activeMenu]="subMenuActive" data-target="#report-menu" data-toggle="collapse" aria-expanded="false" *ngIf="mostrarBtnMenu() && (currentUser.Rol === 'Administrador' || currentUser.Rol === 'Super Administrador' || currentUser.Rol === 'Director')" >
+         <div class="d-flex flex-row align-items-center">
+           <span><i class="fa fa-bar-chart text-white text-center icons-center"></i></span>
+           <a  class="nav-link pl-1">Reportes</a>
+         </div>
+       </li>
+     <div id="report-menu" class="collapse">
+         <ul class="text-white ml-2">
+        <li class="nav-item" routerLink="/admin/reporte/1" [class.activeSubMenu]="router == '/admin/reporte/1'" (click)="closeNav()">
+            <a class="nav-link pl-1">Categorías</a>
+          </li>
+           <li class="nav-item" routerLink="/admin/reporte/2" [class.activeSubMenu]="router == '/admin/reporte/2'" (click)="closeNav()">
+             <a class="nav-link pl-1">Clases de Usuarios</a>
+           </li>
+           <li class="nav-item" routerLink="/admin/reporte/3" [class.activeSubMenu]="router == '/admin/reporte/3'" (click)="closeNav()">
+             <a class="nav-link pl-1">Etiquetas</a>
+           </li>
+           <li class="nav-item" routerLink="/admin/reporte/4" [class.activeSubMenu]="router == '/admin/reporte/4'" (click)="closeNav()">
+             <a class="nav-link pl-1">Municipios</a>
+           </li>
+           <li class="nav-item" routerLink="/admin/reporte/5" [class.activeSubMenu]="router == '/admin/reporte/5'" (click)="closeNav()">
+             <a class="nav-link pl-1">Provincias</a>
+           </li>
+           <li class="nav-item" routerLink="/admin/reporte/6" [class.activeSubMenu]="router == '/admin/reporte/6'" (click)="closeNav()">
+             <a class="nav-link pl-1">Histograma de Antiguedad</a>
+           </li>
+           <li class="nav-item" routerLink="/admin/reporte/7" [class.activeSubMenu]="router == '/admin/reporte/7'" (click)="closeNav()">
+             <a class="nav-link pl-1">Histograma de Anuncios</a>
+           </li>
+           <li class="nav-item" routerLink="/admin/reporteclu" [class.activeSubMenu]="router == '/admin/reporteclu'" (click)="closeNav()">
+             <a class="nav-link pl-1">Histograma de Clases de Usuarios</a>
+           </li>
+           <li class="nav-item" routerLink="/admin/reportepuntos" [class.activeSubMenu]="router == '/admin/reportepuntos'" (click)="closeNav()">
+             <a class="nav-link pl-1">Histograma de Puntos</a>
+           </li>
+           <li class="nav-item" routerLink="/admin/reporte/8" [class.activeSubMenu]="router == '/admin/reporte/8'" (click)="closeNav()">
+             <a class="nav-link pl-1">Totales</a>
+           </li>
+         </ul>
+       </div>
+      </ul>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-dark-blue p-sm-0 p-md-1">
+    <div class="container">
+      <div class="navbar-brand order-1 d-flex justify-content-center align-items-center">
+        <button class="navbar-toggler" (click)="openNav()" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="fa fa-navicon text-white"></span>
+        </button>
+        <button class="toggler d-none d-lg-block bg-transparent border-0 pl-0 mr-2" (click)="openNav()" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="fa fa-navicon text-white"></span>
+        </button>
+        <a routerLink="/inicio" class="ml-lg-4 ml-xl-3">
+          <img class="" src="assets/images/logo.png">
+        </a>
+      </div>
+
+      <div class="collapse navbar-collapse order-3 order-lg-2">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item mx-2">
+            <h1 style="display:none;">Inicio</h1>
+            <a class="nav-link" routerLink="/"><span [class.active]="router == '/inicio'">INICIO</span><span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" routerLink="/oficina" *ngIf="mostrarBtnMenu()"><span [class.active]="router == '/oficina'" >OFICINA</span></a>
+          </li>
+          <li class="nav-item mx-2">
+            <!--   <a class="nav-link" [href]="linkApp" target="_blank" ><span [class.active]="router == '/'">APP</span></a>
+           </li>
+         <li class="nav-item mx-2">
+             <a class="nav-link" routerLink="/ayuda" ><span [class.active]="router == '/ayuda'">AYUDA</span></a>
+           </li>-->
+        </ul>
+      </div>
+
+      <div class="d-block d-md-none order-2" *ngIf="!currentUser">
+        <div class="d-flex flex-row align-items-center">
+          <span class="d-flex align-items-center pr-3" (click)="openDialogLogin()"><i class="fa fa-user-circle fa-2x text-white"></i></span>
+          <!--<span class="ml-3 text-white">Salir</span>-->
+        </div>
+      </div>
+
+
+      <div class="d-none d-md-block order-2" *ngIf="!mostrarBtnMenu()">
+        <div class="order-lg-3 d-flex align-items-center pl-3 pr-1 access-buttons text-dark-blue">
+          <div class="d-flex flex-row align-items-center btn-border pr-3 cursor-pointer" (click)="openDialogLogin()">
+            <span class="mr-3">ACCEDER</span>
+            <span class="d-flex align-items-center"><i class="fa fa-arrow-circle-right arrow-circle"></i></span>
+          </div>
+          <div class="d-flex flex-row align-items-center pl-3 cursor-pointer" (click)="openDialogRegister()">
+            <span class="mr-3">REGISTRARSE</span>
+            <span class="d-flex align-items-center"><i class="fa fa-arrow-circle-right text-orange arrow-circle"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row justify-content-end align-items-center order-2 cursor-pointer" *ngIf="currentUser != null && currentUser.Bloqueado && mostrarBloqueado">
+        <span class="d-none d-sm-block text-white mr-2" style="font-size: 9px">Usuario bloqueado hasta: {{currentUser.FechaDesbloqueo | date: "dd/MM/yyyy"}} </span> <span class="text-white"> <b></b></span>
+        <span class="ml-3 text-white" ></span>
+      </div>
+      <div class="d-flex flex-row justify-content-end align-items-center order-2 cursor-pointer" *ngIf="mostrarBtnMenu()">
+        <span class="d-none d-sm-block text-white mr-2">Bienvenido </span> <span class="text-white"> <b>{{list[0]}}</b></span>
+        <span class="ml-3 text-white" (click)="logout()"><i class="fa fa-sign-out fa-2x"></i></span>
+      </div>
+    </div>
+  </nav>
+</header>
+
+</div>

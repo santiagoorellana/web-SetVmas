@@ -1,0 +1,112 @@
+<div class="container my-5">
+  <div class="row" style="border: groove 1px gray; padding: 5px; margin-top: 10px; margin-right: 10px; width: 100%">
+    <div class="col-12" style="line-height: 1.5">
+      <p class="grid-header">Estadísticas del Negocio</p>
+      <hr>
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-5">
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Usuarios: </mat-label>{{cantUsuario}}</div>
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Anuncios: </mat-label>{{cantAnuncio}}</div>
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Puntos: </mat-label>{{cantPuntos }}</div>
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Banners Superiores: </mat-label>{{cantBs}}</div>
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Banners Inferiores: </mat-label>{{cantBi}}</div>
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Usuarios del último Mes: </mat-label>{{cantULM }}</div>
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Visualizaciones: </mat-label>{{cantView}}</div>
+        </div>
+        <div class="col-lg-5">
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Autorrenovables: </mat-label>{{cantAuto}}</div>
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Banners Activos: </mat-label>{{cantBa}}</div>
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Ventas e/ Usuarios: </mat-label>{{cantVentaUs}}</div>
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Denuncias Pendientes: </mat-label>{{cantDenPen }}</div>
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Compras por Confirmar: </mat-label>{{cantComConf}}</div>
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Anuncios por Invitados: </mat-label>{{cantAnunInv}}</div>
+          <div class="row" style="margin-left: 15px; font-weight: bold; font-size: large"><mat-label style="margin-right: 5px; font-size: 1.4rem !important;">Referencias a Web: </mat-label>{{cantRefWeb}}</div>
+        </div>
+        <div class="col-lg-1"></div>
+      </div>
+      <br>
+    </div>
+  </div>
+  <div class="row" style="border: groove 1px gray; padding: 5px; margin-top: 10px; margin-right: 10px; width: 100%">
+    <div class="col-12 ">
+      <p class="grid-header">Datos del Registro</p>
+      <hr>
+      <form #form="ngForm" autocomplete="off" (submit)="salvarCambios()">
+
+        <div class="row">
+          <div class="col-lg-5 offset-1">
+
+            <div class="row ">
+              <div class="col-lg-6">
+                <input type="hidden" name="UsuarioId" id="UsuarioId" #UsuarioId="ngModel" class="form-control" [(ngModel)]="currentUser.UsuarioId">
+                <mat-form-field>
+                  <input matInput  [value]="currentUser.FechaCreacion | date: 'dd/MM/yyyy'" name="FechaCreacion" id="FechaCreacion" disabled type="text" placeholder="Fecha de Creación" >
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row ">
+              <div class="col-lg-6">
+                <mat-form-field>
+                  <input matInput [(ngModel)]="currentUser.Codigo" name="Codigo" id="Codigo" disabled type="text" placeholder="Código">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row ">
+              <div class="col-lg-6">
+                <mat-form-field>
+                  <input matInput [(ngModel)]="currentUser.Puntos" name="Puntos" id="Puntos" disabled type="text" placeholder="Puntos">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row ">
+              <div class="col-lg-6">
+                <mat-form-field>
+                  <input matInput [(ngModel)]="currentUser.Anfitrion" name="Anfitrion" id="Anfitrion" disabled type="text" placeholder="Anfitrión">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+<!--
+          <div class="col-lg-5 pt-lg-1">
+            <div class="row ">
+              <div class="col-lg-6">
+                <mat-form-field>
+                  <input matInput [(ngModel)]="currentUser.Telefono" name="Telefono" id="Telefono" type="text" placeholder="Teléfono">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row ">
+              <div class="col-lg-6">
+                <mat-form-field>
+                  <input matInput [(ngModel)]="currentUser.Correo" name="Correo" id="Correo" type="text" placeholder="Correo">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row ">
+              <div class="col-lg-6">
+                <mat-form-field>
+                  <input matInput [(ngModel)]="currentUser.Password" name="Password" id="Password" type="password" placeholder="Password">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <button class="btn-admin" [class.btn-disabled]="form.invalid" style="padding-left: 20px; padding-right: 20px" type="submit" [disabled]="form.invalid"> <i class="fa fa-save"> Guardar </i></button>
+              </div>
+            </div>
+          </div>-->
+
+          
+        </div>
+      </form>
+    </div>
+  </div>
+
+  </div>

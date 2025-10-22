@@ -1,0 +1,40 @@
+.form-control, input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="name"], textarea {
+  font-size: 14px;
+
+}
+
+input.mat-input-element {
+  height: 15px;
+}
+
+
+#view_p{
+  background-color: #b8d0d6;
+  min-height: 300px;
+}
+
+.btn-contacto{
+  background-color: transparent;
+  border-radius: 50px !important;
+  border: #020448 1px solid !important;
+  color: #020448;
+  width: 190px;
+  height: 45px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  font-family: 'OSRegular', sans-serif;
+}
+.btn-contacto:hover{
+  background-color: #020448;
+  border-radius: 50px !important;
+  border: #020448 1px solid !important;
+  color: #fff;
+  width: 190px;
+  height: 45px;
+  font-weight: bold;
+  letter-spacing: 5px;
+}
+.h4-contacto{
+  color: #020448;
+  font-size: 35px;
+}

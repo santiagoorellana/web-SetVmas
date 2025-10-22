@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Contáctenos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item lines="none" class="ion-text-center ion-margin-bottom">
+    <ion-text color="primary" ><p [innerHTML]="formData.Contenido"></p></ion-text>
+  </ion-item>
+
+
+  <form>
+    <ion-item>
+      <ion-label color="primary" position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="nombre" name="nombre" type="text" #nombrev="ngModel" spellcheck="false"
+        autocapitalize="off"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="email" name="email" type="text" #emailv="ngModel" spellcheck="false" autocapitalize="off"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Asunto</ion-label>
+      <ion-input [(ngModel)]="asunto" name="asunto" autocomplete="on" autocorrect="on"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">¿Cómo te podemos ayudar?</ion-label>
+      <ion-textarea [(ngModel)]="texto" rows="6" name="texto" autocomplete="on" autocorrect="on"></ion-textarea>
+    </ion-item>
+    <ion-item lines="none" class="captcha-item">
+      <div class="center-button">
+        <re-captcha (resolved)="captchaResolved($event)" siteKey="6LfI1fcUAAAAAEwQ1Fb86Qkhabye30Y81fMYxsHM"></re-captcha>
+      </div>
+    </ion-item>
+    <ion-item lines="none" class="ion-margin-top">
+      <div class="center-button">
+        <ion-button [disabled]="!validate()" class="buttons" shape="round" fill="outline" color="primary"
+          (click)="send()">
+          Enviar
+        </ion-button>
+      </div>
+    </ion-item>
+  </form>
+</ion-content>

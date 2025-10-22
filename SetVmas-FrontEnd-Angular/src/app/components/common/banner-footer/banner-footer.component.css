@@ -1,0 +1,119 @@
+.img-content{
+    /* background-image: url("../../../../assets/images/slide/2.jpg"); */
+    /* background-position: center; */
+    /* min-width: 200px;
+    max-width: 200px;
+    min-height: 150px;
+    max-height: 150px; */
+    transition: transform .5s ease;
+    padding-top: 10px;
+    /* transform: scaleY(.8); */
+  }
+
+  .img-content:hover {
+    /* transform: scaleY(1); */
+    z-index: 9999;
+    opacity: 1;
+  }
+
+  .ribbon-title{
+    padding-bottom: 5px;
+    padding-top: 5px;
+    min-width: 100px;
+    max-width: 100px;
+    background: #e46d09;
+    color: #e6e2c8;
+    text-align: end;
+    padding-right: 10px;
+    position:relative;
+    right: -178px;
+    border-radius: 7px 0 0 7px;
+  }
+
+  .ribbon-title:before, .ribbon-title:after{
+    position: absolute;
+    content: '';
+    display: block;
+  }
+
+  .ribbon-title:before{
+    width: 10px;
+    height: 39px;
+    background: inherit;
+    left: 100px;
+    bottom: -8px;
+    border-radius: 0 7px 6px 0;
+  }
+
+  .ribbon-title:after{
+    width: 8px;
+    height: 8px;
+    background: whitesmoke;
+    bottom: -8px;
+    left: 100px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .middle {
+
+    /*transition: .5s ease;*/
+    opacity: 0;
+    position: relative;
+    display: inline-block;
+    top: 86px;
+    text-align: center;
+    width: 100%;
+    /* visibility: hidden; */
+    /* display: none; */
+
+  }
+
+  .line-slide-bottom {
+    transition: .5s ease;
+    position: relative;
+    margin-top: 66px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .line-slide-top {
+    transition: .5s ease;
+    position: relative;
+    margin-top: -11px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .text {
+    background-color: rgba(0, 0, 0, .5);
+    color: white;
+    padding-top: 5px;
+    height: 65px;
+  }
+
+  .text span{
+    font-size: 1rem;
+  }
+
+  /*.middle:hover {*/
+  /*  !*position:relative;*!*/
+  /*  opacity: 1;*/
+  /*}*/
+
+  .img-content:hover .line-slide-bottom, .img-content:hover .line-slide-top {
+    display: none !important;
+  }
+
+  .img-content:hover > .middle{
+    top: 76px;
+    position: relative !important;
+    opacity: 1;
+  }
+
+  .bg-slide {
+    background: #fff ;
+
+    color: white;
+    /* padding-top: 5px; */
+    height: 10px;
+  }

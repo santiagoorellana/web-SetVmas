@@ -1,0 +1,910 @@
+<div class="container pb-3 bg-modal full-screen-modal">
+  <div class="row">
+    <div class="col-12 my-4 d-none d-md-block">
+      <div class="d-flex flex-row ">
+        <div class="w-100 d-flex justify-content-start pl-3">
+          <div class="encabezado-naranja border-orange">Anunciar </div>
+          <!-- <div class="ico-anunciar"></div> -->
+          <span><i class="fa fa-bullhorn px-2 icon-advert" aria-hidden="true"></i></span>
+        </div>
+        <div class="w-100 d-flex justify-content-end">
+          <a class="d-flex justify-content-center align-items-center cursor-pointer" (click)="onCloseClick()">
+            <div class="rounded-circle mr-2 p-1 btn-border-orange d-flex justify-content-center align-items-center">
+              <span class=""><i class="fa fa-close text-orange"></i></span>
+            </div>
+            <span class="texto-cerrar d-none d-sm-block">Cerrar</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mb-3 py-4 bg-white d-block d-md-none fixed-top">
+      <div class="d-flex flex-row">
+        <div class="w-100 d-flex justify-content-start">
+          <!-- <div class="ico-anunciar" style="height:25px !important; width:25px !important"></div> -->
+          <span><i class="fa fa-bullhorn icon-advert" aria-hidden="true"></i></span>
+          <div class="encabezado-naranja border-orange-left pl-3 ml-3">Anunciar</div>
+        </div>
+        <div class="w-100 d-flex justify-content-end">
+          <a class="d-flex justify-content-center align-items-center cursor-pointer" (click)="onCloseClick()">
+            <div class="rounded-circle mr-2 p-1 btn-border-orange d-flex justify-content-center align-items-center">
+              <span class=""><i class="fa fa-close text-orange"></i></span>
+            </div>
+            <span class="texto-cerrar d-none d-sm-block">Cerrar</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+<!--    <mat-dialog-content class="mat-typography">-->
+      <!--simple configuration section-->
+    <form  #form="ngForm" autocomplete="off" >
+      <div id="simpleConfiguration" class="col-12 mt-5 mt-md-0 pt-5 pt-md-0 px-0">
+        <div class="d-flex justify-content-center align-items-center">
+          <!--<div mat-dialog-content class="w-100">-->
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-4">
+
+                <mat-form-field appearance="outline" class="w-100 btnInput py-0 my-0" style="background-color:#fcfcfc;">
+                  <input matInput placeholder="* Título" maxlength="30" [(ngModel)]="anuncio.Titulo" #Titulo="ngModel" name="Titulo" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100 fs-input mb-3 btnCheck btnSelect" style="background-color:#fcfcfc;margin-top:5px;">
+                  <mat-select #Accion="ngModel" placeholder="Acción" [(ngModel)]="anuncio.Accion" name="Accion" id="Accion">
+                    <mat-option *ngFor="let accion of ListaAcciones" [value]="accion">{{accion}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <!-- <mat-form-field appearance="outline" class="w-100 fs-input mb-3 btnCheck btnSelect">
+    <mat-select #Accion="ngModel" placeholder="Acción" [(ngModel)]="anuncio.Accion">
+      <mat-option value="0">Compro</mat-option>
+      <mat-option value="1">Vendo</mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+                <!--<mat-form-field appearance="outline" class="align-content-center w-100 btnInput btnCheck btnSelect">
+                  <input type="text" required placeholder="* Acción" style="font-size: 1rem" aria-label="Number" matInput
+                         [(ngModel)]="anuncio.Accion" [formControl]="inputAcc" [matAutocomplete]="autoAction"
+                         name="accion">
+                  <mat-autocomplete #autoAction="matAutocomplete">
+                    <mat-option *ngFor="let option of ListaAccionFiltradas | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>-->
+
+                <div class="col-12 col-xl-4 pb-2 px-0">
+                  <div class="d-flex flex-sm-row">
+                    <mat-form-field appearance="outline" class="btnInput btnInputNumber" style="background-color:#fcfcfc;">
+                      <!-- <mat-label class="fs-input">* Precio</mat-label> -->
+                      <input id="edit-anuncio-precio" matInput placeholder="* Precio" class="py-0 my-0" #Precio="ngModel" type="number"
+                             [(ngModel)]="anuncio.Precio" name="precio"
+                             required value="* Precio"
+                             min="0"
+                             max="9999999">
+                    </mat-form-field>
+                    <mat-checkbox class="ml-3"  [(ngModel)]="anuncio.ProductoNuevo" name="productonuevo"
+                                  [checked]="anuncio.ProductoNuevo">Nuevo</mat-checkbox>
+                  </div>
+                </div><br/>
+
+                <mat-label class="label-title">Formas de Contacto</mat-label>
+                <mat-form-field appearance="outline" class="w-100 btnInput" style="background-color:#fcfcfc;">
+                  <input matInput maxlength="100" placeholder="* Nombre de Contacto" class="py-0 my-0" #NombreContacto="ngModel"
+                         [(ngModel)]="anuncio.NombreContacto"
+                         required name="nombrecontacto">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100 btnInput" style="background-color:#fcfcfc;margin-top:3px;">
+                  <input matInput maxlength="11" placeholder="* Telefono de Contacto" class="py-0 my-0" #TelefonoContacto="ngModel"
+                         [(ngModel)]="anuncio.TelefonoContacto" name="telefonocontacto"
+                         required>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100 btnInput " style="background-color:#fcfcfc;margin-top:3px;">
+                  <!-- <mat-label>* Correo</mat-label> -->
+                  <input matInput type="email" maxlength="35" placeholder="* Correo de Contacto" class="py-0 my-0" #CorreoContacto="ngModel"
+                         [(ngModel)]="anuncio.CorreoContacto" name="correocontacto"
+                         required>
+                </mat-form-field>
+
+                <!-- <mat-form-field  appearance="outline" class="w-100 fs-input btnCheck btnSelect">
+    <mat-select #Provincia="ngModel" placeholder="Provincia" [(ngModel)]="anuncio.Provincia">
+      <mat-option value="0">La Habana</mat-option>
+      <mat-option value="1">Matanzas</mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+                <!--<mat-form-field appearance="outline" class="align-content-center w-100 btnInput btnCheck btnSelect">
+                  <input type="text" placeholder="Provincia" style="font-size: 1rem" aria-label="Number"
+                         matInput [formControl]="inputProv" (ngModelChange)="inputProvinciaChange($event)"
+                         [(ngModel)]="anuncio.Provincia" [matAutocomplete]="autoProvincia" name="Provincia" id="Provincia">
+                  <mat-autocomplete #autoProvincia="matAutocomplete">
+                    <mat-option *ngFor="let option of ListaProvFiltradas | async" [value]="option.Nombre"
+                                (onSelectionChange)="selectedProvincia($event)">
+                      {{option.Nombre}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="align-content-center w-100 btnInput btnCheck btnSelect">
+                  <input type="text" placeholder="Municipio" style="font-size: 1rem" aria-label="Number" matInput name="municipio"
+                         [formControl]="inputMun" [(ngModel)]="anuncio.Municipio" [matAutocomplete]="autoMcpio">
+                  <mat-autocomplete #autoMcpio="matAutocomplete">
+                    <mat-option *ngFor="let option of ListaMunFiltradas | async" [value]="option.Nombre">
+                      {{option.Nombre}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>-->
+
+                  <mat-form-field appearance="outline" class="w-100 fs-input mb-3 btnCheck btnSelect" style="background-color:#fcfcfc;margin-top:3px;">
+                      <mat-select placeholder="Provincia" (ngModelChange)="inputProvinciaChange($event)"
+                                  [(ngModel)]="anuncio.Provincia" name="Provincia" id="Provincia">
+                          <mat-option [value]=""  (click)="selectedProvincia('')"></mat-option>
+                          <mat-option *ngFor="let option of ListaProv" [value]="option.Nombre" (click)="selectedProvincia(option)"><!--(onSelectionChange)="selectedProvincia($event)"-->
+                              {{option.Nombre}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="w-100 fs-input mb-3 btnCheck btnSelect" style="background-color:#fcfcfc;">
+                      <mat-select placeholder="Municipio" [(ngModel)]="anuncio.Municipio"  name="Municipio" id="Municipio"><!--(optionSelected)="selectedCategoria($event)"-->
+                          <mat-option *ngFor="let option of ListaMun" [value]="option.Nombre">
+                              {{option.Nombre}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+
+
+
+
+                <!-- categorias -->
+               <div class="mt-4 pt-2">
+                <mat-label class="label-title">Categoría del anuncio</mat-label>
+               <!-- <mat-form-field appearance="outline" class="align-content-center w-100 btnInput btnCheck btnSelect">
+                  <input type="text" placeholder="Categoría" name="categoria"
+                         style="font-size: 1rem" aria-label="Number"
+                         matInput [formControl]="inputCat" [(ngModel)]="anuncio.Categoria.Nombre"
+                         [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedCategoria($event)">
+                    <mat-option *ngFor="let option of ListaCategoriaFiltradas | async" [value]="option.Nombre">
+                                      {{option.Nombre}}
+                    </mat-option>
+                  </mat-autocomplete>
+              </mat-form-field>-->
+
+                   <mat-form-field appearance="outline" class="w-100 fs-input mb-3 btnCheck btnSelect" style="background-color:#fcfcfc;">
+                       <mat-select placeholder="* Categoria" [(ngModel)]="anuncio.Categoria.Nombre" name="Nombre" id="Nombre" required [disabled]="anuncio.AnuncioId!=0"><!--(optionSelected)="selectedCategoria($event)"-->
+                           <mat-option *ngFor="let cat of ListaCategoria" [value]="cat.Nombre" (click)="selectedCategoria(cat)">{{cat.Nombre}}</mat-option>
+                       </mat-select>
+                   </mat-form-field>
+
+                <mat-form-field class="example-chip-list fs-input tags-selected-input w-100" style="background-color:#fcfcfc;">
+                  <mat-chip-list placeholder="* Etiquetas (máx. {{maxEtiquetas}})" #chipList1 [disabled]="!anuncio.Categoria || editing">
+                    <mat-chip class="btn-tag-selected" *ngFor="let fruit of ListaEti; let indx=index;"
+                              [selectable]="selectable" [removable]="removable" (removed)="removeEti(fruit,indx)">
+                      {{fruit.Nombre}}
+                      <div matChipRemove *ngIf="removable" class="rounded-circle ml-1 p-1 btn-tag-close d-flex justify-content-center align-items-center">
+                        <span class=""><i class="fa fa-close text-white icon-small"></i></span>
+                      </div>
+                    </mat-chip>
+                    <input placeholder="* Etiquetas" #etiquInp
+                           [formControl]="inputEtq"
+                           name="etiquetas"
+                           style="font-size: 1rem !important" [matAutocomplete]="auto1"
+                           [matChipInputFor]="chipList1"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addEti($event)"
+                           [matAutocompleteDisabled]="!anuncio.Categoria || editing">
+                  </mat-chip-list>
+                  <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="selectedEti($event)">
+                    <mat-option *ngFor="let fruit of ListaEtiFilter | async" [value]="fruit">
+                      {{fruit.Nombre}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+               </div>
+
+                <!-- <mat-form-field  appearance="outline" class="w-100 fs-input btnCheck btnSelect">
+    <mat-select #Municipio="ngModel" placeholder="Municipio" [(ngModel)]="anuncio.Municipio">
+      <mat-option value="0">Cerro</mat-option>
+      <mat-option value="1">Cardenas</mat-option>
+    </mat-select>
+  </mat-form-field> -->
+  <!-- <div class="container">
+    <div class="row">
+      <div class="col-12 pr-0 pl-0 pl-lg-2 pr-lg-2">
+
+
+      </div>
+    </div>
+  </div> -->
+              </div>
+              <div class="col-12 col-md-4">
+                <div class="container mb-lg-2">
+                  <div class="row">
+
+                    <div class="col-12 col-xl-8 px-0 px-xl-2 d-flex justify-content-xl-end">
+                      <div>
+                        <label class="label-title">Imagen Principal</label>
+                        <div class="d-flex flex-row align-items-center">
+
+                            <!--   <img [src]="'anuncios/bannerinf.png' | safeUrl" style="width: 200px; height: auto">-->
+                          <div class="deleteImg" *ngIf="anuncio.ImageContent" (click)="deleteImgSelected()">
+                            <div class="rounded-circle bg-danger p-2 btn-plus-img d-flex justify-content-center align-items-center">
+                              <i class="fa fa-close text-white"></i>
+                            </div>
+                          </div>
+                          <!--    <canvas id="micanvas2" class="w-100 hidden"  *ngIf="anuncio.ImageContent"></canvas>-->
+
+                          <div class="img-thumbnail img-preview-out d-flex justify-content-center align-items-center">
+
+                             <canvas id="micanvas" class="w-100"  *ngIf="anuncio.ImageContent"></canvas>
+
+                               <!--<img class="img-thumbnail " [src]="previewUrl" />-->
+
+                            <div class="d-none">
+                              <input type="file" name="imagen" id="fileUploadImageSimple" name="image" (change)="fileProgress($event,'fileUploadImageSimple')" />
+                            </div>
+
+                            <!--<div class="ml-2 rounded-circle bg-orange p-2 btn-plus-img d-flex justify-content-center">
+    <span class=""><i class="fa fa-plus text-white"></i></span>
+  </div>-->
+                             <!-- <img [src]="'anuncios/'+anuncio.ImageName | safeUrl" style="width: 200px;" *ngIf="anuncio.ImageName">-->
+                          <!--  <div bgImage [imgUrl]="domSanitizer.bypassSecurityTrustUrl('anuncios/bannerinferior.jpg')"></div>-->
+                         <!--  <img [src]="'anuncios/'+anuncio.ImageName | safeUrl" style="width: 200px;backgroundSize:contain;backgroundPosition:center" *ngIf="anuncio.ImageName" >-->
+                          <div style="height: 350px; width: 200px" bgImage [imgUrl]="getUrlImage(anuncio.ImageName,'anuncios')" *ngIf="!anuncio.ImageContent && anuncio.ImageName"></div>
+                          <div style="height: 350px; width: 200px" bgImage [imgUrl]="getUrlImage(anuncio.Categoria.ImageName,'categorias')" *ngIf="!anuncio.ImageContent && !anuncio.ImageName"></div>
+
+                          </div>
+
+                        </div>
+                         <div class="row" >
+                           <div class="col-md-6">
+                         <div class="d-flex flex-row justify-content-start align-items-center mt-2 cursor-pointer" (click)="onOpenFileUpload('fileUploadImageSimple')">
+                           <span class="color-orange"><i class="fa fa-folder-open-o fa-2x"></i></span>
+                           <span class="label-upload pl-2">Examinar</span>
+
+                         </div>
+                         </div>
+                           <div class="col-md-6" style="margin-top: 5px">
+                          <span class="label-upload pl-2 cursor-pointer"  *ngIf="fileData" (click)="girar('fileUploadImageSimple')">
+                            <i class="fa fa-redo fa-2x" title="Girar"></i>
+
+                          </span>
+                        </div>
+                       </div>
+
+                     </div>
+                   </div>
+                   <div id="img-free" class="col-12 px-0 px-xl-2 mt-2 d-flex justify-content-start flex-column flex-md-row flex-wrap flex-md-nowrap scroll-wrap">
+
+                     <ng-template #containerImgFree>
+                     </ng-template>
+
+                   </div>
+                 </div>
+               </div>
+
+
+             </div>
+             <div class="col-12 col-md-4">
+
+               <mat-form-field class="w-100 fs-input" appearance="outline" style="background-color:#fcfcfc;margin-top:2px;margin-bottom: 20px;" >
+
+                 <mat-label class="fs-input">Texto del anuncio</mat-label>
+                 <textarea maxlength="1000" class="w-100" matInput rows="30" placeholder="Texto del anuncio" #Etiquetas="ngModel"
+                           [(ngModel)]="anuncio.Descripcion" name="descripcion">
+                    </textarea>
+                  </mat-form-field>
+
+                  <!--<div class="captchar" ngIf="currentUser===null">-->
+               <div class="captchar" >
+                     <re-captcha (resolved)="resolved($event)" siteKey="6LfI1fcUAAAAAEwQ1Fb86Qkhabye30Y81fMYxsHM"></re-captcha><!--Setvmas-->
+                      <!--  <re-captcha (resolved)="resolved($event)" siteKey="6LdX0fcUAAAAAC8xRIu0HAX4szjL2Ufavpf_8Chq"></re-captcha>--><!--Localhost-->
+
+                    </div>
+
+               <div class="d-flex flex-column flex-sm-row flex-md-column flex-xl-row justify-content-xl-center align-items-center align-items-md-center">
+                 <div class="d-flex justify-content-center justify-content-lg-start mb-2 mb-xl-0 mr-1 w-50">
+                   <div  (click)="(form.invalid || anuncio.Etiquetas.length === 0 || currentUser===null )?'':onShowAdvancedConfiguration()" class="d-flex flex-row justify-content-center justify-content-lg-start align-items-center cursor-pointer">
+                     <button mat-mini-fab class="bg-blue btn-advanced cursor-pointer"
+                             type="button"
+                             (click)="onShowAdvancedConfiguration()"
+                             [class.btn-disabled]="form.invalid || anuncio.Etiquetas.length === 0 || currentUser===null "
+                             [disabled]="form.invalid || anuncio.Etiquetas.length === 0 || currentUser===null">
+                       <!-- <span><i class="mdi mdi-arrow-down mdi-18px text-white"></i> </span> -->
+                        <span><i class="fa fa-arrow-down text-white "></i> </span>
+                      </button>
+<!--                      <button mat-mini-fab class="bg-blue btn-advanced cursor-pointer"-->
+<!--                              type="button"-->
+<!--                              (click)="onShowAdvancedConfiguration()"-->
+<!--                              [class.btn-disabled]="form.invalid || anuncio.Etiquetas.length === 0  "-->
+<!--                              [disabled]="form.invalid || anuncio.Etiquetas.length === 0 ">-->
+<!--                        &lt;!&ndash; <span><i class="mdi mdi-arrow-down mdi-18px text-white"></i> </span> &ndash;&gt;-->
+<!--                        <span><i class="fa fa-arrow-down text-white "></i> </span>-->
+<!--                      </button>-->
+                      <span class="label-btn-advanced ml-2 w-50">Configuración Avanzada</span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center justify-content-lg-end mt-2 mt-sm-0 mt-md-2 mt-xl-0 w-50">
+                    <button class="btn-orange bg-orange px-3 py-2 cursor-pointer"
+                            type="submit" mat-raised-button (click)="onSubmitData()"
+                            [class.btn-disabled]="form.invalid || anuncio.Etiquetas.length === 0 || captcha.invalid"
+                            [disabled]="form.invalid || anuncio.Etiquetas.length === 0 || captcha.invalid">
+                      <span class="border-separator pr-2">Guardar</span>
+                      <span class="ml-3"><i class="fa fa-chevron-right next-icon"></i></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--</div>-->
+        </div>
+      </div>
+
+      <!--advanced configuration section-->
+      <div id="advancedConfiguration" class="col-12 mt-0 mt-md-0 pt-0 pt-sm-4 pt-md-0 px-0 px-sm-1 hidden">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 px-0 px-sm-1">
+              <form [formGroup]="optionsForm" #form="ngForm">
+
+                <div id="accordion" class="accordion" role="tablist">
+                  <!--Opcion mas Destacado-->
+                  <div class="card border-0 mb-sm-2">
+                    <div class="card-header cursor-pointer border-0 py-1 pr-2 d-none d-sm-block collapsed" role="tab" data-toggle="collapse" href="#panel1" aria-expanded="false" aria-controls="panel1">
+                      <div class="d-flex flex-row align-items-center justify-content-between w-100">
+                        <span class="collapsed fs-header-panel pr-1">
+                          DESTAQUE SU ANUNCIO. HAGA QUE SU ANUNCIO SE MUESTRE RESALTADO EN LAS LISTAS DE NUESTRO SITIO.  <strong id="fechaFinDestacado">Quedan {{diasFinDest}} dias</strong>
+                        </span>
+                        <span class="icon-panel"></span>
+                      </div>
+                    </div>
+                    <div class="card-header header-custom cursor-pointer border-0 py-3 pr-2 d-block d-sm-none collapsed" role="tab" data-toggle="collapse" href="#panel1" aria-expanded="false" aria-controls="panel1">
+                      <span class="collapsed fs-header-panel pr-1">
+                        DESTACA TU ANUNCIO  <strong id="fechaFinDestacadoResp">Quedan {{diasFinDest}} dias</strong>
+                      </span>
+                    </div>
+                    <div id="panel1" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                      <div class="card-body">
+                        <div class="container-fluid px-0">
+                          <div class="row d-flex justify-content-end">
+                            <div class="col-12 col-lg-12 col-xl-5 mb-2 mb-lg-0">
+                              <span class="color-orange font-weight-bold">
+                                Utilice esta opción para que su anuncio aparezca destacado en las listas. ¡Llame la atención!
+                              </span>
+                            </div>
+                            <div class="col-5 col-sm-3 col-lg-3 col-xl-2 pt-3">
+                              <mat-checkbox class="ml-lg-2 ml-md-0" formControlName="destacadoCheck" value="destacado" (change)="checkValidations($event)">Comprar destacado</mat-checkbox>
+                            </div>
+                            <div class="col-7 col-sm-4 col-lg-5 col-xl-3 pl-lg-0 d-flex flex-row justify-content-end justify-content-lg-center justify-content-xl-end">
+                              <span class="label-total-pay pt-3 mr-2">Días a pagar</span>
+                              <mat-form-field appearance="outline" class="btnInput btnInputTotalDay">
+                                <input matInput class="py-0 my-0" formControlName="destacadoDias" (change)="calcular($event.target.name)" name="destacadoDias" type="number" min="1" [attr.disabled]="!f.destacadoCheck.value?true:null" />
+
+                              </mat-form-field>
+                            </div>
+                            <!--<div class="col-5 col-sm-5 col-lg-2 col-xl-3 d-flex flex-row justify-content-end pt-3">
+                          </div>-->
+                            <div class="col-12 col-sm-5 col-lg-4 col-xl-2 d-flex flex-row justify-content-end pt-3">
+                              <span class="label-total-pay">Puntos por día:</span><span class="font-weight-bold color-orange ml-1">{{precioDest}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--Opcion mas Etiquetas-->
+                  <div class="card border-0 mb-sm-2">
+                    <div class="card-header cursor-pointer border-0 py-1 pr-2 d-none d-sm-block collapsed" role="tab" data-toggle="collapse" href="#panel2" aria-expanded="false" aria-controls="panel2">
+                      <div class="d-flex flex-row align-items-center justify-content-between w-100">
+                        <span class="collapsed fs-header-panel pr-1">
+                          DESCRIBA SU ANUNCIO. ASÓCIELO A AQUELLOS TÉRMINOS QUE FACILITEN SU BÚSQUEDA POR LOS USUARIOS.   <strong id="fechaFinDescriptivo">Quedan {{diasFinDesc}} dias</strong>
+                        </span>
+                        <span class="icon-panel"></span>
+                      </div>
+                    </div>
+                    <div class="card-header header-custom cursor-pointer border-0 py-3 pr-2 d-block d-sm-none collapsed" role="tab" data-toggle="collapse" href="#panel2" aria-expanded="false" aria-controls="panel2">
+                      <span class="collapsed fs-header-panel">
+                        DESCRIBE TU ANUNCIO <strong id="fechaFinDescriptivoResp">Quedan {{diasFinDesc}} dias</strong>
+                      </span>
+                    </div>
+                    <div id="panel2" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                      <div class="card-body pb-xl-0">
+                        <div class="container-fluid px-0">
+                          <div class="row d-flex justify-content-end">
+                            <!-- <div class="col-12 col-sm-12 col-xl-7 pr-lg-5">-->
+                            <div class="col-12 col-lg-12 col-xl-5 mb-2 mb-lg-0">
+                              <span class="color-orange font-weight-bold">
+                                Haga su anucio más descriptivo y fácil de encontrar asociándolo con más de tres etiquetas. ¡Multiplique su anuncio!
+                              </span>
+                              <mat-form-field class="example-chip-list fs-input tags-selected-input w-100 mt-2">
+                                <mat-chip-list #chipList [disabled]="(f.descriptivoCheck.value==false || diasFinDesc!=0)?true:null">
+                                  <mat-chip class="btn-tag-selected" *ngFor="let fruit of ListaEti2; let indx=index;" [selectable]="selectable" [removable]="removable" (removed)="removeEti2(fruit,indx)">
+                                    {{fruit.Nombre}}
+                                    <div matChipRemove *ngIf="removable" class="rounded-circle ml-1 p-1 btn-tag-close d-flex justify-content-center align-items-center">
+                                      <span class=""><i class="fa fa-close text-white icon-small"></i></span>
+                                    </div>
+                                  </mat-chip>
+                                  <input placeholder="Etiquetas" #etiquInp2
+                                         [formControl]="inputEtq2"
+                                         style="font-size: 1rem !important" [matAutocomplete]="auto2"
+                                         [matChipInputFor]="chipList"
+                                         id="etiquInp2"
+                                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                                         (matChipInputTokenEnd)="addEti2($event)"
+                                         [matAutocompleteDisabled]="(f.descriptivoCheck.value==false || diasFinDesc!=0)?true:null">
+                                </mat-chip-list>
+                                <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="selectedEti2($event)">
+                                  <mat-option *ngFor="let fruit of ListaEtiFilter2 | async" [value]="fruit">
+                                    {{fruit.Nombre}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            </div>
+                            <!--<div class="col-12 col-sm-6 col-xl-2 d-flex flex-row justify-content-end justify-content-sm-start justify-content-xl-end">
+              <span class="label-total-pay pt-3 mr-2">Días a pagar</span>
+              <mat-form-field appearance="outline" class="btnInput btnInputTotalDay">
+                 <mat-label class="fs-input">* Precio</mat-label>
+                <input matInput class="py-0 my-0">
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3 d-flex flex-row justify-content-end pt-3">
+              <span class="label-total-pay">Puntos por día:</span><span class="font-weight-bold color-orange ml-1">{{listaTipoOpciones[1].Precio}}</span>
+            </div>-->
+
+
+                            <div class="col-5 col-sm-3 col-lg-4 col-xl-2 pt-3">
+                             <mat-checkbox class="ml-lg-2 ml-md-0" formControlName="descriptivoCheck" value="descriptivo" (change)="checkValidations($event)">Comprar más etiquetas</mat-checkbox>
+                            </div>
+                            <div class="col-7 col-sm-4 col-lg-4 col-xl-2 pl-lg-0 d-flex flex-row justify-content-end justify-content-sm-start justify-content-xl-end">
+                              <span class="label-total-pay pt-3 mr-2">Días a pagar</span>
+                              <mat-form-field appearance="outline" class="btnInput btnInputTotalDay">
+                                <input matInput class="py-0 my-0" formControlName="descriptivoDias" (change)="calcular($event.target.name)" name="descriptivoDias" type="number" min="0" [attr.disabled]="!f.descriptivoCheck.value?true:null" />
+                              </mat-form-field>
+                            </div>
+                            <div class="col-12 col-sm-6 col-xl-3 d-flex flex-row justify-content-end pt-3">
+                              <span class="label-total-pay">Puntos por día:</span><span class="font-weight-bold color-orange ml-1"> {{precioDesc}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--Opcion autorrenovable-->
+                  <div class="card border-0 mb-sm-2">
+                    <div class="card-header cursor-pointer border-0 py-1 pr-2 d-none d-sm-block collapsed" role="tab" id="headingThree1" data-toggle="collapse" href="#panel3" aria-expanded="false" aria-controls="panel3">
+                      <div class="d-flex flex-row align-items-center justify-content-between w-100">
+                        <span class="collapsed fs-header-panel pr-1">
+                          HAGA MÁS VISIBLE SU ANUNCIO. CONFIGÚRELO PARA QUE SE AUTORRENUEVE PERIÓDICAMENTE EN LAS LISTAS DE NUESTRO SITIO.   <strong id="fechaFinAuto">Quedan {{diasFinAuto}} dias</strong>
+
+                        </span>
+                        <span class="icon-panel"></span>
+                      </div>
+                    </div>
+                    <div class="card-header header-custom cursor-pointer border-0 py-3 pr-2 d-block d-sm-none collapsed" role="tab" data-toggle="collapse" href="#panel3" aria-expanded="false" aria-controls="panel3">
+                      <span class="collapsed fs-header-panel">
+                        HAZ MÁS VISIBLE TU ANUNCIO <strong id="fechaFinAutoResp">Quedan {{diasFinAuto}} dias</strong>
+                      </span>
+                    </div>
+                    <div id="panel3" class="collapse" role="tabpanel" aria-labelledby="headingThree2" data-parent="#accordion">
+                      <div class="card-body">
+                        <div class="container-fluid px-0">
+                          <div class="row mb-3">
+                            <div class="col-12">
+                              <span class="color-orange font-weight-bold">
+                                Esta opción automatiza su anuncio, haciendo que se renueve periódicamente y que suba a las primeras posiciones
+                                de la lista dentro de su categoría. ¡Le dará más visibilidad! Setvmás trabaja para usted.
+                              </span>
+                            </div>
+                          </div>
+                          <div class="row d-flex justify-content-end">
+                            <div class="col-12 col-sm-4 col-md-6 col-xl-2 d-flex flex-row justify-content-end justify-content-sm-start align-items-end mb-3 mb-sm-0">
+                              <mat-checkbox class="mb-2" formControlName="autorrenovableCheck" value="auto" (change)="checkValidations($event)">Comprar autorrenovable</mat-checkbox>
+                            </div>
+                            <div class="col-12 col-sm-8 col-md-6 col-xl-5 justify-content-end justify-content-xl-center align-items-end mb-3 mb-sm-0">
+                              <!--<mat-form-field appearance="outline" class="w-100 fs-input btnCheck btnSelect">
+                <mat-select placeholder="Frecuencia de renovación del anuncio">
+                  <mat-option value="0">Diariamente</mat-option>
+                  <mat-option value="1">Semanalmente</mat-option>
+                </mat-select>
+              </mat-form-field>-->
+
+                              <mat-form-field appearance="outline" class="w-100 fs-input btnCheck btnSelect">
+                                <mat-label>Frecuencia de renovación del anuncio</mat-label>
+                                <mat-select formControlName="frecuencia" [disabled]="!f.autorrenovableCheck.value">
+                                  <!--<mat-option [value]="0"> </mat-option>-->
+                                  <mat-option *ngFor="let frec of listaFrecAutoRenovables; let i=index;" [value]="frec.Nombre" (click)="changeFrecuencia(frec)">
+                                    {{frec.Nombre}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 col-xl-2 d-flex flex-row justify-content-end justify-content-sm-start justify-content-xl-end">
+                              <span class="label-total-pay pt-3 mr-2">Días a pagar</span>
+                              <mat-form-field appearance="outline" class="btnInput btnInputTotalDay">
+                                <input matInput class="py-0 my-0" formControlName="autorrenovableDias" (change)="calcular($event.target.name)" name="autorrenovableDias" type="number" min="0" [attr.disabled]="!f.autorrenovableCheck.value?true:null"/>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 col-xl-3 d-flex flex-row justify-content-end pt-3">
+                              <span class="label-total-pay">Puntos por día:</span><span class="font-weight-bold color-orange ml-1">{{precioAutorr}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--Opcion mi web es el anuncio-->
+                  <div class="card border-0 mb-sm-2">
+                    <div class="card-header cursor-pointer border-0 py-1 pr-2 d-none d-sm-block collapsed" role="tab" id="headingThree3" data-toggle="collapse" href="#panel4" aria-expanded="false" aria-controls="panel4">
+                      <div class="d-flex flex-row align-items-center justify-content-between w-100">
+                        <span class="collapsed fs-header-panel pr-1">
+                          ANUNCIE SU PÁGINA WEB. PERMITA QUE NUESTROS USUARIOS ACCEDAN DIRECTAMENTE A SU NEGOCIO.   <strong id="fechaFinWeb">Quedan {{diasFinWeb}} dias</strong>
+                        </span>
+                        <span class="icon-panel"></span>
+                      </div>
+                    </div>
+                    <div class="card-header header-custom cursor-pointer border-0 py-3 pr-2 d-block d-sm-none collapsed" role="tab" data-toggle="collapse" href="#panel4" aria-expanded="false" aria-controls="panel4">
+                      <span class="collapsed fs-header-panel">
+                        ANUNCIA TU PÁGINA WEB <strong id="fechaFinWebResp">Quedan {{diasFinWeb}} dias</strong>
+                      </span>
+                    </div>
+                    <div id="panel4" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                      <div class="card-body">
+                        <div class="container-fluid px-0">
+                          <div class="row mb-2">
+                            <div class="col-12">
+                              <span class="color-orange font-weight-bold">
+                                Anuncie su página web con esta opción. ¡Abra las puertas de su negocio con un solo click!
+                              </span>
+                            </div>
+                          </div>
+                          <div class="row d-flex justify-content-end">
+                            <div class="col-12 col-sm-5 col-xl-3">
+                              <!--<div class="w-100 px-0 px-xl-5 d-flex flex-row justify-content-end justify-content-sm-end pt-0 pt-sm-3">-->
+                              <div class="col-12 col-sm-4 col-md-6 col-xl-2 d-flex flex-row justify-content-end justify-content-sm-start align-items-end mb-3 mb-sm-0">
+                                <mat-checkbox formControlName="webCheck" value="web" (change)="checkValidations($event)">Comprar mi enlace web</mat-checkbox>
+                              </div>
+                            </div>
+                            <div class="col-12 col-sm-5 col-xl-3">
+                              <!--<div class="w-100 px-0 px-xl-5 d-flex flex-row justify-content-end justify-content-sm-end pt-0 pt-sm-3">-->
+                              <div class="col-12 col-sm-4 col-md-6 col-xl-2 d-flex flex-row justify-content-end justify-content-sm-start align-items-end mb-3 mb-sm-0">
+                                <mat-checkbox formControlName="miWebCheck" [disabled]="((f.webCheck.value===true && diasFinWeb!==0)||f.webCheck.value===false)?true:null " value="miWebCheck" (change)="checkValidations($event)">Mi web es el anuncio</mat-checkbox>
+                              </div>
+                            </div>
+                            <div class="col-12 col-sm-7 col-xl-4">
+                              <mat-form-field appearance="outline" class="w-100 btnInput">
+                                <input matInput placeholder="* (ejemplo) http://www.setvmas.com" class="py-0 my-0" formControlName="web" [attr.disabled]="(f.webCheck.value===false || diasFinWeb!==0)?true:null " >
+                              </mat-form-field>
+                                <mat-error *ngIf="f.web.hasError('required')">
+                                    Este campo es obligatorio
+                                </mat-error>
+                              <mat-error *ngIf="f.web.hasError('pattern')">
+                                Url no válida
+                              </mat-error>
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-xl-2 d-flex justify-content-end justify-content-sm-start">
+                              <span class="label-total-pay pt-3 mr-2">Días a pagar</span>
+                              <mat-form-field appearance="outline" class="btnInput btnInputTotalDay">
+                                <input matInput class="py-0 my-0" formControlName="webDias" (change)="calcular($event.target.name)" name="webDias" type="number" min="0" [attr.disabled]="!f.webCheck.value?true:null"/>
+                              </mat-form-field>
+                              <!--<span id="fechaFinWeb" class="label-total-pay pt-3 mr-2">Hasta:{{fechaFinWeb|date:'dd/MM/yyyy'}}</span>-->
+                            </div>
+                            <div class="col-12 col-sm-6 col-xl-3 d-flex flex-row justify-content-end justify-content-sm-end pt-3">
+                              <span class="label-total-pay">Puntos por día:</span><span class="font-weight-bold color-orange ml-1">{{precioWeb}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--Opcion imagenes-->
+                  <div class="card border-0 mb-sm-2">
+                    <div class="card-header cursor-pointer border-0 py-1 pr-2 d-none d-sm-block collapsed" role="tab" id="headingThree4" data-toggle="collapse" href="#panel5" aria-expanded="false" aria-controls="panel5">
+                      <div class="d-flex flex-row align-items-center justify-content-between w-100">
+                        <span class="collapsed fs-header-panel pr-1">
+                          INSERTE IMÁGENES EN SUS ANUNCIOS. PERMITA A LOS USUARIOS INTERACTUAR CON SUS PRODUCTOS, OFREZCA REALIDADES.   <strong id="fechaFinImg">Quedan {{diasFinImg}} dias</strong>
+
+                        </span>
+                        <span class="icon-panel"></span>
+                      </div>
+                    </div>
+                    <div class="card-header header-custom cursor-pointer border-0 py-3 pr-2 d-block d-sm-none collapsed" role="tab" data-toggle="collapse" href="#panel5" aria-expanded="false" aria-controls="panel5">
+                      <span class="collapsed fs-header-panel">
+                        INSERTA IMÁGENES <strong id="fechaFinImgResp">Quedan {{diasFinImg}} dias</strong>
+                      </span>
+                    </div>
+                    <div id="panel5" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                      <div class="card-body">
+                        <div class="container">
+                          <div class="row mb-2">
+                            <div class="col-12 mb-3">
+                              <span class="color-orange font-weight-bold">
+                                Con esta opción podrás insertar imágenes con títulos, mejorando la presentación de tus productos y servicios.
+                                ¿Necesitas una galería, vidiriera o tienda?¡Pruebe con esto! Cree su espacio.
+                              </span>
+                            </div>
+                          </div>
+                          <div class="row d-flex justify-content-end">
+                            <div class="col-12 d-flex flex-column flex-md-row flex-wrap flex-md-nowrap scroll-wrap">
+
+                              <ng-template #containerImg>
+                              </ng-template>
+
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-3 d-flex flex-row justify-content-start pt-3">
+                              <mat-checkbox formControlName="imagenCheck" value="imagenes" (change)="checkValidations($event)">Comprar más imágenes</mat-checkbox>
+                            </div>
+                            <div class="col-12 col-lg-6 d-flex flex-row justify-content-start align-items-end align-items-lg-start pb-0 pt-lg-3">
+
+                              <span class="label-total-pay pt-3 mr-2">Días a pagar</span>
+                              <mat-form-field appearance="outline" class="btnInput btnInputTotalDay">
+                                <input matInput class="py-0 my-0" formControlName="imagenDias" (change)="calcular($event.target.name)" name="imagenDias" type="number" min="0" [attr.disabled]="!f.imagenCheck.value?true:null">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-3 d-flex flex-row justify-content-end justify-content-sm-start justify-content-lg-end">
+                              <div class="d-none d-lg-block">
+                                <span class="label-total-pay">Puntos por día:</span><span class="font-weight-bold color-orange ml-1">
+                                  {{precioImg}}
+                                </span>
+                              </div>
+                            </div>
+                            <!--<div class="col-12 col-sm-6 col-md-6 col-lg-3 d-flex flex-row justify-content-end pt-3">
+              <span class="label-total-pay">Puntos por día:</span><span class="font-weight-bold color-orange ml-1">{{listaTipoOpciones[8].Precio}}</span>
+            </div>-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--Opcion BANNER INFERIOR-->
+                  <div class="card border-0 mb-sm-2">
+                    <div class="card-header cursor-pointer border-0 py-1 pr-2 d-none d-sm-block collapsed" role="tab" id="headingThree5" data-toggle="collapse" href="#panel6" aria-expanded="false" aria-controls="panel6">
+                      <div class="d-flex flex-row align-items-center justify-content-between w-100">
+                        <span class="collapsed fs-header-panel pr-1">
+                          ANÚNCIESE EN EL BANNER INFERIOR DEL SITIO. APROVECHE LAS OPORTUNIDADES DE HACER MÁS VISIBLE SU NEGOCIO.   <strong id="fechaFinInf">Quedan {{diasFinInf}} dias</strong>
+                        </span>
+                        <span class="icon-panel"></span>
+                      </div>
+                    </div>
+                    <div class="card-header header-custom cursor-pointer border-0 py-3 pr-2 d-block d-sm-none collapsed" role="tab" data-toggle="collapse" href="#panel6" aria-expanded="false" aria-controls="panel6">
+                      <span class="collapsed fs-header-panel">
+                        ANUNCIA EN BANNER INFERIOR <strong id="fechaFinInfResp">Quedan {{diasFinInf}} dias</strong>
+                      </span>
+                    </div>
+                    <div id="panel6" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                      <div class="card-body">
+                        <div class="container-fluid px-0">
+                          <div class="row mb-2">
+                            <div class="col-12">
+                              <span class="color-orange font-weight-bold">
+                                Con esta opción, la imagen principal de su anuncio podrá aparecer como banner de acceso a su anuncio
+                                en la parte inferior de las páginas del sitio. ¡Muestre lo que tiene!
+                              </span>
+                            </div>
+                          </div>
+                          <div class="row d-flex justify-content-end">
+                            <div class="col-12 col-lg-3 w-100 d-flex flex-row justify-content-end justify-content-sm-start pt-lg-3">
+                              <mat-checkbox id="squareCheckbox" class="text-right" formControlName="bannerInfCheck" value="inferior" (change)="checkValidations($event)">Comprar <br class="d-block d-sm-none"> banner inferior</mat-checkbox>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row justify-content-end justify-content-sm-start justify-content-lg-end">
+                              <span class="label-total-pay pt-3 mr-2">Días a pagar</span>
+                              <mat-form-field appearance="outline" class="btnInput btnInputTotalDay">
+                                <input matInput class="py-0 my-0" formControlName="bannerInfDias" (change)="calcular($event.target.name)" name="bannerInfDias"  type="number" min="0" [attr.disabled]="!f.bannerInfCheck.value?true:null" >
+                              </mat-form-field>
+                            </div>
+                          <!--  <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row justify-content-end justify-content-sm-start justify-content-lg-end">
+                              <div class="container px-0">
+                                <div class="row">
+                                  <div class="col-lg-9 col-xl-7 px-xl-0">
+                                    <div class="w-100">
+                                      <img class="img-thumbnail img-banner-movil w-100" id="fileUploadImageInf1" [src]="bannerInf">
+                                      <div class="d-none">
+                                        <input type="file" id="fileUploadImageInf" name="image" (change)="fileProgress($event,'fileUploadImageInf')" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-3 col-xl-5 pl-xl-0 d-flex flex-column align-items-end">
+                                    <div class="d-flex flex-row align-items-center align-self-start align-self-lg-end mt-1 mt-lg-0 cursor-pointer d-none" (click)="onOpenFileUpload('fileUploadImageInf')">
+                                      <span class="color-orange"><i class="fa fa-folder-open-o fa-2x"></i></span>
+                                      <span class="label-upload pl-2">Imagen</span>
+                                    </div>
+                                    <!--<div class="d-flex flex-row align-items-center pt-2">
+      <span class="label-total-pay mr-lg-4 mr-2">Días a pagar</span>
+      <mat-form-field appearance="outline" class="btnInput btnInputTotalDay ml-lg-3">
+        <input matInput class="py-0 my-0" [formControl]="bannerSupDias">
+      </mat-form-field>
+    </div>
+    <div class="d-flex flex-row pt-3">
+      <span class="label-total-pay">Puntos por día:</span><span class="font-weight-bold color-orange ml-1 ml-lg-2">{{listaTipoOpciones[10].Precio}}</span>
+    </div>
+
+                                  </div>
+                                  <div class="d-flex flex-row justify-content-start justify-content-lg-end align-items-center mt-2 mt-lg-0 cursor-pointer" (click)="onOpenFileUpload('fileUploadImageDesktop')">
+                                    <mat-error *ngIf="f.imageInf.hasError('required')">
+                                      Debes introducir una imagen
+                                    </mat-error>
+                                    <mat-error *ngIf="f.imageInf.hasError('imageValid')">
+                                      Debe insertar una imagen con las siguientes dimesiones: 292 X 186
+                                    </mat-error>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>-->
+                            <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row justify-content-end pt-3">
+                              <span class="label-total-pay">Puntos por día:</span><span class="font-weight-bold color-orange ml-1">{{precioInf}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--Opcion BANNER Superior-->
+                  <div class="card border-0 mb-sm-2">
+                    <div class="card-header cursor-pointer border-0 py-1 pr-2 d-none d-sm-block collapsed" role="tab" id="headingThree6" data-toggle="collapse" href="#panel7" aria-expanded="false" aria-controls="panel7">
+                      <div class="d-flex flex-row align-items-center justify-content-between w-100">
+                        <span class="collapsed fs-header-panel pr-1">
+                          ANÚNCIESE EN EL BANNER SUPERIOR DEL SITIO. OFREZCA UNA IMAGEN DE CALIDAD, NOSOTROS HAREMOS EL RESTO.    <strong id="fechaFinSup">Quedan {{diasFinSup}} dias</strong>
+                        </span>
+                        <span class="icon-panel"></span>
+                      </div>
+                    </div>
+                    <div class="card-header header-custom cursor-pointer border-0 py-3 pr-2 d-block d-sm-none collapsed" role="tab" data-toggle="collapse" href="#panel7" aria-expanded="false" aria-controls="panel7">
+                      <span class="collapsed fs-header-panel">
+                        ANUNCIA EN BANNER SUPERIOR <strong id="fechaFinSupResp">Quedan {{diasFinSup}} dias</strong>
+                      </span>
+                    </div>
+                    <div id="panel7" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                      <div class="card-body border-bottom-orange">
+                        <div class="container-fluid px-0">
+                          <div class="row mb-2">
+                            <div class="col-12">
+                              <span class="color-orange font-weight-bold">
+                                Esta opción le permite colocar una imagen como banner principal de acceso a su anuncio en la parte superior
+                                de las páginas del sitio. Le recomendamos contactar a un diseñador para que le haga una imagen atractiva y
+                                efectiva para su publicidad, que cumpla con los requisitos de formato. Adáptese a formato móvil o de escritorio.
+                                ¡Maximice sus oportunidades!
+                              </span>
+                            </div>
+                          </div>
+
+                          <div class="row d-flex justify-content-end justify-content-start justify-content-lg-end">
+                            <div class="col-12 col-lg-6 w-100 d-flex flex-row justify-content-end justify-content-sm-start pt-lg-3">
+                              <mat-checkbox class="ml-lg-2 ml-md-0" formControlName="bannerSupCheck" value="superior" (change)="checkValidations($event)">Comprar <br class="d-block d-sm-none"> banner superior</mat-checkbox>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row justify-content-end justify-content-sm-start justify-content-lg-end">
+                              <span class="label-total-pay pt-3 mr-2">Días a pagar</span>
+                              <mat-form-field appearance="outline" class="btnInput btnInputTotalDay">
+                                <input matInput class="py-0 my-0" formControlName="bannerSupDias" (change)="calcular($event.target.name)" name="bannerSupDias" type="number" min="0" [attr.disabled]="!f.bannerSupCheck.value?true:null" >
+                              </mat-form-field>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-3 d-flex flex-row justify-content-end pt-3">
+                              <span class="label-total-pay">Puntos por día:</span><span class="font-weight-bold color-orange ml-1">{{precioSup}}</span>
+                            </div>
+                          </div>
+                          <div class="row d-flex justify-content-end">
+                            <div class="col-12 col-xl-7 d-flex flex-column flex-lg-column-reverse justify-content-end mb-2 mb-lg-2">
+                              <div class="d-flex flex-row justify-content-end">
+                                <img class="img-thumbnail img-banner-desktop w-100" id="fileUploadImageDesktop1" [src]="bannerDesktop">
+                                <div class="d-none">
+                                  <input type="file" id="fileUploadImageDesktop" name="image" (change)="fileProgress($event,'fileUploadImageDesktop')"/> <!--[attr.disabled]="!f.bannerSupCheck.value==true?true:null"-->
+                                </div>
+
+                              </div>
+                              <div class="d-flex flex-row justify-content-start justify-content-lg-end align-items-center mt-2 mt-lg-0 cursor-pointer" (click)="onOpenFileUpload('fileUploadImageDesktop')">
+                                <span class="color-orange"><i class="fa fa-folder-open-o fa-2x"></i></span>
+                                <span class="label-upload pl-2">Imagen para escritorio</span>
+                              </div>
+                              <div class="d-flex flex-row justify-content-start justify-content-lg-end align-items-center mt-2 mt-lg-0 cursor-pointer" >
+                                <mat-error *ngIf="f.imageDesk.hasError('required')">
+                                  Debes introducir una imagen con las siguientes dimesiones: 1170x166
+                                </mat-error>
+                                <mat-error *ngIf="f.imageDesk.hasError('imageValid')">
+                                  Debe insertar una imagen con las siguientes dimesiones: 1170x166
+                                </mat-error>
+                              </div>
+                              </div>
+
+                              <div class="col-12 col-xl-5 d-flex flex-column flex-lg-row justify-content-end">
+                                <div class="container px-0">
+                                  <div class="row">
+                                    <div class="col-lg-9 col-xl-7 px-xl-0">
+                                      <div class="w-100">
+                                        <img class="img-thumbnail img-banner-movil w-100" id="fileUploadImageMovil1" [src]="bannerMobil">
+                                        <div class="d-none">
+                                          <input type="file" id="fileUploadImageMovil" name="image" (change)="fileProgress($event,'fileUploadImageMovil')"  /><!-- [attr.disabled]="!f.bannerSupCheck.value==true?true:null"-->
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-3 col-xl-5 pl-xl-0 d-flex flex-column align-items-end">
+                                      <div class="d-flex flex-row align-items-center align-self-start align-self-lg-end mt-1 mt-lg-0 cursor-pointer d-none" (click)="onOpenFileUpload('fileUploadImageMovil')">
+                                        <span class="color-orange"><i class="fa fa-folder-open-o fa-2x"></i></span>
+                                        <span class="label-upload pl-2">Imagen para móvil</span>
+                                      </div>
+                                      <!--<div class="d-flex flex-row align-items-center pt-2">
+      <span class="label-total-pay mr-lg-4 mr-2">Días a pagar</span>
+      <mat-form-field appearance="outline" class="btnInput btnInputTotalDay ml-lg-3">
+        <input matInput class="py-0 my-0" [formControl]="bannerSupDias">
+      </mat-form-field>
+    </div>
+    <div class="d-flex flex-row pt-3">
+      <span class="label-total-pay">Puntos por día:</span><span class="font-weight-bold color-orange ml-1 ml-lg-2">{{listaTipoOpciones[10].Precio}}</span>
+    </div>-->
+
+                                    </div>
+                                    <div class="d-flex flex-row justify-content-start justify-content-lg-end align-items-center mt-2 mt-lg-0 cursor-pointer" >
+                                      <mat-error *ngIf="f.imageMov.hasError('required')">
+                                  Debes introducir una imagen con las siguientes dimesiones: 322x166
+                                      </mat-error>
+                                      <mat-error *ngIf="f.imageMov.hasError('imageValid')">
+                                        Debe insertar una imagen con las siguientes dimesiones: 322x166
+                                      </mat-error>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+            <div class="col-12 d-flex flex-column flex-sm-row justify-content-center align-items-center mt-2 mb-3">
+              <div class="d-flex flex-column flex-lg-row mt-1 justify-content-center justify-content-sm-start mb-2 mb-sm-0 w-50">
+                <div class="d-flex justify-content-center justify-content-sm-start mb-1 mb-sm-2 mb-md-0 mr-lg-5">
+                  <div class="d-flex flex-row justify-content-center justify-content-lg-start align-items-center cursor-pointer">
+                    <span class="label-total-pay">Total de puntos a pagar:</span><span class="font-weight-bold color-orange ml-1">{{total}}</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center justify-content-sm-start justify-content-lg-end mt-2 mt-lg-0" *ngIf="comprarPutnos">
+                  <a class="d-flex justify-content-start justify-content-lg-center align-items-center cursor-pointer color-shop-cart" (click)="openDialogDirectPurchase()">
+                    <div class="mr-1 p-lg-1 d-flex justify-content-center align-items-center">
+                      <span><i class="mdi mdi-cart-outline mdi-24px"></i></span>
+                    </div>
+                    <span>Debe comprar puntos</span>
+                  </a>
+                </div>
+              </div>
+              <div class="d-flex flex-column flex-md-row mt-0 mt-sm-1 justify-content-center justify-content-sm-end align-items-center w-50">
+                <div class="d-flex justify-content-center justify-content-md-start justify-content-lg-end mb-2 mb-md-0 mr-1 w-50">
+                  <div (click)="onShowSimpleConfiguration()" class="d-flex flex-row justify-content-center justify-content-lg-end align-items-center cursor-pointer">
+                    <button mat-mini-fab class="bg-blue btn-advanced border-0">
+                      <span><i class="fa fa-arrow-up text-white"></i></span>
+                    </button>
+                    <span class="label-btn-advanced ml-2 w-50">Regresar</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center justify-content-md-end mt-2 mt-md-0 w-50">
+                  <div class="d-flex justify-content-center justify-content-lg-end mt-2 mt-lg-0">
+                  <!--  <button class="btn-orange bg-orange px-3 py-2 cursor-pointer"
+                            type="submit" mat-raised-button (click)="onSubmitData()"
+                            [class.btn-disabled]="form.invalid || anuncio.Etiquetas.length === 0  || optionsForm.invalid "
+                            [disabled]="form.invalid || anuncio.Etiquetas.length === 0 || optionsForm.invalid">
+                      <span class="border-separator pr-2">Guardar</span>
+                      <span class="ml-3"><i class="fa fa-chevron-right next-icon"></i></span>
+                    </button>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<!--    </mat-dialog-content>-->
+
+    </form>
+  </div>
+</div>
+

@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Ayuda
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div>
+
+
+    <ul>
+      <li (click)="termino()"><strong>Términos y condiciones</strong></li>
+      <li (click)="nosotros()"><strong>Nosotros</strong></li>
+      <li (click)="respuestas()"><strong>Preguntas frecuentes</strong></li>
+      <li (click)="puntos()"><strong>Puntuación</strong></li>
+      <!-- <li (click)="politicas()"><strong>Políticas</strong></li> -->
+    </ul>
+    <div style="height: 20px;"></div>
+    <ion-item *ngIf="help === false" lines="full">
+      <h3 [innerHTML]="formData.Titulo"></h3>
+
+    </ion-item>
+    <ion-item *ngIf="help === false" lines="none">
+      <ion-text [innerHTML]="formData.Contenido"></ion-text>
+    </ion-item>
+    <!-- <div *ngIf="help === true" [innerHTML]="ayudar.Valor">{{ayudar.Valor}}</div> -->
+  </div>
+
+</ion-content>

@@ -1,0 +1,114 @@
+<!--<ngx-slick-carousel id="slideFooter" class="carousel  d-none d-lg-block"-->
+<!--                    #slickModal="slick-carousel"-->
+<!--                    [config]='slideConfig'>-->
+<!--    <div ngxSlickItem *ngFor="let slide of slides" class="slide">-->
+<!--        <a [href]="slide.link" target="_blank">-->
+<!--           &lt;!&ndash; <div bgImage [imgUrl]="slide.urlImageFooter" class="h-100 w-100 img-content">&ndash;&gt;-->
+<!--            <div bgImage [imgUrl]="slide.urlImageFooter" class="h-100 w-100 img-content">-->
+<!--                &lt;!&ndash; <div class="ribbon-title">POPULAR</div> &ndash;&gt;-->
+<!--                <div style="height: 10px;" class="line-slide-top w-100 d-none d-md-block">-->
+<!--                  <div class="bg-slide"></div>-->
+<!--                </div>-->
+<!--                <div class="middle w-100">-->
+<!--                  <div class="text d-flex flex-column justify-content-start align-items-center">-->
+<!--                    &lt;!&ndash;<span>{{slide.title}}</span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<span>{{slide.Anuncio.Titulo}}</span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<small><i>{{slide.category}}</i></small>&ndash;&gt;-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div style="height: 10px;" class="line-slide-bottom w-100 d-none d-md-block">-->
+<!--                  <div class="bg-slide"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </a>-->
+<!--    </div>-->
+<!--  </ngx-slick-carousel>-->
+
+<!--<div class="container">-->
+<!--  <div class="row">-->
+<!--    <div class="col-12 bg-white">-->
+<!--      -->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<ngx-slick-carousel id="slideFooter" class="carousel d-none d-lg-block"
+                    #slickModal="slick-carousel"
+                    [config]='slideConfig'>
+  <div ngxSlickItem *ngFor="let banner of banners" class="slide">
+    <a [href]="rootSiteURL +'detalles-anuncio/'+ banner.AnuncioId" target="_blank">
+      <div [style.background-image]="getStyle(banner.ImageName)" class="h-100 w-100 img-content slide-img">
+        <div style="height: 10px;" class="line-slide-top w-100 d-none d-lg-block">
+          <div class="bg-slide"></div>
+        </div>
+        <div class="middle w-100">
+          <div class="text d-flex flex-column justify-content-start align-items-center">
+            <span>{{getStr(banner.Anuncio.Titulo)}}</span>
+            <!--<span>{{slide.title}}</span>-->
+            <!--<span>{{slide.Anuncio.Titulo}}</span>-->
+            <!--<small><i>{{slide.category}}</i></small>-->
+          </div>
+        </div>
+        <div style="height: 10px;" class="line-slide-bottom w-100 d-none d-lg-block">
+          <div class="bg-slide"> </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</ngx-slick-carousel>
+
+
+<ngx-slick-carousel id="slideFooterResponsive" class="carousel d-block d-lg-none"
+                    #slickModal="slick-carousel"
+                    [config]='slideConfigResponsive'
+                    (afterChange)='afterChange($event)'>
+
+
+
+  <div ngxSlickItem *ngFor="let banner of banners" class="slide">
+    <a [href]="rootSiteURL +'detalles-anuncio/'+ banner.AnuncioId" target="_blank">
+      <div [style.background-image]="getStyle(banner.ImageName)"  class="h-100 w-100 slide-img">
+        <div style="height: 10px;" class="line-slide-top w-100 d-none d-lg-block">
+          <div class="bg-slide"></div>
+        </div>
+        <div class="middle w-100">
+          <div class="text d-flex flex-column justify-content-start align-items-center">
+            <!--<span>{{slide.title}}</span>
+              <small><i>papa</i></small>-->
+            <span>{{banner.Anuncio.Titulo}}</span>
+
+          </div>
+        </div>
+        <div style="height: 10px;" class="line-slide-bottom w-100 d-none d-lg-block">
+          <div class="bg-slide"></div>
+        </div>
+      </div>
+    </a>
+  </div>
+</ngx-slick-carousel>
+
+
+<!--<ngx-slick-carousel id="slideFooterResponsive" class="carousel d-block d-lg-none"-->
+<!--                    #slickModal="slick-carousel"-->
+<!--                    [config]='slideConfigResponsive'-->
+<!--&gt;-->
+
+<!--  <div ngxSlickItem *ngFor="let slide of slides" class="slide">-->
+<!--    <a [href]="slide.link" target="_blank">-->
+<!--      <div bgImage [imgUrl]="slide.urlImageFooter" class="h-100 w-100 img-content">-->
+<!--        <div style="height: 10px;" class="line-slide-top w-100 d-none d-md-block">-->
+<!--          <div class="bg-slide"></div>-->
+<!--        </div>-->
+<!--        <div class="middle w-100">-->
+<!--          <div class="text d-flex flex-column justify-content-start align-items-center">-->
+<!--            &lt;!&ndash;<span>{{slide.title}}</span>&ndash;&gt;-->
+<!--            &lt;!&ndash;<span>{{slide.Anuncio.Titulo}}</span>&ndash;&gt;-->
+<!--            &lt;!&ndash;<small><i>{{slide.category}}</i></small>&ndash;&gt;-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div style="height: 10px;" class="line-slide-bottom w-100 d-none d-md-block">-->
+<!--          <div class="bg-slide"></div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </a>-->
+<!--  </div>-->
+<!--</ngx-slick-carousel>-->

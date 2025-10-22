@@ -1,0 +1,97 @@
+<form *ngIf="service.formData != null" #form="ngForm" autocomplete="off" (submit)="service.putDenuncias()">
+  <div class="container pt-4 pb-3">
+    <div class="row">
+      <div class="col-12">
+        <p class="title-pages pl-3 py-3">Gestión de Denuncias</p>
+      </div>
+    </div>
+    <div class="row pt-4 pb-2">
+      <div class="col-12">
+        <div class="container bg-white py-3">
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden" name="DenunciaId" id="DenunciaId" #DenunciaId="ngModel"
+                    class="form-control" [(ngModel)]="service.formData.DenunciaId">
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 w-100">
+              <mat-form-field class="w-100">
+                <mat-label>Anuncio</mat-label>
+                <input matInput
+                      type="text"
+                      name="Titulo"
+                      id="Titulo"
+                      required
+                      disabled
+                      [(ngModel)]="service.formData.Titulo"
+                      placeholder="Anuncio">
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <mat-form-field class="w-100">
+                <mat-label>Usuario</mat-label>
+                <input matInput
+                      type="text"
+                      name="Correo"
+                      id="Correo"
+                      required
+                      disabled
+                      [(ngModel)]="service.formData.Correo"
+                      placeholder="Usuario">
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <mat-form-field class="w-100">
+                <mat-label>Motivo</mat-label>
+                <input matInput
+                      type="text"
+                      name="Nombre"
+                      id="Nombre"
+                      required
+                      disabled
+                      [(ngModel)]="service.formData.MotivoDenuncia"
+                      placeholder="Motivo">
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <mat-form-field class="w-100">
+                <mat-label>Fecha Creación</mat-label>
+                <input matInput
+                      type="text"
+                      name="FechaCreacion"
+                      id="FechaCreacion"
+                      required
+                      disabled
+                      [(ngModel)]="service.formData.FechaCreacion"
+                      placeholder="Fecha Creacion">
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <mat-form-field class="w-100">
+                <mat-label>Estado</mat-label>
+                <mat-select [(ngModel)]="service.formData.Estado" name="Estado" id="Estado">
+                  <mat-option *ngFor="let estado of service.listEstados" [value]="estado">
+                    {{estado}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 d-flex flex-column">
+              <hr class="w-100 separator-btns-admin">
+              <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+                <button class="btn-admin px-4 mr-sm-3 mb-2 mb-sm-0" mat-raised-button [class.btn-disabled]="form.invalid" [disabled]="form.invalid" type="submit">
+                  <span><i class="fa fa-floppy-o px-2" aria-hidden="true"></i></span>
+                  <span class="btn-filter-border pr-3">Guardar</span>
+                </button>
+                <button class="btn-admin px-4" routerLink="/admin/denuncias">
+                  <span><i class="fa fa-arrow-left px-2" aria-hidden="true"></i></span>
+                  <span class="btn-filter-border pr-3">Regresar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

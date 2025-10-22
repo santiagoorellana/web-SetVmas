@@ -1,0 +1,12 @@
+
+.vs/
+
+SetVmas/obj/
+
+SetVmas/bin/
+
+SetVmasDomain/bin/
+
+SetVmasDomain/obj/
+/SetVmasDomain/Models/setDBContext.cs
+/SetVmasDomain/Models/setDBContext.cs

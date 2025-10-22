@@ -1,0 +1,13 @@
+.line-top, .line-bottom{
+  height: 10px;
+  width: 100%;
+  /* position: absolute; */
+}
+
+.line-top{
+  margin-bottom: -10px;
+}
+
+.line-bottom{
+  margin-top: -10px;
+}

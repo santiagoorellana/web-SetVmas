@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Verificar Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-item>
+      <ion-label color="primary" position="floating">* Código de Verificación</ion-label>
+      <ion-input [(ngModel)]="confirmCode" name="confirmCode" type="text" spellcheck="false"
+        autocapitalize="off" required></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-buttons slot="end">
+        <ion-button shape="round" fill="clear" color="primary" (click)="close()">Cancelar</ion-button>
+        <ion-button shape="round" [disabled]="!confirmCode" class="save-button" fill="solid" color="primary" (click)="confirm()">Verificar</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </form>
+</ion-content>

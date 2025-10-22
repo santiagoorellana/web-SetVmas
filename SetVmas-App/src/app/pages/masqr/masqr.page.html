@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-icon class="ion-margin-start" size="large" slot="start" name="scan"></ion-icon>
+    <ion-title>Mi código de referido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-item style="--padding-start: 0;" *ngIf="referido" class="ion-text-center">
+      <qrcode [qrdata]="referido" [width]="256" style="margin: auto;" [errorCorrectionLevel]="'M'"></qrcode>
+    </ion-item>
+    <div style="height: 5px;"></div>
+    <div class="center-button">
+      <ion-button shape="round" fill="clear" color="primary" (click)="cancel()">Cerrar</ion-button>
+    </div>
+  </form>
+</ion-content>

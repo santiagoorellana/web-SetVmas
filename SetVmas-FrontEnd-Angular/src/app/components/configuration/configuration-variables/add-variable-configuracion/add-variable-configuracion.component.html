@@ -1,0 +1,141 @@
+<form #form="ngForm" autocomplete="off" (submit)="service.salvarCambios()">
+  <div class="container pt-4 pb-3">
+    <div class="row">
+      <div class="col-12">
+        <p class="title-pages pl-3 py-3">Insertar Variable de Configuración</p>
+      </div>
+    </div>
+    <div class="row pt-4 pb-2">
+      <div class="col-12">
+        <div class="container bg-white py-3">
+          <div class="row">
+            <div class="col-12">
+              <input type="hidden" name="VariableConfiguracionId" id="VariableConfiguracionId" #VariableConfiguracionId="ngModel" class="form-control" [(ngModel)]="service.formData.VariableConfiguracionId">
+            </div>
+            <div class="col-12">
+              <div class="d-flex flex-row text-center align-items-center bg-white input-custom">
+                <mat-form-field class="w-100">
+                  <mat-label>Nombre</mat-label>
+                  <input matInput [(ngModel)]="service.formData.Nombre" required name="Nombre" id="Nombre" type="text" placeholder="Nombre">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="d-flex flex-row text-center align-items-center bg-white input-custom">
+                <mat-form-field class="w-100">
+                  <input matInput [(ngModel)]="service.formData.Valor" name="Valor" id="Valor" type="text" placeholder="Valor">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="d-flex flex-row text-center align-items-center bg-white input-custom">
+                <mat-form-field class="w-100">
+                  <input matInput [(ngModel)]="service.formData.NombreCodigo" name="NombreCodigo" id="NombreCodigo" type="text" placeholder="Código">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="d-flex flex-row text-center align-items-center bg-white input-custom">
+                <mat-form-field class="w-100">
+                  <mat-label>Tipo</mat-label>
+                  <mat-select [(ngModel)]="service.formData.Tipo" name="Tipo" id="Tipo">
+                    <mat-option selected> </mat-option>
+                    <mat-option value="General">General</mat-option>
+                    <mat-option value="Precios de Puntos">Precios de Puntos</mat-option>
+                    <mat-option value="Factor de Bonificación">Factor de Bonificación</mat-option>
+                    <mat-option value="Formas de Pago">Formas de Pago</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-12 d-flex flex-column">
+              <hr class="w-100 separator-btns-admin">
+              <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+                <button class="btn-admin px-4 mr-sm-3 mb-2 mb-sm-0" mat-raised-button [class.btn-disabled]="form.invalid" [disabled]="form.invalid" type="submit">
+                  <span><i class="fa fa-floppy-o px-2" aria-hidden="true"></i></span>
+                  <span class="btn-filter-border pr-3">Guardar</span>
+                </button>
+                <button class="btn-admin px-4" routerLink="/admin/variables">
+                  <span><i class="fa fa-arrow-left px-2" aria-hidden="true"></i></span>
+                  <span class="btn-filter-border pr-3">Regresar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- <br><br><br><br>
+<form #form="ngForm" autocomplete="off" (submit)="service.salvarCambios()">
+  <div class="grid">
+    <p class="grid-header">Insertar Variable de Configuración</p>
+    <div class="grid-body">
+      <div class="item-wrapper">
+
+        <div class="row">
+          <div class="col-md-9">
+            <input type="hidden" name="VariableConfiguracionId" id="VariableConfiguracionId" #VariableConfiguracionId="ngModel" class="form-control" [(ngModel)]="service.formData.VariableConfiguracionId">
+            <mat-form-field>
+              <input matInput [(ngModel)]="service.formData.Nombre" required name="Nombre" id="Nombre" type="text" placeholder="Nombre">
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">    </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <mat-form-field>
+              <input matInput [(ngModel)]="service.formData.Valor" name="Valor" id="Valor" type="text" placeholder="Valor">
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">    </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <mat-form-field>
+              <input matInput [(ngModel)]="service.formData.NombreCodigo" name="NombreCodigo" id="NombreCodigo" type="text" placeholder="Código">
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">    </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <mat-form-field>
+              <mat-label>Tipo</mat-label>
+              <mat-select [(ngModel)]="service.formData.Tipo" name="Tipo" id="Tipo">
+                <mat-option selected> </mat-option>
+                <mat-option value="General">General</mat-option>
+                <mat-option value="Precios de Puntos">Precios de Puntos</mat-option>
+                <mat-option value="Factor de Bonificación">Factor de Bonificación</mat-option>
+                <mat-option value="Formas de Pago">Formas de Pago</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">    </div>
+        </div>
+
+        <hr>
+        <div class="row">
+          <div class="col-md-4">    </div>
+          <div class="col-md-4">    </div>
+          <div class="col-md-4">
+            <button class="btn-fondo-azul" [class.btn-disabled]="form.invalid" style="padding-left: 20px; padding-right: 20px" type="submit" [disabled]="form.invalid"> <i class="mdi mdi-tooltip-edit"> Guardar </i></button>
+
+            <button class="btn-fondo-azul" style="padding-left: 20px; padding-right: 20px; margin-left: 10px" type="button" (click)="regresar()"> <i class="mdi mdi-arrow-left"> Regresar </i></button>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+</form>
+
+
+
+
+ -->

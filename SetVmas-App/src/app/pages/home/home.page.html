@@ -1,0 +1,128 @@
+<ion-header id="home-header" [appScrollVanish]="scrollArea">
+  <ion-toolbar color="primary" class="custom-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button size="small" autoHide="false" class="toggle"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <img src="assets/logo_setvmas.png" height="43px" width="81px" alt="No Image" style="vertical-align: bottom;" />
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="!isConnected" size="small" id="enable" fill="clear" (click)="onReload()">
+        <ion-icon slot="icon-only" name="reload-outline"></ion-icon>
+      </ion-button>
+      <ion-button size="small" *ngIf="!servAnuncio.nameUser" fill="clear" [routerLink]="['/', 'signin']" color="light">
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button size="small" *ngIf="servAnuncio.nameUser" fill="clear" (click)="presentAlertConfirm()" color="light">
+        {{ servAnuncio.nameUser }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="primary" *ngIf="bannersTop.length > 0">
+    <ion-item class="banner-up" color="primary" *ngIf="bannersTop.length > 0 && !  loadingBannerTop">
+      <ion-slides pager page="true" [options]="slideOpts">
+        <ion-slide *ngFor="let item of bannersTop" (click)="openBanner(item)">
+          <img [src]="rootURL + 'uploads/banners/'+item.ImageName" class="banner" alt="No Image" />
+        </ion-slide>
+      </ion-slides>
+    </ion-item>
+  </ion-toolbar>
+  <ion-toolbar color="primary" style="display: contents;">
+    <ion-button [disabled]="!enableFilterButton" class="notification-icon-button" size="small" slot="start" fill="clear"
+      [routerLink]="['/', 'search']" color="light">
+      <ion-badge *ngIf="filters && _.size(_.keys(filters)) > 0" class="notification-badge" color="danger">
+        <span>{{_.size(_.keys(filters))}}</span>
+      </ion-badge>
+      <ion-icon name="options"></ion-icon>
+    </ion-button>
+    <ion-searchbar [disabled]="loading || filters && _.size(_.keys(filters)) > 0" (ionClear)="onSearchClear()"
+      (search)="onSearch(true)" mode="ios" id="custom-search" [(ngModel)]="searchText" placeholder="¿Qué buscas?">
+    </ion-searchbar>
+    <ion-button class="notification-icon-button" size="small" slot="end" fill="clear"
+      [routerLink]="['/', 'add-announce']" color="warning">
+      <ion-icon name="megaphone"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+  <ion-toolbar color="primary" style="height: 29px;">
+    <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="tab">
+      <ion-segment-button [value]="RECENTS_TAB">
+        RECIENTES
+      </ion-segment-button>
+      <ion-segment-button [value]="MOST_SEEN_TAB">
+        POPULARES
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="pageContent" #scrollArea scrollEvents="true" fullscreen>
+  <div
+    *ngIf="!loading && loadFirstTime && !((tab === RECENTS_TAB && recents && recents.length > 0) || (tab !== RECENTS_TAB && mostSeen &&  mostSeen.length > 0))">
+    <ion-text class="ion-text-center ion-padding">
+      <h4 style="margin-top: 30%;">No hay anuncios para mostrar.</h4>
+    </ion-text>
+  </div>
+  <div
+    *ngIf="!loading && ((tab === RECENTS_TAB && recents && recents.length > 0) || (tab !== RECENTS_TAB && mostSeen && mostSeen.length > 0))">
+    <div *ngIf="screenWidth / 360 < 2">
+      <app-item-ad [item]="item" *ngFor="let item of tab === RECENTS_TAB ? recents : mostSeen"></app-item-ad>
+    </div>
+    <div *ngIf="screenWidth / 360 >= 2">
+      <ion-grid>
+        <ion-row *ngFor="let rows of getRows(tab === RECENTS_TAB ? recents : mostSeen)">
+          <ion-col *ngFor="let item of rows">
+            <app-item-ad [item]="item"></app-item-ad>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+  <div *ngIf="loading || !loadFirstTime">
+    <ion-card *ngFor="let item of skeletorCard">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <p>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </p>
+          <ion-text color="primary">
+            <h2>
+              <ion-skeleton-text animated></ion-skeleton-text>
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </h2>
+          </ion-text>
+          <ion-buttons>
+            <ion-skeleton-text animated style="width: 30%; height: 16px;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 10%;height: 16px;position: absolute;right: 35px;bottom: 0px;">
+            </ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 10%;height: 16px;position: absolute;right: 0;bottom: 0px;">
+            </ion-skeleton-text>
+          </ion-buttons>
+        </ion-label>
+
+      </ion-item>
+    </ion-card>
+  </div>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content>
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer *ngIf="bannersBottom.length > 0" [appHideHeader]="scrollArea">
+  <ion-toolbar color="primary">
+    <ion-item color="primary" *ngIf="bannersBottom.length > 0 && !loadingBannerBottom">
+      <ion-slides pager page="true" [options]="slideOpts">
+        <ion-slide class="slide" *ngFor="let index of getIndexesForSlidesBottom()">
+          <div class="contenedor">
+            <img *ngFor="let item of getImagesForSlideBottom(index)"
+              [src]="rootURL + 'uploads/banners/inferior/'+item.ImageName" alt="No Image" (click)="openBanner(item)" />
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

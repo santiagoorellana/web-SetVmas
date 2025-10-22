@@ -1,0 +1,33 @@
+@font-face {
+  font-family: Roboto-Light;
+  src: url("../assets/fonts/Roboto-Light.ttf");
+}
+
+@font-face {
+  font-family: Roboto-Medium;
+  src: url("../assets/fonts/Roboto-Medium.ttf");
+}
+
+
+ion-header {
+  ion-toolbar {
+    .online {
+      font-weight: bold;
+    }
+
+    label {
+      color: white;
+    }
+  }
+}
+
+ion-item-divider {
+  ion-label {
+    color:orangered;
+    font-size: 16px;
+  }
+}
+
+.secondary-menu {
+  margin-top: 60px;
+}

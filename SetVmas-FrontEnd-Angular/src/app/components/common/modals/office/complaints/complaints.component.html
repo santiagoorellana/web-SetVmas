@@ -1,0 +1,88 @@
+<div class="container" >
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center align-items-center title-modals-small d-block d-md-none">
+      Lista de denuncias
+    </div>
+    <div class="col-12 d-flex justify-content-center justify-content-md-start align-items-center mt-4">
+      <div class="ico-complaints mr-md-4"></div>
+      <div class="title-modals d-none d-md-block">
+        Lista de denuncias
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="row mt-4">
+    <div class="col-12 px-0 px-md-3">
+      <div class="table-container">
+        <mat-table [dataSource]="dataSource">
+            <!-- Checkbox Column
+            <ng-container matColumnDef="select">
+              <mat-header-cell *matHeaderCellDef class="title-table pl-2 pr-1">
+              </mat-header-cell>
+
+              <mat-cell *matCellDef="let row" class="rows-table pl-2 pr-1"
+                style="white-space: nowrap; overflow: hidden;">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)"
+                [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+              </mat-cell>
+            </ng-container>-->
+
+          <!-- Complaint Column -->
+          <ng-container matColumnDef="Denuncias">
+            <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start px-1">Denuncias</mat-header-cell>
+            <!-- <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start px-1">{{row.Motivo.Nombre}}</mat-cell> -->
+            <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start px-1">{{row.MotivoDenuncia}}</mat-cell>
+          </ng-container>
+
+          <!-- State Column -->
+          <ng-container matColumnDef="Estado">
+            <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-center px-1">Estado</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-center px-1">{{row.Estado}}</mat-cell>
+          </ng-container>
+
+
+          <!-- ID Anunce Column -->
+          <ng-container matColumnDef="anunceID">
+            <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-center px-1">Anuncio</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-center px-1">{{row.Titulo}}</mat-cell>
+          </ng-container>
+
+          <!-- ID User Column -->
+          <ng-container matColumnDef="userID">
+            <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-center px-1">Usuario</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-center px-1">{{row.Correo}}</mat-cell>
+          </ng-container>
+
+          <!-- Date Column -->
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-center px-1">Fecha</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-center px-1">{{row.FechaCreacion|date:'dd/MM/yyyy'}}</mat-cell>
+          </ng-container>
+
+          <!-- Time Column -->
+          <ng-container matColumnDef="time">
+            <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-center px-1">Hora</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-center px-1">{{row.FechaCreacion|date:'HH:mm'}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="tableColumns" class="office-mat-header-row"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: tableColumns" (click)="selection.toggle(row)"></mat-row>
+        </mat-table>
+        <mat-paginator [length]="service.resultsLength" [pageSize]="10"
+        [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4 d-flex flex-row justify-content-center justify-content-md-end align-items-center" (click)="onCloseClick()">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-5 col-xl-4">
+      <div class="d-flex flex-row justify-content-center align-items-center cursor-pointer oval-btn color-blue font-osbold py-2">
+        <span class="ml-2">CERRAR</span>
+      </div>
+    </div>
+  </div>
+</div>

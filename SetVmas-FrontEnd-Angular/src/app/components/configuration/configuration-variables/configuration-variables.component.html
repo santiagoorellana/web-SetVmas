@@ -1,0 +1,188 @@
+
+<div class="container pt-4 pb-3">
+  <div class="row">
+    <div class="col-12">
+      <p class="title-pages pl-3 py-3">Gestión de Variables de Configuración</p>
+    </div>
+  </div>
+  <!-- Filters -->
+  <div class="row pt-4 pb-2">
+    <div class="col-12">
+      <div class="container bg-white pt-3">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Buscar</mat-label>
+                <input matInput placeholder="Buscar" #input>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row py-2">
+    <div class="col-12 d-flex justify-content-center justify-content-sm-end">
+      <button class="btn-admin px-4" (click)="onEdit(0)">
+        <span><i class="fa fa-plus px-2" aria-hidden="true"></i></span>
+        <span class="btn-filter-border pr-3">Añadir</span>
+      </button>
+      <!-- <button class="btn-fondo-azul" style="width: 75%" (click)="onEdit(0)" *ngIf="currentUser.Rol === 'Super Administrador'">
+        <i class="add"> Añadir </i>
+      </button> -->
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="row mt-1">
+    <div class="col-12">
+      <mat-tab-group [backgroundColor]="'primary'" [selectedIndex]="selectedIndex" (selectedTabChange)="onLinkClick($event)">
+        <!-- <mat-tab *ngFor="let tab of tabs" label="{{tab}}" [disabled]="currentUser.Rol == 'Director' && tab!='Bonificación'">-->
+        <mat-tab label="General">
+        <!-- <mat-tab label="General" [disabled]="currentUser.Rol == 'Director'"> -->
+          <mat-table class="table-center lessons-table mat-elevation-z8" [dataSource]="dataSource"
+                     matSort matSortActive="Nombre" matSortDisableClear matSortDirection="asc" #sortGeneral="matSort">
+            <ng-container matColumnDef="VariableConfigiuracionId">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Id</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col-md-3">{{row.VariableConfiguracionId}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Nombre">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-6 d-flex align-items-center">Nombre</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col-md-6 d-flex align-items-center">{{row.Nombre}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Valor">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Valor</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col-md-3">{{row.Valor}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Acciones">
+              <mat-header-cell *matHeaderCellDef class="tituloTablas col">Acciones</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col text-center">
+                <mat-icon aria-hidden="false" (click)="onEdit(row.VariableConfiguracionId)" aria-label="Editar" class="editar-icon"></mat-icon>
+                <!-- <mat-icon aria-hidden="false" (click)="onDelete(row.CategoriaId)" aria-label="Eliminar">delete</mat-icon> -->
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="service.tableColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: service.tableColumns"></mat-row>
+          </mat-table>
+          <mat-paginator #paginatorGeneral="matPaginator" [length]="service.resultsLength" [pageSize]="service.pageSize"
+                         [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorData($event)" [showFirstLastButtons]="true"></mat-paginator>
+        </mat-tab>
+
+        <!-- <mat-tab label="Puntos" [disabled]="currentUser.Rol == 'Director'"> -->
+        <mat-tab label="Puntos">
+          <mat-table class="table-center lessons-table mat-elevation-z8" [dataSource]="dataSourcePuntos"
+                     matSort matSortActive="Nombre" matSortDisableClear matSortDirection="asc" #sortPuntos="matSort">
+            <ng-container matColumnDef="VariableConfigiuracionId">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Id</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col-md-3">{{row.VariableConfiguracionId}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Nombre">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-6">Nombre</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col-md-6">{{row.Nombre}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Valor">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Valor</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col-md-3">{{row.Valor}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Acciones">
+              <mat-header-cell *matHeaderCellDef class="tituloTablas col">Acciones</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col text-center">
+                <mat-icon aria-hidden="false" (click)="onEdit(row.VariableConfiguracionId)" aria-label="Editar">edit</mat-icon>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="service.tableColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: service.tableColumns"></mat-row>
+
+          </mat-table>
+
+          <mat-paginator #paginatorPuntos="matPaginator" [length]="service.resultsLength" [pageSize]="service.pageSize"
+                         [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorData($event)" [showFirstLastButtons]="true"></mat-paginator>
+
+        </mat-tab>
+
+     <!--   <mat-tab label="Bonificación">
+          <mat-table class="table-center lessons-table mat-elevation-z8" [dataSource]="dataSourceBoni"
+                     matSort matSortActive="Nombre" matSortDisableClear matSortDirection="asc" #sortBoni="matSort">
+            <ng-container matColumnDef="VariableConfigiuracionId">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Id</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col-md-3">{{row.VariableConfiguracionId}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Nombre">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-6">Nombre</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col-md-6">{{row.Nombre}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Valor">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Valor</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col-md-3">{{row.Valor}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Acciones">
+              <mat-header-cell *matHeaderCellDef class="tituloTablas col">Acciones</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col text-center">
+                <mat-icon aria-hidden="false" (click)="onEdit(row.VariableConfiguracionId)" aria-label="Editar">edit</mat-icon>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="service.tableColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: service.tableColumns"></mat-row>
+
+          </mat-table>
+          <mat-paginator #paginatorBoni="matPaginator" [length]="service.resultsLength" [pageSize]="service.pageSize"
+                         [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorData($event)" [showFirstLastButtons]="true"></mat-paginator>
+
+        </mat-tab>-->
+
+        <!-- <mat-tab label="Formas de Pago" [disabled]="currentUser.Rol == 'Director'"> -->
+       <!-- <mat-tab label="Formas de Pago">
+          <mat-table class="table-center lessons-table mat-elevation-z8" [dataSource]="dataSourcePagos"
+                     matSort matSortActive="Nombre" matSortDisableClear matSortDirection="asc" #sortPagos="matSort">
+            <ng-container matColumnDef="VariableConfigiuracionId">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Id</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col-md-3">{{row.VariableConfiguracionId}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Nombre">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-6">Nombre</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col-md-6">{{row.Nombre}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Valor">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Valor</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col-md-3">{{row.Valor}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Acciones">
+              <mat-header-cell *matHeaderCellDef class="tituloTablas col">Acciones</mat-header-cell>
+              <mat-cell *matCellDef="let row" class="col text-center">
+                <mat-icon aria-hidden="false" (click)="onEdit(row.VariableConfiguracionId)" aria-label="Editar" class="editar-icon"></mat-icon>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="service.tableColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: service.tableColumns"></mat-row>
+
+          </mat-table>
+          <mat-paginator #paginatorPagos="matPaginator" [length]="service.resultsLength" [pageSize]="service.pageSize"
+                         [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorData($event)" [showFirstLastButtons]="true"></mat-paginator>
+
+        </mat-tab>-->
+      </mat-tab-group>
+
+
+    </div>
+  </div>
+</div>
+

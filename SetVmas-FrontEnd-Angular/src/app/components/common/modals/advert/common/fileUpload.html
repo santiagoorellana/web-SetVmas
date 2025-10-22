@@ -1,0 +1,55 @@
+<div class="mr-4 mr-md-2 mb-3">
+    <div class="d-flex flex-column align-items-start">
+         <div class="d-flex flex-row align-items-start align-items-md-center">
+                <div class="img-thumbnail d-flex justify-content-center align-items-center">
+                  <!--  <canvas id="micanvas5" class="w-100"  *ngIf="!name"></canvas>-->
+                    <img class="img-preview" [src]="urlImg" [id]="idImg"  *ngIf="!editing" >
+                    <!--   <div style="height: 174px; width: 130px" bgImage [imgUrl]="urlImg" [id]="idImg" *ngIf="editing"></div>-->
+
+                    <div class="img-secondary-anunce mr-2 cursor-pointer" *ngIf="editing" >
+                        <!--<img src="{{img.ImageContent}}">-->
+                        <img [src]="'almacen/mini/'+name | safeUrl">
+
+                    </div>
+                </div>
+
+                           <div class="d-flex flex-column justify-content-start ml-4 ml-md-2" >
+                                   <div class="d-flex flex-row justify-content-start cursor-pointer d-block d-md-none mb-3" (click)="onOpenFileUpload()">
+                                       <span class="color-orange"><i class="fa fa-folder-open-o fa-2x"></i></span>
+                                       <span class="label-upload pl-2">Examinar</span>
+
+                                   </div>
+
+
+                               <span class="label-upload pl-2 cursor-pointer" *ngIf="fileData" (click)="girar()">
+                                 <i class="fa fa-redo fa-2x" style="margin-left: -5px; margin-bottom: 5px;" title="Girar"></i>
+                               </span>
+
+                                                               <!-- <div class="d-block d-md-none d-flex flex-row mb-3">
+                                       <span class="label-total-pay">Puntos:</span><span class="font-weight-bold color-orange ml-1">5</span>
+                                   </div>                       -->
+                    <div class="rounded-circle cursor-pointer bg-orange p-2 btn-plus-img d-flex justify-content-center align-items-center" [ngClass]="{'disableBtn': disableComponent}" (click)="disableComponent?'':addNew()">
+                        <span class=""><i class="fa fa-plus text-white"></i></span>
+                    </div>
+                <div class="rounded-circle cursor-pointer bg-danger mt-2 p-2 btn-plus-img d-flex justify-content-center align-items-center" [ngClass]="{'disableBtn': disableComponent}" (click)="disableComponent?'':deleteFileUpload()">
+                  <span class=""><i class="fa fa-minus text-white"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <!--<mat-form-field appearance="outline" class="title-img w-100">
+            <input matInput placeholder="Título de la imagen" class="py-0 my-0">
+        </mat-form-field>-->
+        <div class="d-none">
+          <input type="file" [id]="idAttrFileUpload" [disabled]="disableComponent" name="image" (change)="fileProgress($event)" />
+        </div>
+    </div>
+    <div class="d-flex flex-row justify-content-start align-items-center cursor-pointer " (click)="disableComponent?'':onOpenFileUpload()">
+        <div  [ngClass]="{'disableBtn': disableComponent}" class="d-none d-md-block">
+            <span class="color-orange"><i class="fa fa-folder-open-o fa-2x"></i></span>
+            <span class="label-upload pl-2">Examinar</span>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,136 @@
+<div class="container pt-4 pb-3">
+  <div class="row">
+    <div class="col-12">
+      <p class="title-pages pl-3 py-3">Gestión de Tipos de Transferencia y Bonificaciones</p>
+    </div>
+  </div>
+  <!-- Filters -->
+  <div class="row pt-4 pb-2">
+    <div class="col-12">
+      <div class="container bg-white pt-3">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Buscar</mat-label>
+                <input matInput placeholder="Buscar" #input>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--
+  <div class="row pb-3 pt-2">
+    <div class="col-12 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+      <button class="btn-admin px-4" routerLink="/admin/nomencladores/tipo-transferencias/add/0">
+        <span><i class="fa fa-plus px-2" aria-hidden="true"></i></span>
+        <span class="btn-filter-border pr-3">Añadir</span>
+      </button>
+    </div>
+  </div>-->
+
+  <!-- Table -->
+  <div class="row">
+    <div class="col-12">
+      <div class="mat-elevation-z8">
+        <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+           matSort matSortActive="Nombre" matSortDisableClear matSortDirection="asc"  id="tblBackend">
+
+          <ng-container matColumnDef="TipoTransferenciaId">
+            <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+            <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.TipoTransferenciaId}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Nombre">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Nombre</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-3">{{row.Nombre}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Cantidad">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Cantidad</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-3">{{row.Cantidad}}</mat-cell>
+            <mat-form-field>
+              <input matInput placeholder="First name">
+            </mat-form-field>
+          </ng-container>
+
+          <ng-container matColumnDef="Descripcion">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Descripcion</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.Descripcion}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Acciones">
+            <mat-header-cell *matHeaderCellDef class="tituloTablas col-md-2">Acciones</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-2 text-center">
+              <mat-icon aria-hidden="false" (click)="onEdit(row.TipoTransferenciaId)" aria-label="Editar" class="editar-icon">edit</mat-icon>
+              <mat-icon aria-hidden="false" (click)="onDelete(row.TipoTransferenciaId)"  class="delete-icon" *ngIf="service.currentUser.Rol === 'Super Administrador'" aria-label="Eliminar"></mat-icon>
+
+              <!-- <button mat-icon-button (click)="onDelete(Acciones.TipoTransferenciaId)" *ngIf="service.currentUser.Rol === 'Super Administrador'">
+                <mat-icon aria-label="Eliminar" class="delete-icon"></mat-icon>
+              </button> -->
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="service.tableColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: service.tableColumns" (click)="onRowClicked(row)"></mat-row>
+        </mat-table>
+
+        <mat-paginator [length]="service.resultsLength" [pageSize]="service.pageSize"
+                       [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorData($event)" [showFirstLastButtons]="true"></mat-paginator>
+
+        <!-- <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+             matSort matSortActive="Nombre" matSortDisableClear matSortDirection="asc"  id="tblBackend">
+
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef class="col-md-1">
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-md-1">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="EtiquetaId">
+      <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+      <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.EtiquetaId}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Nombre">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-6">Nombre</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-md-6">{{row.Nombre}}</mat-cell>
+    </ng-container>
+
+  <ng-container matColumnDef="CantUsada">
+    <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Cant. Usada</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.CantUsada}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Acciones">
+    <mat-header-cell *matHeaderCellDef class="tituloTablas col">Acciones</mat-header-cell>
+    <mat-cell *matCellDef="let row" class="col text-center">
+
+      <mat-icon aria-hidden="false" (click)="onEdit(row.EtiquetaId)" aria-label="Eliminar">edit</mat-icon>
+
+      <mat-icon aria-hidden="false" (click)="onDelete(row.EtiquetaId)" aria-label="Eliminar">delete</mat-icon>
+
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
+        </mat-table>
+        <mat-paginator [length]="service.resultsLength" [pageSize]="10"
+                      [pageSizeOptions]="[10, 20, 30]"></mat-paginator> -->
+      </div>
+    </div>
+  </div>
+</div>

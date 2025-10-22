@@ -1,0 +1,283 @@
+<div class="container pt-4 pb-3">
+  <div class="row">
+    <div class="col-12">
+      <p class="title-pages pl-3 py-3">Listado de Anuncios en el Sistema</p>
+    </div>
+  </div>
+  <!-- Filters -->
+  <div class="row pt-4 pb-2">
+    <div class="col-12">
+      <div class="container bg-white pt-3">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Título</mat-label>
+                <input matInput placeholder="Título" #input>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Rol</mat-label>
+                <mat-select name="rol" #rol>
+                  <mat-option selected (click)="filterRol('')"> </mat-option>
+                  <mat-option *ngFor="let rol of listaRoles" [value]="rol" (click)="filterRol(rol)">
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div> -->
+<!--          <div class="col-12 col-sm-6 col-lg-3">-->
+<!--            <div class="d-flex flex-row text-center align-items-center bg-white">-->
+<!--              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>-->
+<!--              <mat-form-field class="w-100">-->
+<!--                <mat-label>Inactividad</mat-label>-->
+<!--                &lt;!&ndash; <input type="number" matInput value="0"> &ndash;&gt;-->
+<!--                <input matInput type="number" min="0" placeholder="Inactividad" #inactividad>-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+<!--          </div>-->
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Categoría</mat-label>
+                <mat-select name="categoria" #rol [(ngModel)]="categoria" (change)="filter()">
+
+                  <mat-option *ngFor="let rol of listaCat" [value]="rol.CategoriaId" (click)="filter()" >{{rol.Nombre}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+<!--          <div class="col-12 col-sm-6 col-lg-3">-->
+<!--            <div class="d-flex flex-row text-center align-items-center bg-white">-->
+<!--              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>-->
+<!--              <mat-form-field class="w-100">-->
+<!--                <mat-label>Renovación</mat-label>-->
+<!--                <input matInput type="number" min="0" placeholder="Renovación" #renovacion>-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+<!--          </div>-->
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Renovación</mat-label>
+                <mat-select name="tipoOpciones" #rol [(ngModel)]="tipocion" (change)="filter()">
+<!--                  <mat-option selected (click)="filterRol('')"> Ninguna</mat-option>-->
+                  <mat-option *ngFor="let rol of listaAutoRen" [value]="rol.TipoOpcionId" (click)="filter()">{{rol.Nombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <p class="pl-3 py-3">Total de anuncios: {{servAnu.totalAnuncios}}</p>
+    </div>
+  </div>
+
+  <div class="row pb-3 pt-2">
+    <div class="col-12 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+      <button class="btn-admin px-4 mr-sm-3 mb-2 mb-sm-0" mat-raised-button (click)="removeSelectedRows()">
+        <span><i class="fa fa-trash px-2" aria-hidden="true"></i></span>
+        <span class="btn-filter-border pr-3">Eliminar</span>
+      </button>
+      <button class="btn-admin px-4" mat-raised-button (click)="ocultar()">
+        <span><i class="fa fa-eye px-2" aria-hidden="true"></i></span>
+        <span class="btn-filter-border pr-3">Ocultar</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="row">
+    <div class="col-12">
+      <div class="mat-elevation-z8">
+
+        <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+           matSort matSortActive="FechaCreacion" matSortDirection="asc" matSortDisableClear id="tblBackend">
+
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef class="col-md-1">
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-1">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="AnuncioId">
+            <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+            <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.AnuncioId}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ProductoNuevo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-lg-1">Nuevo</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-lg-1 fila-cursor" >
+              <mat-checkbox class="fila-cursor" style="margin-left: 8px"
+                            [checked]="row.ProductoNuevo"
+                            [disabled]="true"> </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Precio">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-lg-1 ">Precio</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-lg-1 fila-cursor">{{row.Precio | currency}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Titulo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-lg-3">Título</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-lg-3 fila-cursor">{{row.Titulo}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="FechaCreacion">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-lg-1">Creado</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-lg-1 fila-cursor">{{row.FechaCreacion | date: "dd/MM/yy h:mm a"}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="FechaModificacion">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-lg-1">Modif.</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-lg-1 fila-cursor">{{row.FechaModificacion | date: "dd/MM/yy h:mm a"}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="NombreContacto">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-lg-1">Propietario</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-lg-1 fila-cursor">{{row.NombreContacto}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Codigo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-lg-1">Código</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-lg-1 fila-cursor">{{row.Usuario.Codigo}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Provincia">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-lg-1">Provincia</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-lg-1 fila-cursor">{{row.Provincia}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Municipio">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-lg-1">Municipio</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-lg-1 fila-cursor">{{row.Municipio}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ContadorView">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-lg-1">Vistas</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-lg-1 fila-cursor">{{row.ContadorView}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="IsActivo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-lg-1">Estado</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-lg-1 fila-cursor">{{row.IsActivo ? 'Activo' : 'No Activo'}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="IsVisible">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-lg-1">Visible</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-lg-1 fila-cursor"><mat-checkbox class="fila-cursor" style="margin-left: 8px" [checked]="row.IsVisible" [disabled]="true"></mat-checkbox></mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: tableColumns" (click)="onRowClicked(row)"></mat-row>
+        </mat-table>
+
+        <mat-paginator [length]="servAnu.resultsLength" [pageSize]="servAnu.pageSize"
+                       [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorData($event)" [showFirstLastButtons]="true"></mat-paginator>
+
+        <!-- <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+        matSort matSortDisableClear matSortDirection="asc">
+
+          <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef class="col-md-1">
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-1">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="isnew">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Nuevo</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.isnew}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Precio</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Title</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.title}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="created">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Creado</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.created}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Modificado</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.edit}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="contact">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Contacto</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.contact}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="province">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Provincia</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.province}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="town">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Municipio</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.town}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="view">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Vistas</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.view}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="state">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Estado</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.state}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="visible">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Visible</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.visible}}</mat-cell>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+              (click)="selection.toggle(row)">
+          </tr>
+
+        </mat-table>
+        <mat-paginator  [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+      </div>
+    </div>
+  </div>
+</div>
+

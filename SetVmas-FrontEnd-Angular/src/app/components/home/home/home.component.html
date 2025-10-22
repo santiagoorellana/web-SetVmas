@@ -1,0 +1,51 @@
+
+<div class="container-fluid d-block d-md-none" style="background-color: #b8d0d6; margin-top: 50px;">
+  <div class="row">
+    <div class="col-12 px-0 bg-white" style="height: 150px;">
+      <app-slide-header></app-slide-header>
+    </div>
+  </div>
+</div>
+
+<div class="container d-none d-md-block" style="background-color: #b8d0d6; margin-top: 50px;">
+  <div class="row">
+    <div class="col-12 px-0 bg-white" style="height: 150px;">
+      <app-slide-header></app-slide-header>
+    </div>
+  </div>
+</div>
+
+<app-filters [mostrarSiempreResultados]="router == '/inicio'?true:false" *ngIf="router != '/oficina'"></app-filters>
+
+<div class="container-fluid" style="background-color: #eee;" *ngIf="router != '/inicio'">
+  <div class="container" style="height: 100%; min-height: 300px">
+    <div class="row">
+      <div class="col-12 px-0">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container-fluid bg-white">
+  <div class="container" style="height: 10px;">
+
+  </div>
+</div> -->
+<div class="container-fluid">
+<div class="row">
+  <div class="col-12 px-0">
+    <div class="bg-white line-top d-none d-lg-block"></div>
+    <div class="container" style="background-color: #b8d0d6;">
+      <div class="row">
+        <div class="col-12 bg-white px-0" style="height: 150px;">
+          <banner-footer></banner-footer>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white line-bottom d-none d-lg-block"></div>
+  </div>
+</div>
+</div>
+
+

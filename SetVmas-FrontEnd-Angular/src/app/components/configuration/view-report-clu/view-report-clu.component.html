@@ -1,0 +1,56 @@
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <label>Rango inicial a valorar:</label>
+      <mat-form-field appearance="outline" class="btnInput" style="width: 90%">
+        <input matInput
+               style="font-size: 1rem"
+               type="number"
+               min="0"
+               placeholder="Rango Inicial"
+               [(ngModel)]="rangoI" />
+      </mat-form-field>
+      <label>Rango final a valorar:</label>
+      <mat-form-field appearance="outline" class="btnInput" style="width: 90%">
+        <input matInput
+               style="font-size: 1rem"
+               type="number"
+               min="0"
+               placeholder="Rango Final"
+       [(ngModel)]="rangoF" />
+</mat-form-field>
+</div>
+<div class="col-4"></div>
+</div>
+<div class="row">
+<div class="col-4"></div>
+<div class="col-4">
+<button id="btn-ins-anu" class="btn-orange bg-blue pr-0"
+      type="submit" mat-raised-button (click)="imprimirReporte()" >
+<span class="border-separator pr-2 text-white">IMPRIMIR</span>
+<span class="ml-3 mr-3"><i class="fa fa-chevron-right next-icon text-white"></i></span>
+</button>
+</div>
+<div class="col-4"></div>
+</div>
+
+</div>
+<br>
+<div *ngIf="mostrarRepo" class="container">
+
+<ssrs-reportviewer
+[reportserver]="reportServer"
+[reporturl]="reportUrl"
+[showparameters]=false
+[parameters]="parameters"
+[language]="language"
+[width] ="width"
+[height]="height"
+[toolbar]="toolbar" >
+</ssrs-reportviewer>
+
+</div>

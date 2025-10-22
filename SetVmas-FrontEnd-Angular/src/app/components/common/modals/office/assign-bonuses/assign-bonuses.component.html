@@ -1,0 +1,208 @@
+<div class="container" *ngIf = "isLoad">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center align-items-center title-modals-small d-block d-md-none">
+      Tarifa de puntos y Bonificaciones
+    </div>
+    <div class="col-12 d-flex justify-content-center justify-content-md-start align-items-center mt-4">
+      <div class="ico-assign-bonuses mr-md-4"></div>
+      <div class="title-modals d-none d-md-block">
+        Tarifa de puntos y Bonificaciones
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    Si deseas comprar puntos a SetVmas, el valor de un punto ahora es: {{precio.Valor}}  CUP
+  </div>
+
+  <div class="row">
+    Recibirás bonificaciones por acciones que hagas en SetVmas
+  </div>
+
+  <div class="container">
+    <ul>
+      <li>•	Cada usuarios que se registra en SetVmas, recibe: {{T_Valores.bon_registro}} puntos</li>
+      <li>•	Por cada uno de los primeros {{CantX_PRIM_REF.Valor}} referidos, se reciben: {{CantRef.Valor}} puntos</li>
+      <li>•	Por ver un anuncio cada 24 horas, se reciben: {{T_Valores.bon_visualizacion}} puntos</li>
+      <li>•	Al clasificar una denuncia se reciben: {{T_Valores.bon_clasificacion}} puntos</li>
+      <li>•	Por subir al nivel BRONCE, el usuario recibe: {{T_Clases.BRONCE}} puntos</li>
+      <li>•	Por subir al nivel PLATA, el usuario recibe: {{T_Clases.PLATA}} puntos</li>
+      <li>•	Por subir al nivel ORO, el usuario recibe: {{T_Clases.ORO}} puntos</li>
+      <li>•	Por subir al nivel DIAMANTE, el usuario recibe: {{T_Clases.DIAMANTE}} puntos</li>
+    </ul>
+  </div>
+
+  <div class="row">
+    Otras bonificaciones serán otorgadas según la clase de usuario y son las siguientes:
+  </div>
+
+  <!--Tabla Bonificaciones por Compra y Venta-->
+  <div class="row mt-3">
+    <div class="table-container mt-1">
+      <mat-table [dataSource]="T_Compraventas">
+        <!-- Primera Columna [vacia o id] -->
+        <ng-container matColumnDef="Bonificaciones">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start px-1 showB">Bonificaciones (%)</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.Bonificaciones}}</mat-cell>
+        </ng-container>
+
+        <!-- DIAMANTE Column -->
+        <ng-container matColumnDef="DIAMANTE">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">DIAMANTE</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.DIAMANTE}}</mat-cell>
+        </ng-container>
+
+        <!-- ORO Column -->
+        <ng-container matColumnDef="ORO">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">ORO</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.ORO}}</mat-cell>
+        </ng-container>
+
+        <!-- PLATA Column -->
+        <ng-container matColumnDef="PLATA">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">PLATA</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.PLATA}}</mat-cell>
+        </ng-container>
+
+        <!-- BRONCE Column -->
+        <ng-container matColumnDef="BRONCE">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">BRONCE</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.BRONCE}}</mat-cell>
+        </ng-container>
+
+        <!-- INICIADO Column -->
+        <ng-container matColumnDef="INICIADO">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">INICIADO</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.INICIADO}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="tableColumnsCV" class="office-mat-header-row"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: tableColumnsCV"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+
+  <div class="row">
+    Además de recibir bonificaciones por las acciones que realizas, también podrá recibir
+    bonificaciones por las acciones que realizan tus referidos y por las acciones que
+    realizan los referidos de tus referidos y más...
+  </div>
+  <div class="">
+    <ul class="">
+      <li>•	Recibes puntos por los anuncios válidos que insertan tus referidos.</li>
+      <li>•	Por las denuncias efectivas que realizan tus referidos.</li>
+      <li>•	Por los puntos que compran tus referidos.</li>
+      <li>•	Por los puntos que venden tus referidos.</li>
+    </ul>
+  </div>
+
+  <div class="container">
+    Estas bonificaciones serán otorgadas según la clase de usuario y son un porciento de la
+    bonificación otorgada por anunciar y denunciar, o un porciento del valor comprado
+    o vendido. Se resume en la siguiente tabla:
+  </div>
+
+  <!-- Tabla de FactoresBonificacionVentas-->
+  <div class="row mt-3">
+
+    <div class="table-container mt-1">
+      <mat-table [dataSource]="T_FactoresBonificacionVentas">
+        <!-- Primera Columna [vacia o id] -->
+        <ng-container matColumnDef="Nombre">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start px-1 showB">Nombre</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.Nombre}}</mat-cell>
+        </ng-container>
+
+        <!-- DIAMANTE Column -->
+        <ng-container matColumnDef="DIAMANTE">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">DIAMANTE</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.DIAMANTE}}</mat-cell>
+        </ng-container>
+
+        <!-- ORO Column -->
+        <ng-container matColumnDef="ORO">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">ORO</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.ORO}}</mat-cell>
+        </ng-container>
+
+        <!-- PLATA Column -->
+        <ng-container matColumnDef="PLATA">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">PLATA</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.PLATA}}</mat-cell>
+        </ng-container>
+
+        <!-- BRONCE Column -->
+        <ng-container matColumnDef="BRONCE">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">BRONCE</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.BRONCE}}</mat-cell>
+        </ng-container>
+
+        <!-- INICIADO Column -->
+        <ng-container matColumnDef="INICIADO">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">INICIADO</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.INICIADO}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="tableColumnsFB" class="office-mat-header-row"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: tableColumnsFB"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+
+  <div class="row">
+    <strong>Metas necesarias para alcanzar las clases de usuarios</strong>
+  </div>
+
+  <div class="row">
+    Todo usuario registrado en el sistema Setvmás es clase INICIADO
+    y para obtener una clase superior debe cumplir las siguiente condiciones:
+  </div>
+
+  <!-- Table de ClasesUsuarios-->
+  <div class="row mt-3">
+    <div class="table-container mt-1">
+      <mat-table [dataSource]="T_ClasesUsuarios">
+        <!-- Primera Columna [vacia o id] -->
+        <ng-container matColumnDef="Condiciones">
+          <mat-header-cell [ngClass]="'customWidthConditions'" *matHeaderCellDef class="title-table d-flex justify-content-start ">Condiciones</mat-header-cell>
+          <mat-cell *matCellDef="let row" [ngClass]="'customWidthConditions'" class="rows-table d-flex justify-content-start justify-content-xl-center ">{{row.Condiciones}}</mat-cell>
+        </ng-container>
+
+        <!-- BRONCE Column -->
+        <ng-container matColumnDef="BRONCE">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">BRONCE</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.BRONCE}}</mat-cell>
+        </ng-container>
+
+        <!-- PLATA Column -->
+        <ng-container matColumnDef="PLATA">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">PLATA</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.PLATA}}</mat-cell>
+        </ng-container>
+
+        <!-- ORO Column -->
+        <ng-container matColumnDef="ORO">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">ORO</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.ORO}}</mat-cell>
+        </ng-container>
+
+        <!-- DIAMANTE Column -->
+        <ng-container matColumnDef="DIAMANTE">
+          <mat-header-cell *matHeaderCellDef class="title-table d-flex justify-content-start justify-content-xl-center px-1">DIAMANTE</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="rows-table d-flex justify-content-start justify-content-xl-center px-1">{{row.DIAMANTE}}</mat-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="tableColumnsCU" class="office-mat-header-row"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: tableColumnsCU"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+  <div class="row mt-4 d-flex flex-row justify-content-end align-items-center">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 pr-md-2 mt-2 mt-sm-0 order-2 order-sm-1">
+      <div class="d-flex justify-content-center align-items-center cursor-pointer oval-btn color-blue font-osbold py-2" (click)="onCloseClick()">
+        CERRAR
+      </div>
+    </div>
+  </div>
+</div>

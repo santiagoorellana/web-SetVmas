@@ -1,0 +1,37 @@
+.ico-complaints {
+  background: url("../../../../../../assets/images/icons/icon-complaints.png") no-repeat;
+  background-size: contain;
+  width: 65px !important;
+  height: 65px !important;
+}
+
+.table-container {
+  max-height: 217px;
+  width: 100%;
+  overflow: auto;
+}
+
+mat-row:nth-child(even) {
+  background: #eee;
+}
+
+mat-row:nth-child(odd) {
+  background: #b8d0d6;
+}
+
+mat-row, mat-header-row, mat-footer-row {
+  min-height: 30px;
+}
+
+@media (max-width: 767.98px) {
+  .ico-complaints {
+    background: url("../../../../../../assets/images/icons/icon-complaints.png") no-repeat;
+    background-size: contain;
+    width: 55px !important;
+    height: 55px !important;
+  }
+
+  mat-table {
+    width: 900px;
+  }
+}

@@ -1,0 +1,426 @@
+<div class="container-fluid px-0 bg-white">
+<!--  section filter -->
+  <div id="filter" class="container" *ngIf="!aplicarfiltros">
+    <div class="row h-100">
+     <div class="col-12">
+       <div class="container h-100">
+         <div class="row h-100">
+          <div class="col-1 col-lg-3 d-flex justify-content-center align-items-center ">
+            <div class="d-block d-lg-none">
+              <div class="d-flex justify-content-center align-items-center filters cursor-pointer ml-0 ml-lg-5 pl-2 circle-btn" [ngClass]="filtroAva ? 'btnpp':''" (click)="prepararFiltros()">
+                <span><i class="fa fa-sliders px-2 icon-inside-btn" aria-hidden="true"></i></span>
+              </div>
+            </div>
+            <div class="d-none d-lg-block">
+              <div (click)="prepararFiltros()" id="btnSearch" [ngClass]="filtroAva ? 'btnpp':''" class="d-flex align-items-center filters cursor-pointer ml-5 pl-4">
+                <span class="btn-filter-border pr-3" >FILTROS</span>
+                <span><i class="fa fa-sliders px-2 icon-inside-btn" aria-hidden="true"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="col d-flex align-items-center search pr-0">
+            <div class="d-flex flex-row text-center align-items-center w-100">
+              <span class="d-none d-lg-block"><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <!-- <form class="ml-2 w-100"> -->
+                <mat-form-field class="d-flex align-content-center w-100 input-text-fullwidth">
+                  <!--<mat-label>¿Que estás buscando?...</mat-label>-->
+                    <input matInput type="text" placeholder="¿Qué estás buscando?" [(ngModel)]="txtBuscar" (blur)="buscarTexto()" (keypress)="buscarTextoEnter($event)"  style="margin-left: 8px; margin-top: 5px">
+
+                </mat-form-field>
+              <!-- </form> -->
+            </div>
+          </div>
+          <div class="col-1 col-lg-3 d-flex justify-content-center align-items-center ">
+            <div class="d-block d-lg-none">
+              <div class="d-flex align-items-center announce mr-0 mr-lg-5 pl-2 cursor-pointer circle-btn" (click)="openDialog()">
+                <span><i class="fa fa-bullhorn px-2 icon-inside-btn" aria-hidden="true"></i></span>
+              </div>
+            </div>
+            <div class="d-none d-lg-block">
+              <div (click)="openDialog()" class="d-flex align-items-center announce mr-5 pl-4 cursor-pointer">
+                <span class="btn-filter-border pr-3">ANUNCIAR</span>
+                <span><i class="fa fa-bullhorn px-2 icon-inside-btn" aria-hidden="true"></i></span>
+              </div>
+            </div>
+          </div>
+         </div>
+       </div>
+     </div>
+    </div>
+  </div>
+
+<!--  ventana de filtros-->
+  <div id="vistaBuscar" *ngIf="aplicarfiltros">
+    <section class="container" style="background-color: white">
+      <div class="row">
+        <div class="col-12 py-3 d-flex flex-row justify-content-between">
+          <div (click)="prepararFiltros()" class="d-flex flex-row justify-content-center align-items-center cursor-pointer ">
+            <span class="text-dark-blue font-weight-bold label-title-filter mr-2">{{'filtros' | uppercase}}</span>
+            <span class="text-dark-blue pl-2 border-left-blue fa-2x"><i class="fa fa-sliders"></i></span>
+          </div>
+
+          <div>
+            <span (click)="clearFilter()" style="text-decoration: underline;" class="text-dark-blue font-weight-bold cursor-pointer ">LIMPIAR FILTRO</span>
+          </div>
+          <div (click)="prepararFiltros()" class="d-flex flex-row cursor-pointer">
+            <div class="rounded-icon p-1 mr-2 d-flex justify-content-center align-items-center">
+              <span class="text-dark-blue d-flex"><i class="fa fa-close"></i> </span>
+            </div>
+            <span class="text-dark-blue  font-weight-bold btn-close-filter border-bottom-blue">{{'cerrar' | uppercase}}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <div  class="w-100 container" style="background-color: white;  padding-top: 15px; padding-bottom: 15px;">
+      <div class="row">
+        <div class="col-md-4">
+          <!--<mat-checkbox style="margin-left: 15px" class="btnCheck"> Búsqueda Profunda </mat-checkbox>-->
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="align-content-center w-100 btnInput btnCheck btnSelect">
+            <input type="text"
+                   placeholder="Acción"
+                   style="font-size: 1rem" aria-label="Number"
+                   matInput
+                   [formControl]="inputAcc"
+                   [matAutocomplete]="auto1"
+                   [(ngModel)]="buscarAnuncio.Accion">
+            <mat-autocomplete #auto1="matAutocomplete">
+              <mat-option *ngFor="let option of ListaAccionFiltradas | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="align-content-center w-100 btnInput btnCheck btnSelect">
+          <input type="text" placeholder="Categoría"
+                 style="font-size: 1rem" aria-label="Number"
+                 matInput
+                 [formControl]="inputCat"
+                 [matAutocomplete]="auto"
+                 [(ngModel)]="buscarAnuncio.Categoria">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of ListaCategoriaFiltradas | async" [value]="option.Nombre"
+                        (onSelectionChange)="selectedCategoria($event)">
+              {{option.Nombre}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="align-content-center w-100 btnInput btnCheck btnSelect">
+          <input type="text" placeholder="Provincia" style="font-size: 1rem" aria-label="Number" (ngModelChange)="inputProvinciaChange($event)"
+                 matInput  [matAutocomplete]="auto3"
+                 [(ngModel)]="buscarAnuncio.Provincia"
+                 [formControl]="inputProv">
+          <mat-autocomplete #auto3="matAutocomplete">
+            <mat-option *ngFor="let option of ListaProvFiltradas | async" [value]="option.Nombre"
+
+            ><!--(onSelectionChange)="selectedProvincia($event)"-->
+              {{option.Nombre}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row  mt-2">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="align-content-center w-100 btnInput btnCheck btnSelect">
+            <input type="text" placeholder="Municipio" style="font-size: 1rem" aria-label="Number" matInput
+                   [matAutocomplete]="auto4"
+                   [formControl]="inputMun"
+                   [(ngModel)]="buscarAnuncio.Municipio"
+            >
+            <mat-autocomplete #auto4="matAutocomplete">
+              <mat-option *ngFor="let option of ListaMunFiltradas | async" [value]="option.Nombre">
+                {{option.Nombre}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="align-content-center w-100 btnInput btnCheck btnSelect" >
+            <input matInput
+                   style="font-size: 1rem"
+                   type="text"
+                   placeholder="Descripción"
+                   #Titulo="ngModel"
+                   [(ngModel)]="buscarAnuncio.Descripcion" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="align-content-center w-100 btnInput">
+            <input matInput
+                   style="font-size: 1rem;"
+                   type="number"
+                   placeholder="Precio Míninmo"
+                   #Precio="ngModel"
+                   min="0"
+                   [(ngModel)]="buscarAnuncio.PrecioMin">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 d-flex align-items-center">
+          <mat-form-field appearance="outline" class="align-content-center w-100 btnInput">
+            <input matInput
+                   style="font-size: 1rem;"
+                   type="number"
+                   placeholder="Precio Máximo"
+                   #Precio="ngModel"
+                   min="0"
+
+                   [(ngModel)]="buscarAnuncio.PrecioMax">
+          </mat-form-field>
+        </div>
+        <div class="col-md-8 ">
+          <mat-form-field class="align-content-center w-100 " style="margin-top: 10px" >
+            <mat-chip-list #chipList>
+              <mat-chip class = "btn-buscar-etiqueta" *ngFor="let fruit of ListaEti; let indx=index;" [selectable]="selectable" [removable]="removable" (removed)="removeEti(fruit,indx)">
+                {{fruit.Nombre}}
+              <!--    <span class="ml-2" *ngIf="removable" ><i class="fa fa-close btn-del-etiqueta-blanca"></i></span>
+              <mat-icon matChipRemove *ngIf="removable" class="btn-del-etiqueta-blanca">x</mat-icon>-->
+<mat-icon matChipRemove *ngIf="removable" class="btn-del-etiqueta-blanca">close</mat-icon>
+              </mat-chip>
+              <input placeholder="Etiquetas" #etiquInp
+                     [formControl]="inputEtq"
+                     style="font-size: 1rem" [matAutocomplete]="auto2"
+                     [matChipInputFor]="chipList"
+                     [(ngModel)]="buscarAnuncio.ListaEtiquetas"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addEti($event)">
+            </mat-chip-list>
+            <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="selectedEti($event)" >
+              <mat-option *ngFor="let fruit of ListaEtiFilter | async" [value]="fruit">
+                {{fruit.Nombre}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-md-6 d-flex align-items-center">
+          <div class="container px-0">
+            <div class="row">
+              <div class="col-md-2">
+                <div class="d-inline-flex">
+                  <div class="campo-centro-buscador mr-2">Fotos</div>
+                  <div><mat-checkbox [checked]="buscarAnuncio.HasFoto"  class="resp-foto"
+                                     [(ngModel)]="buscarAnuncio.HasFoto"></mat-checkbox></div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="d-inline-flex">
+                  <div class="campo-centro-buscador mr-2">Web</div>
+                  <mat-checkbox [checked]="buscarAnuncio.IsWeb" class="resp-web"
+                                [(ngModel)]="buscarAnuncio.IsWeb"></mat-checkbox>
+                </div>
+              </div>
+              <div class="col">
+                <div class="d-inline-flex">
+                  <div class="campo-centro-buscador mr-2">Producto Nuevo</div>
+                  <div>
+                    <mat-checkbox [checked]="buscarAnuncio.ProductoNuevo"
+                                  [(ngModel)]="buscarAnuncio.ProductoNuevo"></mat-checkbox>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" id="busq_ava" >
+         <div class="d-inline-flex">
+           <mat-label class="mr-2" >Más Parámetros </mat-label>
+           <mat-slide-toggle (toggleChange)="mostrarMasCampos()" [checked]="mostrarMasCamposBusq==true?true:false"  ></mat-slide-toggle>
+         </div>
+        </div>
+      </div>
+
+      <div class="row mt-3" *ngIf="mostrarMasCamposBusq">
+        <div class="col-12">
+          <hr>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="align-content-center w-100 btnInput">
+            <input matInput
+                   style="font-size: 1rem;"
+                   type="text"
+                   placeholder="Título del anuncio"
+                   #Titulo="ngModel"
+                   [(ngModel)]="buscarAnuncio.Titulo" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="align-content-center w-100 btnInput">
+            <input matInput
+                   style="font-size: 1rem; "
+                   type="text"
+                   placeholder="Url del sitio"
+                   #Titulo="ngModel"
+                   [(ngModel)]="buscarAnuncio.Url" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="align-content-center w-100 btnInput">
+            <input matInput
+                   style="font-size: 1rem"
+                   type="text"
+                   placeholder="Nombre del Contacto"
+                   #Titulo="ngModel"
+                   [(ngModel)]="buscarAnuncio.NombreContacto" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="align-content-center w-100 btnInput">
+            <input matInput
+                   style="font-size: 1rem"
+                   type="text"
+                   placeholder="Teléfono del contacto"
+                   #Titulo="ngModel"
+                   [(ngModel)]="buscarAnuncio.TelefonoContacto" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" class="align-content-center w-100 btnInput">
+            <input matInput
+                   style="font-size: 1rem"
+                   type="text"
+                   placeholder="Email del contacto"
+                   #CorreoContacto="ngModel"
+                   [(ngModel)]="buscarAnuncio.CorreoContacto" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 20px">
+        <div class="col-12">
+          <div class="d-flex justify-content-end">
+            <button (click)="buscarAnunciosFiltros()" class="d-flex align-items-center btn-rounded-blue cursor-pointer pl-4 ">
+              <span class="btn-filter-border pr-3">{{'Buscar' | uppercase}}</span>
+              <span class="text-white"><i class="fa fa-chevron-right px-2 icon-inside-btn" aria-hidden="true"></i></span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<!--  result-->
+  <div id="vista_resultados" class="container-fluid px-0 bg-content" *ngIf="mostrarResultados" style="min-height: 200px">
+
+    <section class="container" *ngIf="ListaAnuncios && ListaAnuncios.length > 0">
+      <div class="row">
+        <div class="col-12 col-md-8 offset-0 offset-md-2 mt-3 py-2 d-flex flex-row justify-content-center align-items-center">
+          <div class="py-1 px-1 px-md-5 mr-2" [ngClass]="filtroReciente ? 'label-filter-active' : 'label-filter'" (click)="clickNuevo()">
+            <span class="pl-1 font-weight-bold">{{'Recientes' | uppercase}}</span>
+          </div>
+          <div class="py-1 px-1 px-md-5 mr-2" [ngClass]="filtroMasVisto ? 'label-filter-active' : 'label-filter'" (click)="clickPopulares()">
+            <span class="pl-1 font-weight-bold">{{'Populares' | uppercase}}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="container content-filter" *ngIf="ListaAnuncios && ListaAnuncios.length > 0">
+<!--      <div class="row">-->
+<!--        <div class="col-5"></div>-->
+<!--        <div class="col-2 align-self-lg-center align-center">-->
+<!--          <div class="spinner-container" *ngIf="loading$ | async">-->
+<!--            <mat-spinner></mat-spinner>cargando...-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col-5"></div>-->
+<!--      </div>-->
+
+      <div class="row" >
+        <div class="col-12 px-sm-1 px-md-0">
+          <mat-grid-list [cols]="cantColumnas" rowHeight="91px" gutterSize="8px"  (window:resize)="onResize($event)">
+
+            <mat-grid-tile [ngClass]="!anuncio.IsDestacado ? 'grid-tile' : 'grid-tile-destacado'"
+                           *ngFor="let anuncio of ListaAnuncios"
+                           [colspan]="1"
+                           [rowspan]="2"
+                           [style.background]="'#020448'">
+
+              <div class="cortina" (click)="!anuncio.IsWeb?openDialogReportAnunce(anuncio):''">
+                <div class="row h-100">
+                  <div class="col-6 h-100 px-0 img-en-anunc-prev d-inline-block">
+<!--                    <img [src]="anuncio.Imagen">-->
+<!--                    <img class="h-100 w-100" src="assets/images/descarga.png">-->
+<!--                    <img src="assets/images/descarga.png">-->
+                   <a [href]="anuncio.Url" rel="nofollow" target="_blank" *ngIf="anuncio.IsWeb">
+                     <img [alt]="anuncio.Titulo" [src]="'anuncios/mini/'+anuncio.ImageName | safeUrl" *ngIf="anuncio.ImageName">
+                     <img [alt]="anuncio.Titulo" [src]="'categorias/mini/'+anuncio.Categoria.ImageName | safeUrl" *ngIf="!anuncio.ImageName">
+                   </a>
+
+                    <img [alt]="anuncio.Titulo" [src]="'anuncios/mini/'+anuncio.ImageName | safeUrl" *ngIf="!anuncio.IsWeb && anuncio.ImageName">
+                    <img [alt]="anuncio.Titulo" [src]="'categorias/mini/'+anuncio.Categoria.ImageName | safeUrl" *ngIf="!anuncio.IsWeb && !anuncio.ImageName">
+<!--                    <div bgImage [imgUrl]="domSanitizer.bypassSecurityTrustUrl(url)"></div>-->
+                    <div class="w-100 icon-advert">
+                      <div class="d-flex justify-content-between mx-3 py-2">
+                      <div class="rounded-circle ml-3 p-2 d-flex justify-content-center align-items-center">
+                        <span class="fa fa-share-alt" (click)="copyLink($event, anuncio.AnuncioId)"></span>
+                      </div>
+                        <div class="rounded-circle p-2 d-flex justify-content-center align-items-center" (click)="openDialogReportAnunce(anuncio)" *ngIf="anuncio.IsWeb">
+                          <span class="fa fa-eye"></span>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div [ngClass]="!anuncio.IsDestacado ? 'bgWhite' : 'bgBlue'"  class="col-6 px-0">
+                   <div class="px-2">
+                  <!--   <div class="cat-en-anunc-prev ">{{anuncio.Categoria.Nombre}}</div>-->
+
+                  <!--Zuleidy mostarr el listado de etiquetas en lugar de la categoria
+                   <div [ngClass]="!anuncio.IsDestacado ? 'cat-en-anunc-prev' : 'cat-en-anunc-prev-destacado'">{{anuncio.Categoria.Nombre}}</div>-->
+                  <div class="container" style="height: 80px !important;">
+                    <div class="row mt-2 pb-3 border-separator">
+                      <div class="col color-blue overflow-auto treepoints" style="padding: 0px !important;">
+                        <p>{{stringTags(anuncio.Etiquetas)}}</p>
+                      </div>
+                    </div>
+                  </div>
+                    <!--Zuleidy mostarr el listado de etiquetas en lugar de la categoria-->
+
+                  <!-- <div class="tit-en-anunc-prev">{{anuncio.Titulo}}</div>-->
+                    <div [ngClass]="!anuncio.IsDestacado ? 'tit-en-anunc-prev' : 'tit-en-anunc-prev-destacado'">{{anuncio.Titulo}}</div>
+                     <div [ngClass]="!anuncio.IsDestacado ? 'fondo-precio-en-anunc-prev' : 'fondo-precio-en-anunc-prev-destacado'"><span>{{anuncio.Precio | currency: 'USD'}}</span></div>
+                   </div>
+                  </div>
+                </div>
+              </div>
+            </mat-grid-tile>
+
+          </mat-grid-list>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6 offset-0 offset-md-3 mt-3 py-1 d-flex flex-row justify-content-around">
+          <div class="paginate-label" [class]="pagActual!==1 ? 'texto-paginado' : 'texto-paginado-deshab'" (click)="clickAnterior()">{{'Anterior' | uppercase}}</div>
+          <div class="text-orange font-weight-bold paginate-label">{{pagActual}} / {{totalPaginas}}</div>
+          <div class="paginate-label" [class]="pagActual!==totalPaginas ? 'texto-paginado' : 'texto-paginado-deshab'" (click)="clickNext()">{{'Siguiente' | uppercase}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="container" *ngIf="ListaAnuncios && ListaAnuncios.length == 0">
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center align-items-center">
+          <span class="mt-2">No hay anuncios para mostrar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

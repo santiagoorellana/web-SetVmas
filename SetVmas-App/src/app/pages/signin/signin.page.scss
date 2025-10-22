@@ -1,0 +1,34 @@
+.item-pass {
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+  margin-top: 10px;
+
+  ion-buttons {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+
+    ion-button {
+      --padding-start: 0;
+      --padding-end: 0;
+      font-size: 14px;
+      text-transform: none;
+    }
+  }
+}
+
+.btn_eye_icon{
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  background: transparent;
+  ion-icon{
+      font-size: 22px;
+      color:#757575;
+  }
+}
+
+.btn_eye_icon:focus{
+  outline: none  !important;
+}

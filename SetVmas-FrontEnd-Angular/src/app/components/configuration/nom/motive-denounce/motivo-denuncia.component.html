@@ -1,0 +1,155 @@
+<div class="container pt-4 pb-3">
+  <div class="row">
+    <div class="col-12">
+      <p class="title-pages pl-3 py-3">Gestión de Motivos de Denuncia</p>
+    </div>
+  </div>
+  <!-- Filters -->
+  <div class="row pt-4 pb-2">
+    <div class="col-12">
+      <div class="container bg-white pt-3">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="d-flex flex-row text-center align-items-center bg-white">
+              <span><i class="fa fa-search fa-1x px-2 text-dark-gray" aria-hidden="true"></i></span>
+              <mat-form-field class="w-100">
+                <mat-label>Buscar</mat-label>
+                <input matInput placeholder="Buscar" #input>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pb-3 pt-2">
+    <div class="col-12 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
+      <button class="btn-admin px-4" routerLink="/admin/nomencladores/motivos-denuncia/add/0">
+        <span><i class="fa fa-plus px-2" aria-hidden="true"></i></span>
+        <span class="btn-filter-border pr-3">Añadir</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="row">
+    <div class="col-12">
+      <div class="mat-elevation-z8">
+        <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+           matSort matSortActive="Nombre" matSortDisableClear matSortDirection="asc"  id="tblBackend">
+
+          <ng-container matColumnDef="MotivoDenunciaId">
+            <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+            <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.MotivoDenunciaId}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Nombre">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-3">Nombre</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="col-md-3">{{row.Nombre}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Estado">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Estado</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.Estado}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Acciones">
+            <mat-header-cell *matHeaderCellDef class="tituloTablas col-md-2">Acciones</mat-header-cell>
+            <mat-cell *matCellDef="let Acciones" class="col-md-2 text-center">
+              <mat-icon aria-hidden="false" (click)="onEdit(Acciones.MotivoDenunciaId)" aria-label="Editar" class="editar-icon" ></mat-icon>
+              <mat-icon aria-hidden="false" (click)="onDelete(Acciones.MotivoDenunciaId)" aria-label="Eliminar" class="delete-icon" *ngIf="service.currentUser.Rol === 'Super Administrador'"></mat-icon>
+              <!-- <button mat-icon-button (click)="onEdit(Acciones.MotivoDenunciaId)">
+                <mat-icon aria-label="Editar" class="editar-icon"></mat-icon>
+              </button>
+              <button mat-icon-button (click)="onDelete(Acciones.MotivoDenunciaId)"  *ngIf="service.currentUser.Rol === 'Super Administrador'">
+                <mat-icon aria-label="Eliminar" class="delete-icon"></mat-icon>
+              </button> -->
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="service.tableColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: service.tableColumns"></mat-row>
+
+        </mat-table>
+
+
+        <mat-paginator [length]="service.resultsLength" [pageSize]="service.pageSize"
+                       [pageSizeOptions]="[10, 20, 30]" (page)="getPaginatorData($event)" [showFirstLastButtons]="true"></mat-paginator>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <br><br><br><br>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="col-lg-12 equel-grid">
+      <div class="grid">
+        <p class="grid-header">Gestión de Motivos de Denuncia</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-9">
+    <i class="fa fa-search fa-2x iconos"></i>
+    <mat-form-field>
+      <input matInput placeholder="Buscar" #input>
+    </mat-form-field>
+  </div>
+  <div class="col-md-3"  *ngIf="service.currentUser.Rol === 'Super Administrador'">
+    <div class="example-button-row" style="float:right;">
+      <button mat-raised-button color="primary" (click)="onEdit(0)">
+        <i class="mdi mdi-plus"> Añadir</i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="spinner-container" *ngIf="dataSource.loading$ | async">
+  <mat-spinner></mat-spinner>cargando...
+</div>
+<mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource"
+           matSort matSortActive="Nombre" matSortDisableClear matSortDirection="asc"  id="tblBackend">
+
+  <ng-container matColumnDef="MotivoDenunciaId">
+    <mat-header-cell style="display: none" *matHeaderCellDef>Id</mat-header-cell>
+    <mat-cell style="display: none" *matCellDef="let row" #idT>{{row.MotivoDenunciaId}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Nombre">
+    <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas col-md-8">Nombre</mat-header-cell>
+    <mat-cell *matCellDef="let row" class="col-md-8">{{row.Nombre}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Estado">
+    <mat-header-cell *matHeaderCellDef mat-sort-header class="tituloTablas">Estado</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.Estado}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Acciones">
+    <mat-header-cell *matHeaderCellDef class="tituloTablas col-md-2">Acciones</mat-header-cell>
+    <mat-cell *matCellDef="let Acciones" class="col-md-2">
+
+      <button mat-icon-button (click)="onEdit(Acciones.MotivoDenunciaId)">
+        <mat-icon aria-label="Editar" class="editar-icon"></mat-icon>
+      </button>
+      <button mat-icon-button (click)="onDelete(Acciones.MotivoDenunciaId)"  *ngIf="service.currentUser.Rol === 'Super Administrador'">
+        <mat-icon aria-label="Eliminar" class="delete-icon"></mat-icon>
+      </button>
+    </mat-cell>
+
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="service.tableColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: service.tableColumns"></mat-row>
+
+</mat-table>
+<mat-paginator [length]="service.resultsLength" [pageSize]="10"
+               [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+<br><br>
+
+
+ -->

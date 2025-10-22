@@ -1,0 +1,38 @@
+a {
+  font-family: 'OSSemiBold';
+  text-decoration: none;
+  font-size: .9em;
+  color: #fff !important;
+}
+
+.separator {
+  border: 1px solid #fff;
+}
+
+.icons-center {
+  width: 2em;
+  font-size: 1.3em;
+}
+
+.access-buttons {
+  font-family: 'OSSemiBold';
+  font-size: .9rem;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 15px;
+}
+
+.btn-border {
+  border-right: 1px solid #020448;
+}
+
+.arrow-circle {
+  font-size: 1.6rem !important;
+  margin-top: 2px;
+}
+
+.navbar-toggler{
+  outline: none;
+  padding-top: .5rem;
+}
+

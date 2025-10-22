@@ -1,0 +1,33 @@
+<section style="background-color: white; height: 147px" *ngIf="isLoadComplete">
+  <ngx-slick-carousel id="slideHeader"
+                      class="carousel"
+                      #slickModal="slick-carousel"
+                      [config]='slideConfig'>
+
+<!--    <div ngxSlickItem *ngFor="let slide of slides" class="slide">-->
+<!--      <a [href]="slide.link" target="_blank">-->
+<!--        <div bgImage [imgUrl]="slide.urlImageWeb" class="h-100 w-100 d-none d-md-block"></div>-->
+<!--        <div bgImage [imgUrl]="slide.urlImageResponsive" class="h-100 w-100 d-block d-md-none"></div>-->
+<!--      </a>-->
+<!--    </div>-->
+
+    <div ngxSlickItem *ngFor="let slide of bannersDesktop;let i=index;" class="slide">
+        <a [href]="this.rootSiteURL + 'detalles-anuncio/'+ slide.AnuncioId" target="_blank" >
+<!--          <img [src]="'anuncios/'+slide.ImageName | safeUrl" style="background-repeat: no-repeat; background-size: cover; background-position: center">-->
+
+<!--          <div [style.background-image]="'url(' + getUrl(slide.ImageName) + ')'" style="background-size: cover" class="h-100 w-100 d-none d-md-block"></div>-->
+
+          <div [style.background-image]="getStyle('banners/' + slide.ImageName)" class="h-100 w-100 d-none d-sm-block slide-img"></div>
+
+          <div [style.background-image]="getStyle('banners/' + bannersMobil[i].ImageName)" class="h-100 w-100 d-block d-sm-none slide-img"></div>
+<!--          <div [style.background-image]="getStyle('3M.jpg')" style="background-size: cover" class="h-100 w-100 d-block d-sm-none"></div>-->
+
+
+          <!--          <div bgImage [imgUrl]="'uploads/anuncios/mini/' + bannersMobil[i].ImageName | safeUrl" class="h-100 w-100 d-block d-md-none">-->
+<!--          </div>-->
+        </a>
+    </div>
+
+  </ngx-slick-carousel>
+
+</section>
