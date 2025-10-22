@@ -24,12 +24,12 @@ Se pueden realizar búsquedas directas de anuncios, insertando cadenas de texto 
 <p>Si el usuario activa la búsqueda profunda, también se busca en el texto del anuncio.<br>
 Para filtrar los resultados de la búsqueda, el usuario cuenta con los siguientes filtros:</p>
 
-•	Acción (Seleccionar una: Vendo, Compro, Alquilo, Busco, Cambio, Regalo, Servicio, Información)
-•	Rango de precios (Establecer cualquiera de estos valores: Mínimo, Máximo)
-•	Localidad (Seleccionar provincia y municipio)
-•	Producto nuevo (Marcar si es nuevo)
-•	Web (Marcar si el anuncio tiene web)
-•	Etiquetas (Se seleccionan de una lista o nube de etiquetas.)
+*	Acción (Seleccionar una: Vendo, Compro, Alquilo, Busco, Cambio, Regalo, Servicio, Información)
+*	Rango de precios (Establecer cualquiera de estos valores: Mínimo, Máximo)
+*	Localidad (Seleccionar provincia y municipio)
+*	Producto nuevo (Marcar si es nuevo)
+*	Web (Marcar si el anuncio tiene web)
+*	Etiquetas (Se seleccionan de una lista o nube de etiquetas.)
 
 <h2>Filtrado y ordenamiento de anuncios</h2>
 <p>Al realizar una búsqueda o navegar por las categorías y subcategorías, se presenta una lista de anuncios los cuales se ordenan  siempre según su fecha de actualización, mostrando de primero los más recientes. 
@@ -46,11 +46,11 @@ Si es un usuario registrado y ha entrado al sistema mediante su usuario y contra
 <h2>Registro de usuarios</h2>
 <p>Cualquier usuario no registrado se puede registrar en el sistema, para lo cual tiene una opción en el menú principal de la aplicación. Para registrarse, el usuario debe insertar los siguientes datos:</p>
 
-*Anfitrión (ID del usuario de la persona que lo recomendó, ver recuadro siguiente) [OPCIONAL]
-*Email (Es el Email) 
-*Teléfono
-*Contraseña (Texto. Con confirmación.) 
-*Capcha
+* Anfitrión (ID del usuario de la persona que lo recomendó, ver recuadro siguiente) [OPCIONAL]
+* Email (Es el Email) 
+* Teléfono
+* Contraseña (Texto. Con confirmación.) 
+* Capcha
 
 <p>Una vez registrado el usuario, se le otorga inmediatamente puntos en forma de bonificación por registro y se le envía un email a su dirección con un enlace de verificación. También se le otorga una bonificación por referido al usuario Anfitrión que lo invitó, solo si la cantidad de referidos del Anfitrión, no excede el valor establecido como límite. La cantidad de puntos que se otorgan como bonificación por referido y la cantidad de referidos a bonificar, los configura la administración del sistema. 
 A continuación el formulario de registro:</p>
@@ -74,21 +74,20 @@ Para los usuarios deseen insertar anuncios sin registrarse, pueden utilizar el p
 <h2>Insertar anuncios simples</h2>
 <p>Cualquier usuario registrado, puede insertar anuncios simples, con solo presionar un botón también accesible desde el menú principal de la aplicación.  Al presionar el botón se accede a un formulario donde el usuario debe llenar los datos referentes al producto o servicio. Estos son:</p>
 
-*Precio CUC
-Nuevo(Si está activado, indica que el producto es nuevo.)
-*Acción(Vendo, Compro, Alquilo, Busco, Cambio, Regalo, Servicio, Información.)
-*Título del anuncio
-*Categoría(Debe seleccionar una categoría de la lista)
-Etiquetas(Puede seleccionar hasta tres etiquetas)
-Texto del anuncio De 0 a 5000 caracteres.
-Imagen principal(Permite seleccione una imagen desde un archivo local)
-*Nombre(Nombre de la persona a quien se debe contactar)
-*Forma de contacto(Debe seleccionar una de las dos)
-Teléfono (Teléfono de la persona a quien se debe contactar)
-Dirección email (Email de la persona a quien se debe contactar)
-*Provincia (Provincia donde se anuncia)
-*Municipio (Municipio donde se anuncia)
-Los campos marcados con * son obligatorios.
+* Precio CUC
+* Nuevo(Si está activado, indica que el producto es nuevo.) [Opcional]
+* Acción(Vendo, Compro, Alquilo, Busco, Cambio, Regalo, Servicio, Información.)
+* Título del anuncio
+* Categoría(Debe seleccionar una categoría de la lista)
+* Etiquetas(Puede seleccionar hasta tres etiquetas) [Opcional]
+* Texto del anuncio De 0 a 5000 caracteres. [Opcional]
+* Imagen principal(Permite seleccione una imagen desde un archivo local) [Opcional]
+* Nombre(Nombre de la persona a quien se debe contactar)
+* Forma de contacto(Debe seleccionar una de las dos)
+* Teléfono (Teléfono de la persona a quien se debe contactar) [Opcional]
+* Dirección email (Email de la persona a quien se debe contactar) [Opcional]
+* Provincia (Provincia donde se anuncia)
+* Municipio (Municipio donde se anuncia)
 
 <p>Si la cuenta del usuario registrado ya está verificada, al insertar el primer anuncio del día, se le otorga inmediatamente unos puntos por bonificación por anuncio. La cantidad de puntos de las bonificaciones por anuncioslas establece la administración del sistema y depende de la clase de usuario. </p>
 <img width="569" alt="_ANUNCIAR" src="https://github.com/user-attachments/assets/9652f984-de9e-4307-8c0e-ba9c38e7d524" />
@@ -96,27 +95,27 @@ Los campos marcados con * son obligatorios.
 <h2>Oficina virtual</h2>
 <p>Los usuarios registrados pueden acceder a una oficina virtual mediante una opción en el menú principal de la aplicación, la cual solo es accesible cuando el usuario registrado y verificado se ha loggeado en el sistema. En la oficina virtual el usuario puede:</p>
 
-• Ver el mensaje de texto, insertado por los administradores del sistema. 
-•	Ver y editar sus datos de registro (Solo puede editar teléfono y contraseña)
-•	Ver su fecha de registro
-•	Ver su clase de usuario (BRONCE, PLATA, ORO, DIAMANTE)
-•	Ver su propio ID y  enlace de referido.
-•	Mostrar el QR para ser usado por un referido.
-•	Ver el ID y email de su anfitrión
-•	Ver la cantidad de referidos directos que tiene. 
-•	Ver la lista de referidos directos y por cada uno ver:
-o	ID de usuario.
-o	Dirección email.
-o	Número del móvil.
-o	Cantidad de referidos.
-•	Ver la lista de los anuncios que ha insertado. 
-•	Insertar, modificar, ocultar y eliminar anuncios simples
-•	Insertar, modificar, ocultar y eliminar anuncios avanzados
-•	Ver su acumulado de puntos.
-•	Ver volumen de compras directas que ha realizado. 
-•	Realizar ventas de puntos, si es clase BRONCE o superior. 
-•	Comprar puntos al sistema directamente. (compra directa)
-•	Ver los valores actuales de cada tipo de bonificación.
+* Ver el mensaje de texto, insertado por los administradores del sistema. 
+*	Ver y editar sus datos de registro (Solo puede editar teléfono y contraseña)
+*	Ver su fecha de registro
+*	Ver su clase de usuario (BRONCE, PLATA, ORO, DIAMANTE)
+*	Ver su propio ID y  enlace de referido.
+*	Mostrar el QR para ser usado por un referido.
+*	Ver el ID y email de su anfitrión
+*	Ver la cantidad de referidos directos que tiene. 
+*	Ver la lista de referidos directos y por cada uno ver:
+  o	ID de usuario.
+  o	Dirección email.
+  o	Número del móvil.
+  o	Cantidad de referidos.
+*	Ver la lista de los anuncios que ha insertado. 
+*	Insertar, modificar, ocultar y eliminar anuncios simples
+*	Insertar, modificar, ocultar y eliminar anuncios avanzados
+*	Ver su acumulado de puntos.
+*	Ver volumen de compras directas que ha realizado. 
+*	Realizar ventas de puntos, si es clase BRONCE o superior. 
+*	Comprar puntos al sistema directamente. (compra directa)
+*	Ver los valores actuales de cada tipo de bonificación.
 
 <p>Al seleccionar los anuncios de esta lista uno a uno o varios a la vez, se les puede aplicar las operaciones manuales Actualizar,Eliminar, Ocultar. El formulario de la oficina virtual es el siguiente:</p>
 <img width="587" height="220" alt="_OFICINA 1" src="https://github.com/user-attachments/assets/9fe2bebc-d6ea-4ab7-82b6-ea39985f757f" />
@@ -297,6 +296,7 @@ o	Cantidad total de banners inferiores y % que representa.
 
 <h2>API de la web</h2>
 <p>La web del sistema está implementada de manera tal que brinda una API (Application Program Interface en ingles) al exterior mediante la cual se pueden conectar al sistema otras aplicaciones web, móviles y desktop. La aplicación para Android de Setvmás se conecta al sitio web por medio de esta API.</p>
+
 
 
 
